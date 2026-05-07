@@ -1,0 +1,41 @@
+body {
+    background-color: #ffd9a0;
+    font-family: Arial;
+    text-align: center;
+}
+
+.caixa {
+    background-color: white;
+    width: 450px;
+    margin: 80px auto;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px #888;
+}
+
+h1 {
+    color: darkred;
+}
+
+p {
+    font-size: 18px;
+}
+
+a {
+    display: block;
+    background-color: darkred;
+    color: white;
+    padding: 12px;
+    margin: 15px;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: #7a0000;
+}
+
+img {
+    width: 350px;
+    border-radius: 20px;
+}
