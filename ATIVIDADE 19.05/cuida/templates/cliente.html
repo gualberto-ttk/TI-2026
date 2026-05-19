@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<section class="container py-5">
+  <h1>Cliente: {{ nome }}</h1>
+  <p class="fs-5">Cidade: {{ cidade }}</p>
+  <h2>Regra de entrega</h2>
+  <p>Se a cidade for Natal, a entrega estará disponível.</p>
+  {% if entrega_disponivel %}
+    <div class="alert alert-success fs-4">Entrega disponível!</div>
+  {% else %}
+    <div class="alert alert-danger fs-4">Entrega indisponível.</div>
+  {% endif %}
+</section>
+{% endblock %}

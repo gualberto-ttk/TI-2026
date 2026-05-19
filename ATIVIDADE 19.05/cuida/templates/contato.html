@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<section class="container py-5">
+  <h1>Contato</h1>
+  <p>Preencha o formulário abaixo para falar com a FoodExpress.</p>
+  <form class="card p-4 shadow-sm">
+    <div class="mb-3"><label class="form-label">Nome</label><input type="text" class="form-control" placeholder="Digite seu nome"></div>
+    <div class="mb-3"><label class="form-label">E-mail</label><input type="email" class="form-control" placeholder="seuemail@email.com"></div>
+    <div class="mb-3"><label class="form-label">Mensagem</label><textarea class="form-control" rows="4" placeholder="Digite sua mensagem"></textarea></div>
+    <button type="button" class="btn btn-success" onclick="enviarContato()">Enviar</button>
+  </form>
+  <div class="mt-4">
+    <h4>Informações fictícias</h4>
+    <p>Telefone: (84) 99999-9999</p>
+    <p>Endereço: Av. Principal, 100 - Natal/RN</p>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<div id="banners" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active"><div class="banner banner-1"><h1>FoodExpress</h1><p>Seu delivery rápido e saboroso</p></div></div>
+    <div class="carousel-item"><div class="banner banner-2"><h1>Promoção</h1><p>Frete grátis acima de R$ 50!</p></div></div>
+    <div class="carousel-item"><div class="banner banner-3"><h1>Peça agora</h1><p>Lanches quentinhos na sua casa</p></div></div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#banners" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+  <button class="carousel-control-next" type="button" data-bs-target="#banners" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
+</div>
+
+<section class="container py-5">
+  <div class="alert alert-warning text-center fw-bold">Frete grátis acima de R$ 50!</div>
+  <div class="text-center">
+    <h2>Bem-vindo à FoodExpress</h2>
+    <p class="lead">Escolha seu lanche favorito e receba com rapidez.</p>
+    <a href="{{ url_for('cardapio') }}" class="btn btn-success btn-lg">Ver cardápio</a>
+  </div>
+</section>
+{% endblock %}

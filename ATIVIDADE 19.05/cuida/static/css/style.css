@@ -1,0 +1,8 @@
+body { background: #f8f9fa; }
+.banner { height: 360px; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background-size: cover; background-position: center; }
+.banner h1 { font-size: 3rem; font-weight: 800; text-shadow: 2px 2px 4px #000; }
+.banner p { font-size: 1.4rem; text-shadow: 1px 1px 3px #000; }
+.banner-1 { background: linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)), url('../imagens/banner1.jpg'); }
+.banner-2 { background: linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)), url('../imagens/banner2.jpg'); }
+.banner-3 { background: linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)), url('../imagens/banner3.jpg'); }
+.card-img-top { height: 170px; object-fit: cover; }

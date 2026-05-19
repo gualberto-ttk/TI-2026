@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block conteudo %}
+
+<section class="container py-5">
+
+<h1>Cardápio 🍔</h1>
+
+<div class="row">
+
+{% for chave, lanche in lanches.items() %}
+
+<div class="col-md-3">
+
+<div class="card p-2 mb-4">
+
+<img src="{{ url_for('static', filename='imagens/' ~ lanche['imagem']) }}" class="card-img-top">
+<div class="card-body">
+
+<h5>{{ lanche.nome }}</h5>
+
+<p>{{ lanche.descricao }}</p>
+
+<p class="text-success">{{ lanche.preco }}</p>
+
+<a href="{{ url_for('lanche', nome=chave) }}" class="btn btn-success">
+Comprar 😋
+</a>
+
+</div>
+</div>
+</div>
+
+{% endfor %}
+
+</div>
+
+</section>
+
+{% endblock %}
