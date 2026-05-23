@@ -1,0 +1,280 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:Arial, Helvetica, sans-serif;
+background:#0f5ea8;
+color:white;
+}
+
+/* HEADER */
+
+.header{
+width:100%;
+padding:12px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:fixed;
+top:0;
+background:rgba(5,46,87,0.88);
+backdrop-filter:blur(10px);
+z-index:1000;
+}
+
+.logo{
+font-size:26px;
+font-weight:bold;
+color:#ffb400;
+}
+
+.menu{
+display:flex;
+gap:28px;
+}
+
+.menu a{
+color:white;
+text-decoration:none;
+font-weight:600;
+transition:0.3s;
+}
+
+.menu a:hover{
+color:#ffb400;
+}
+
+/* HERO */
+
+.hero{
+min-height:85vh;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:70px;
+padding:100px 8% 50px;
+}
+
+.hero-text{
+max-width:540px;
+}
+
+.tag{
+display:inline-block;
+background:#ffb400;
+color:#222;
+padding:10px 20px;
+border-radius:30px;
+font-weight:bold;
+margin-bottom:22px;
+}
+
+.hero-text h1{
+font-size:64px;
+line-height:70px;
+margin-bottom:22px;
+}
+
+.hero-text p{
+font-size:21px;
+line-height:34px;
+color:#d7e9ff;
+margin-bottom:30px;
+}
+
+.btn{
+display:inline-block;
+background:#ff9800;
+color:white;
+padding:15px 30px;
+border-radius:14px;
+text-decoration:none;
+font-weight:bold;
+transition:0.3s;
+}
+
+.btn:hover{
+transform:translateY(-3px);
+background:#ffb400;
+}
+
+/* IMAGE */
+
+.hero-image img{
+width:470px;
+border-radius:32px;
+box-shadow:0 16px 32px rgba(0,0,0,0.28);
+}
+
+/* SERVICES */
+
+.services{
+padding:70px 8%;
+}
+
+.title{
+text-align:center;
+margin-bottom:45px;
+}
+
+.title h2{
+font-size:48px;
+margin-bottom:12px;
+}
+
+.title p{
+color:#d7e9ff;
+font-size:20px;
+}
+
+.cards{
+display:flex;
+justify-content:center;
+gap:35px;
+flex-wrap:wrap;
+}
+
+.card{
+width:350px;
+background:white;
+color:#222;
+border-radius:22px;
+overflow:hidden;
+transition:0.3s;
+box-shadow:0 12px 24px rgba(0,0,0,0.18);
+}
+
+.card:hover{
+transform:translateY(-6px);
+}
+
+.card img{
+width:100%;
+height:300px;
+object-fit:cover;
+}
+
+.card-content{
+padding:22px;
+}
+
+.card-content h3{
+font-size:27px;
+color:#0f5ea8;
+margin-bottom:12px;
+}
+
+.card-content p{
+line-height:27px;
+}
+
+/* PROMO */
+
+.promo{
+padding:70px 8%;
+display:flex;
+justify-content:center;
+}
+
+.promo-box{
+width:100%;
+max-width:760px;
+background:linear-gradient(135deg,#ff9800,#ffb400);
+padding:50px;
+border-radius:28px;
+text-align:center;
+box-shadow:0 12px 24px rgba(0,0,0,0.22);
+}
+
+.promo-text{
+font-size:21px;
+font-weight:bold;
+}
+
+.promo-box h2{
+font-size:72px;
+margin:12px 0;
+}
+
+.promo-box p{
+font-size:21px;
+}
+
+/* CONTACT */
+
+.contact{
+background:white;
+color:#222;
+text-align:center;
+padding:70px 8%;
+}
+
+.contact h2{
+color:#0f5ea8;
+font-size:48px;
+margin-bottom:25px;
+}
+
+.contact p{
+font-size:21px;
+margin:15px 0;
+}
+
+/* FOOTER */
+
+footer{
+background:#052e57;
+text-align:center;
+padding:22px;
+color:#c9def8;
+}
+
+/* RESPONSIVO */
+
+@media(max-width:950px){
+
+.hero{
+min-height:auto;
+flex-direction:column;
+text-align:center;
+gap:40px;
+padding:120px 8% 50px;
+}
+
+.hero-text h1{
+font-size:48px;
+line-height:56px;
+}
+
+.hero-image img{
+width:100%;
+max-width:400px;
+}
+
+.header{
+flex-direction:column;
+gap:16px;
+padding:14px 8%;
+}
+
+.menu{
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.services,.promo,.contact{
+padding:55px 8%;
+}
+
+.promo-box h2{
+font-size:56px;
+}
+
+}
