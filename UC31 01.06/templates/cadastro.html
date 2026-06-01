@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inscrição</title>
+</head>
+<body>
+
+    <h2>Campeonato de Games</h2>
+
+    <form method="POST">
+        Nickname:<br>
+        <input type="text" name="nickname"><br><br>
+
+        Jogo:<br>
+        <select name="jogo">
+            <option value="">Selecione</option>
+            <option value="CS2">CS2</option>
+            <option value="Valorant">Valorant</option>
+        </select><br><br>
+
+        E-mail:<br>
+        <input type="email" name="email"><br><br>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    <p>{{ mensagem }}</p>
+
+</body>
+</html>
