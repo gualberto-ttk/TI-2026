@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Página</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=10">
+</head>
+<body class="{{ tema }}">
+    <main class="container">
+        <section class="card">
+            <h1>Minha Página</h1>
+            <p class="saudacao" id="mensagem">
+                {% if nome %}
+                    Oi, {{ nome }}! Bom te ver por aqui de novo.
+                {% else %}
+                    Olá! Antes de começar, me diga seu nome.
+                {% endif %}
+            </p>
+
+            <div class="linha"></div>
+
+            <h2>Seu nome</h2>
+            <form id="formNome" class="formulario">
+                <label for="nome">Digite seu nome:</label>
+                <input type="text" id="nome" name="nome" placeholder="Ex: João" required>
+                <button type="submit" id="btnNome">Guardar nome</button>
+            </form>
+
+            <div class="linha"></div>
+
+            <h2>Escolha o visual da página</h2>
+            <div class="tema-opcoes">
+                <button type="button" id="btnClaro" class="{% if tema == 'claro' %}ativo{% endif %}">Claro</button>
+                <button type="button" id="btnEscuro" class="{% if tema == 'escuro' %}ativo{% endif %}">Escuro</button>
+            </div>
+
+            <p class="tema-atual">
+                Tema escolhido:
+                <strong id="temaTexto">{% if tema == "escuro" %}Escuro{% else %}Claro{% endif %}</strong>
+            </p>
+
+            <button type="button" id="btnLimpar" class="limpar-btn">Apagar minhas preferências</button>
+        </section>
+    </main>
+
+    <script>
+        const body = document.body;
+        const formNome = document.getElementById("formNome");
+        const inputNome = document.getElementById("nome");
+        const mensagem = document.getElementById("mensagem");
+        const temaTexto = document.getElementById("temaTexto");
+        const btnClaro = document.getElementById("btnClaro");
+        const btnEscuro = document.getElementById("btnEscuro");
+        const btnNome = document.getElementById("btnNome");
+        const btnLimpar = document.getElementById("btnLimpar");
+
+        function salvarCookie(nome, valor) {
+            document.cookie = `${nome}=${encodeURIComponent(valor)}; max-age=${60 * 60 * 24 * 30}; path=/`;
+        }
+
+        function apagarCookie(nome) {
+            document.cookie = `${nome}=; max-age=0; path=/`;
+        }
+
+        function mudarTema(tema) {
+            body.classList.remove("claro", "escuro");
+            body.classList.add(tema);
+            salvarCookie("tema", tema);
+
+            btnClaro.classList.remove("ativo");
+            btnEscuro.classList.remove("ativo");
+
+            if (tema === "claro") {
+                btnClaro.classList.add("ativo");
+                temaTexto.textContent = "Claro";
+            } else {
+                btnEscuro.classList.add("ativo");
+                temaTexto.textContent = "Escuro";
+            }
+        }
+
+        formNome.addEventListener("submit", function(evento) {
+            evento.preventDefault();
+            const nome = inputNome.value.trim();
+
+            if (nome !== "") {
+                salvarCookie("nome", nome);
+                mensagem.textContent = `Oi, ${nome}! Bom te ver por aqui de novo.`;
+                inputNome.value = "";
+                btnNome.textContent = "Nome salvo!";
+
+                setTimeout(() => {
+                    btnNome.textContent = "Guardar nome";
+                }, 1500);
+            }
+        });
+
+        btnClaro.addEventListener("click", function() {
+            mudarTema("claro");
+        });
+
+        btnEscuro.addEventListener("click", function() {
+            mudarTema("escuro");
+        });
+
+        btnLimpar.addEventListener("click", function() {
+            apagarCookie("nome");
+            apagarCookie("tema");
+
+            inputNome.value = "";
+            mensagem.textContent = "Olá! Antes de começar, me diga seu nome.";
+            mudarTema("claro");
+
+            btnLimpar.textContent = "Preferências apagadas!";
+
+            setTimeout(() => {
+                btnLimpar.textContent = "Apagar minhas preferências";
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
