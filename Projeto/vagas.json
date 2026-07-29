@@ -1,0 +1,57 @@
+[
+    {
+        "id": 1,
+        "titulo": "Auxiliar Administrativo",
+        "empresa": "Tech Brasil",
+        "cidade": "São Paulo",
+        "estado": "SP",
+        "modalidade": "Presencial",
+        "tipo_contrato": "CLT",
+        "salario": "R$ 2.200",
+        "contato": "rh@techbrasil.com",
+        "descricao": "Auxiliar nas atividades administrativas da empresa.",
+        "requisitos": "Ensino Médio completo e conhecimentos básicos de informática.",
+        "beneficios": "Vale-transporte, vale-refeição e plano de saúde.",
+        "tipos_deficiencia": [
+            "Física",
+            "Auditiva"
+        ]
+    },
+    {
+        "id": 2,
+        "titulo": "Atendente",
+        "empresa": "Mercado Central",
+        "cidade": "Curitiba",
+        "estado": "PR",
+        "modalidade": "Presencial",
+        "tipo_contrato": "CLT",
+        "salario": "R$ 1.900",
+        "contato": "contato@mercadocentral.com",
+        "descricao": "Atendimento ao público e organização do setor.",
+        "requisitos": "Boa comunicação e ensino médio completo.",
+        "beneficios": "Vale-alimentação e assistência médica.",
+        "tipos_deficiencia": [
+            "Visual"
+        ]
+    },
+    {
+        "id": 3,
+        "titulo": "Desenvolvedor Front-end",
+        "empresa": "InovaWeb",
+        "cidade": "Belo Horizonte",
+        "estado": "MG",
+        "modalidade": "Remoto",
+        "tipo_contrato": "PJ",
+        "salario": "R$ 4.500",
+        "contato": "vagas@inovaweb.com",
+        "descricao": "Desenvolvimento de interfaces utilizando HTML, CSS e JavaScript.",
+        "requisitos": "Conhecimento em desenvolvimento web.",
+        "beneficios": "Horário flexível.",
+        "tipos_deficiencia": [
+            "Física",
+            "Visual",
+            "Auditiva",
+            "Intelectual"
+        ]
+    }
+]

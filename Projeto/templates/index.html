@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+
+{% block titulo %}Início{% endblock %}
+
+{% block conteudo %}
+
+<section class="inicio">
+
+    <div class="inicio-texto">
+
+        <span class="destaque">Empregos inclusivos e acessíveis</span>
+
+        <h1>
+            Oportunidades para
+            <span>todos</span>
+        </h1>
+
+        <p>
+            Encontre vagas de emprego em empresas que valorizam
+            a inclusão, a diversidade e a igualdade de oportunidades.
+        </p>
+
+        <div class="botoes-inicio">
+
+            <a href="{{ url_for('listar_vagas') }}" class="botao-principal">
+                Procurar vagas
+            </a>
+
+            <a href="{{ url_for('nova_vaga') }}" class="botao-secundario">
+                Cadastrar vaga
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="inicio-ilustracao">
+
+        <div class="circulo">
+            <span>💼</span>
+        </div>
+
+        <div class="caixa-flutuante caixa-1">
+            ♿ Ambiente acessível
+        </div>
+
+        <div class="caixa-flutuante caixa-2">
+            🤝 Empresas inclusivas
+        </div>
+
+        <div class="caixa-flutuante caixa-3">
+            📈 Crescimento profissional
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="secao-vagas">
+
+    <div class="titulo-secao">
+
+        <div>
+            <span class="subtitulo">Oportunidades recentes</span>
+            <h2>Últimas vagas</h2>
+        </div>
+
+        <a href="{{ url_for('listar_vagas') }}">
+            Ver todas →
+        </a>
+
+    </div>
+
+    {% if vagas_recentes %}
+
+    <div class="lista-vagas">
+
+        {% for vaga in vagas_recentes %}
+
+        <div class="vaga-card">
+
+            <div class="icone-vaga">
+                💼
+            </div>
+
+            <div class="vaga-conteudo">
+
+                <h3>{{ vaga.titulo }}</h3>
+
+                <p class="empresa">
+                    {{ vaga.empresa }}
+                </p>
+
+                <p>
+                    📍 {{ vaga.cidade }} - {{ vaga.estado }}
+                </p>
+
+                <span class="modalidade">
+                    {{ vaga.modalidade }}
+                </span>
+
+                <a href="{{ url_for('detalhes_vaga', vaga_id=vaga.id) }}">
+                    Ver detalhes
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="sem-vagas">
+
+        <div class="icone-sem-vagas">💼</div>
+
+        <h3>Nenhuma vaga cadastrada</h3>
+
+        <p>
+            Seja o primeiro a cadastrar uma oportunidade na plataforma.
+        </p>
+
+        <a href="{{ url_for('nova_vaga') }}" class="botao-principal">
+            Cadastrar vaga
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</section>
+
+
+<section class="sobre-inicio">
+
+    <div class="sobre-texto">
+
+        <span class="subtitulo">Sobre o projeto</span>
+
+        <h2>Uma plataforma feita para incluir</h2>
+
+        <p>
+            O IncluiVagas aproxima pessoas com deficiência de empresas
+            comprometidas com um mercado de trabalho mais acessível.
+        </p>
+
+        <a href="{{ url_for('sobre') }}">
+            Conhecer o projeto →
+        </a>
+
+    </div>
+
+    <div class="beneficios">
+
+        <div class="beneficio">
+            <span>♿</span>
+
+            <div>
+                <h3>Acessibilidade</h3>
+                <p>Recursos pensados para facilitar a navegação.</p>
+            </div>
+        </div>
+
+        <div class="beneficio">
+            <span>🤝</span>
+
+            <div>
+                <h3>Inclusão</h3>
+                <p>Empresas que valorizam diferentes talentos.</p>
+            </div>
+        </div>
+
+        <div class="beneficio">
+            <span>💼</span>
+
+            <div>
+                <h3>Oportunidades</h3>
+                <p>Vagas para diferentes áreas e experiências.</p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

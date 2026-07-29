@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block titulo %}Vagas{% endblock %}
+
+{% block conteudo %}
+
+<h1>Vagas Disponíveis</h1>
+
+<p>
+    Confira abaixo as vagas cadastradas na plataforma.
+</p>
+
+<a href="{{ url_for('nova_vaga') }}" class="btn btn-success mb-4">
+    Cadastrar Nova Vaga
+</a>
+
+{% if vagas %}
+
+    {% for vaga in vagas %}
+
+    <div class="card mb-3">
+
+        <div class="card-body">
+
+            <h4>{{ vaga.titulo }}</h4>
+
+            <p><strong>Empresa:</strong> {{ vaga.empresa }}</p>
+
+            <p><strong>Cidade:</strong> {{ vaga.cidade }}</p>
+
+            <p><strong>Modalidade:</strong> {{ vaga.modalidade }}</p>
+
+            <a href="{{ url_for('detalhes_vaga', vaga_id=vaga.id) }}" class="btn btn-primary">
+                Ver Detalhes
+            </a>
+
+            <a href="{{ url_for('editar_vaga', vaga_id=vaga.id) }}" class="btn btn-warning">
+                Editar
+            </a>
+
+            <a href="{{ url_for('excluir_vaga', vaga_id=vaga.id) }}"
+               class="btn btn-danger"
+               onclick="return confirm('Deseja excluir esta vaga?')">
+                Excluir
+            </a>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+{% else %}
+
+<p>Nenhuma vaga foi cadastrada.</p>
+
+{% endif %}
+
+{% endblock %}

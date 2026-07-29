@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block titulo %}Cadastrar Vaga{% endblock %}
+
+{% block conteudo %}
+
+<h2 class="mb-4">Cadastrar Nova Vaga</h2>
+
+<form method="POST">
+
+    <div class="mb-3">
+        <label>Título da vaga</label>
+        <input type="text" name="titulo" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label>Empresa</label>
+        <input type="text" name="empresa" class="form-control" required>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label>Cidade</label>
+            <input type="text" name="cidade" class="form-control" required>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>Estado</label>
+            <input type="text" name="estado" class="form-control">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label>Modalidade</label>
+
+            <select name="modalidade" class="form-select" required>
+                <option value="">Escolha</option>
+                <option>Presencial</option>
+                <option>Híbrido</option>
+                <option>Remoto</option>
+            </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>Tipo de contrato</label>
+
+            <select name="tipo_contrato" class="form-select">
+                <option>CLT</option>
+                <option>PJ</option>
+                <option>Estágio</option>
+                <option>Temporário</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6 mb-3">
+            <label>Salário</label>
+            <input type="text" name="salario" class="form-control">
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label>E-mail para contato</label>
+            <input type="email" name="contato" class="form-control" required>
+        </div>
+
+    </div>
+
+    <div class="mb-3">
+        <label>Descrição da vaga</label>
+
+        <textarea
+            name="descricao"
+            class="form-control"
+            rows="4"
+            required
+        ></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label>Requisitos</label>
+
+        <textarea
+            name="requisitos"
+            class="form-control"
+            rows="3"
+        ></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label>Benefícios</label>
+
+        <textarea
+            name="beneficios"
+            class="form-control"
+            rows="3"
+        ></textarea>
+    </div>
+
+    <div class="mb-4">
+
+        <label class="mb-2">
+            A vaga é destinada para quais tipos de deficiência?
+        </label>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="tipos_deficiencia" value="Física">
+            <label class="form-check-label">Física</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="tipos_deficiencia" value="Visual">
+            <label class="form-check-label">Visual</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="tipos_deficiencia" value="Auditiva">
+            <label class="form-check-label">Auditiva</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="tipos_deficiencia" value="Intelectual">
+            <label class="form-check-label">Intelectual</label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="tipos_deficiencia" value="Múltipla">
+            <label class="form-check-label">Múltipla</label>
+        </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Cadastrar
+    </button>
+
+    <a href="{{ url_for('listar_vagas') }}" class="btn btn-secondary">
+        Voltar
+    </a>
+
+</form>
+
+{% endblock %}
