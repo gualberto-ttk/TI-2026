@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Séries{% endblock %}
+
+{% block content %}
+
+<h1>Séries Disponíveis</h1>
+
+<form method="GET">
+
+    <input
+        type="text"
+        name="busca"
+        placeholder="Pesquisar..."
+        value="{{ busca }}"
+    >
+
+    <button type="submit">
+        Buscar
+    </button>
+
+</form>
+
+<div class="cards">
+
+    {% for serie in series %}
+
+    <div class="card-serie">
+
+        <h2>{{ serie.nome }}</h2>
+
+        <p>
+            {{ serie.disciplinas|length }} disciplinas
+        </p>
+
+        <a href="{{ url_for('detalhes_vaga', slug=serie.slug) }}">
+            Acessar
+        </a>
+
+    </div>
+
+    {% else %}
+
+    <p>Nenhuma série encontrada.</p>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

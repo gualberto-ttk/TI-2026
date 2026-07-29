@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}{{ serie.nome }}{% endblock %}
+
+{% block content %}
+
+<h1>{{ serie.nome }}</h1>
+
+{% if aluno %}
+
+<p>
+
+    Bem-vindo(a), <strong>{{ aluno.nome }}</strong>!
+
+</p>
+
+{% endif %}
+
+{% for disciplina, conteudos in serie.disciplinas.items() %}
+
+<div class="card">
+
+    <h2>{{ disciplina }}</h2>
+
+    <ul>
+
+        {% for conteudo in conteudos %}
+
+        <li>{{ conteudo }}</li>
+
+        {% endfor %}
+
+    </ul>
+
+</div>
+
+{% endfor %}
+
+<a href="{{ url_for('listar_vagas') }}" class="btn">
+    Voltar
+</a>
+
+{% endblock %}

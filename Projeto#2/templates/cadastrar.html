@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Cadastro{% endblock %}
+
+{% block content %}
+
+<div class="container-cadastro">
+
+    <div class="texto-cadastro">
+
+        <h1>Cadastre-se</h1>
+
+        <p>
+            Preencha seus dados e escolha a série em que você está estudando.
+            Depois disso, você será direcionado para uma página exclusiva com
+            todas as disciplinas e conteúdos da sua série.
+        </p>
+
+    </div>
+
+    <form method="POST" class="form-cadastro">
+
+        <label>Nome Completo</label>
+        <input
+            type="text"
+            name="nome"
+            placeholder="Digite seu nome"
+            required
+        >
+
+        <label>E-mail</label>
+        <input
+            type="email"
+            name="email"
+            placeholder="Digite seu e-mail"
+            required
+        >
+
+        <label>Idade</label>
+        <input
+            type="number"
+            name="idade"
+            min="5"
+            max="100"
+            placeholder="Digite sua idade"
+            required
+        >
+
+        <label>Série Escolar</label>
+
+        <select name="serie" required>
+
+            <option value="">Selecione sua série</option>
+
+            <optgroup label="Ensino Fundamental">
+
+                <option value="1-fundamental">1º Ano</option>
+                <option value="2-fundamental">2º Ano</option>
+                <option value="3-fundamental">3º Ano</option>
+                <option value="4-fundamental">4º Ano</option>
+                <option value="5-fundamental">5º Ano</option>
+                <option value="6-fundamental">6º Ano</option>
+                <option value="7-fundamental">7º Ano</option>
+                <option value="8-fundamental">8º Ano</option>
+                <option value="9-fundamental">9º Ano</option>
+
+            </optgroup>
+
+            <optgroup label="Ensino Médio">
+
+                <option value="1-medio">1º Ano</option>
+                <option value="2-medio">2º Ano</option>
+                <option value="3-medio">3º Ano</option>
+
+            </optgroup>
+
+        </select>
+
+        <button type="submit" class="btn">
+            Entrar na Plataforma
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

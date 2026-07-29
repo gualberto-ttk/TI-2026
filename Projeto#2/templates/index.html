@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Início{% endblock %}
+
+{% block content %}
+
+<section class="inicio">
+
+    <h1>Educação para Todos</h1>
+
+    <p>
+        Uma plataforma gratuita para estudantes encontrarem conteúdos
+        organizados de acordo com sua série escolar.
+    </p>
+
+    <a href="{{ url_for('nova_vaga') }}" class="btn">
+        Começar Agora
+    </a>
+
+</section>
+
+<section class="informacoes">
+
+    <div class="card">
+
+        <h2>📚 Estude</h2>
+
+        <p>
+            Tenha acesso às disciplinas da sua série.
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <h2>🎓 Aprenda</h2>
+
+        <p>
+            Veja os conteúdos básicos de cada matéria.
+        </p>
+
+    </div>
+
+    <div class="card">
+
+        <h2>💻 Gratuito</h2>
+
+        <p>
+            Todo o conteúdo é totalmente gratuito.
+        </p>
+
+    </div>
+
+</section>
+
+<section class="series">
+
+    <h2>Séries Disponíveis</h2>
+
+    <div class="cards">
+
+        {% for serie in series %}
+
+        <div class="card-serie">
+
+            <h3>{{ serie.nome }}</h3>
+
+            <a href="{{ url_for('detalhes_vaga', slug=serie.slug) }}">
+                Ver Conteúdos
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}
