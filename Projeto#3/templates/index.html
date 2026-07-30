@@ -1,0 +1,280 @@
+{% extends "base.html" %}
+
+{% block title %}Início | Educação para Todos{% endblock %}
+
+{% block content %}
+
+<section class="hero-inicio">
+
+    <div class="hero-conteudo">
+
+        <span class="selo-inicio">
+            <i class="fa-solid fa-graduation-cap"></i>
+            Educação gratuita e acessível
+        </span>
+
+        <h1>
+            Aprenda hoje e
+            <span>transforme seu futuro</span>
+        </h1>
+
+        <p>
+            Conteúdos escolares organizados por série, feitos para ajudar
+            estudantes a aprender de maneira simples, gratuita e eficiente.
+        </p>
+
+        <div class="acoes-inicio">
+
+            {% if session.get("email") %}
+
+                <a href="{{ url_for('minha_serie') }}" class="botao-principal-inicio">
+                    <i class="fa-solid fa-book-open"></i>
+                    Acessar minha série
+                </a>
+
+            {% else %}
+
+                <a href="{{ url_for('nova_vaga') }}" class="botao-principal-inicio">
+                    <i class="fa-solid fa-user-plus"></i>
+                    Começar agora
+                </a>
+
+                <a href="{{ url_for('login') }}" class="botao-secundario-inicio">
+                    Já tenho uma conta
+                </a>
+
+            {% endif %}
+
+        </div>
+
+        <div class="numeros-inicio">
+
+            <div>
+                <strong>{{ series|length }}</strong>
+                <span>Séries disponíveis</span>
+            </div>
+
+            <div>
+                <strong>100%</strong>
+                <span>Gratuito</span>
+            </div>
+
+            <div>
+                <strong>24h</strong>
+                <span>Disponível</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="hero-visual">
+
+        <div class="circulo-visual"></div>
+
+        <div class="icone-central">
+            <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+
+        <div class="elemento-flutuante elemento-livro">
+            <i class="fa-solid fa-book-open"></i>
+            <span>Conteúdos</span>
+        </div>
+
+        <div class="elemento-flutuante elemento-aluno">
+            <i class="fa-solid fa-user-graduate"></i>
+            <span>Aprendizado</span>
+        </div>
+
+        <div class="elemento-flutuante elemento-nota">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Evolução</span>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="secao-vantagens">
+
+    <div class="titulo-secao">
+        <span>POR QUE ESTUDAR AQUI?</span>
+        <h2>Tudo o que você precisa para aprender</h2>
+
+        <p>
+            Uma plataforma simples, organizada e criada para facilitar
+            o acesso à educação.
+        </p>
+    </div>
+
+    <div class="grade-vantagens">
+
+        <article class="card-vantagem">
+
+            <div class="icone-card icone-azul">
+                <i class="fa-solid fa-layer-group"></i>
+            </div>
+
+            <h3>Conteúdos organizados</h3>
+
+            <p>
+                Encontre matérias separadas de acordo com sua série escolar.
+            </p>
+
+        </article>
+
+        <article class="card-vantagem">
+
+            <div class="icone-card icone-verde">
+                <i class="fa-solid fa-book"></i>
+            </div>
+
+            <h3>Disciplinas completas</h3>
+
+            <p>
+                Estude Português, Matemática, Ciências, História e muito mais.
+            </p>
+
+        </article>
+
+        <article class="card-vantagem">
+
+            <div class="icone-card icone-roxo">
+                <i class="fa-solid fa-laptop"></i>
+            </div>
+
+            <h3>Acesso gratuito</h3>
+
+            <p>
+                Use a plataforma sem mensalidade pelo celular ou computador.
+            </p>
+
+        </article>
+
+    </div>
+
+</section>
+
+<section class="secao-series">
+
+    <div class="cabecalho-series">
+
+        <div>
+            <span>ESCOLHA SUA TURMA</span>
+            <h2>Séries disponíveis</h2>
+
+            <p>
+                Selecione uma série para conhecer suas disciplinas e conteúdos.
+            </p>
+        </div>
+
+        <a href="{{ url_for('listar_vagas') }}">
+            Ver todas as séries
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+    </div>
+
+    <div class="grade-series">
+
+        {% for serie in series %}
+
+            <article class="card-serie">
+
+                <div class="topo-card-serie">
+
+                    <span class="icone-serie">
+                        <i class="fa-solid fa-school"></i>
+                    </span>
+
+                    {% if "medio" in serie.slug %}
+                        <span class="categoria-serie medio">Ensino Médio</span>
+                    {% else %}
+                        <span class="categoria-serie fundamental">
+                            Ensino Fundamental
+                        </span>
+                    {% endif %}
+
+                </div>
+
+                <h3>{{ serie.nome }}</h3>
+
+                <p>
+                    {{ serie.disciplinas|length }} disciplinas disponíveis
+                    para você estudar.
+                </p>
+
+                <div class="disciplinas-preview">
+
+                    {% for disciplina in serie.disciplinas.keys() %}
+
+                        {% if loop.index <= 3 %}
+                            <span>{{ disciplina }}</span>
+                        {% endif %}
+
+                    {% endfor %}
+
+                </div>
+
+                {% if session.get("email") %}
+
+                    <a href="{{ url_for('detalhes_vaga', slug=serie.slug) }}">
+                        Acessar conteúdos
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                {% else %}
+
+                    <a href="{{ url_for('nova_vaga') }}">
+                        Cadastrar-se para acessar
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                {% endif %}
+
+            </article>
+
+        {% else %}
+
+            <div class="sem-series">
+                <i class="fa-solid fa-folder-open"></i>
+                <h3>Nenhuma série disponível</h3>
+                <p>Verifique os dados do arquivo vagas.json.</p>
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<section class="chamada-final">
+
+    <div>
+        <span>COMECE GRATUITAMENTE</span>
+        <h2>Pronto para começar a estudar?</h2>
+
+        <p>
+            Crie sua conta, escolha sua série e tenha acesso aos conteúdos.
+        </p>
+    </div>
+
+    {% if session.get("email") %}
+
+        <a href="{{ url_for('minha_serie') }}">
+            Minha série
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+    {% else %}
+
+        <a href="{{ url_for('nova_vaga') }}">
+            Criar conta gratuita
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,321 @@
+{% extends "base.html" %}
+
+{% block title %}Cadastre-se | Estude+{% endblock %}
+
+{% block content %}
+
+<section class="pagina-cadastro">
+
+    <div class="cabecalho-cadastro">
+
+        <span class="etiqueta-cadastro">
+            COMECE AGORA
+        </span>
+
+        <h1>Crie sua conta</h1>
+
+        <p>
+            Cadastre-se gratuitamente e tenha acesso aos conteúdos
+            organizados para a sua série escolar.
+        </p>
+
+        <div class="beneficios-cadastro">
+
+            <span>
+                <i class="fa-regular fa-circle-check"></i>
+                Conteúdos gratuitos
+            </span>
+
+            <span>
+                <i class="fa-regular fa-circle-check"></i>
+                Disciplinas organizadas
+            </span>
+
+            <span>
+                <i class="fa-regular fa-circle-check"></i>
+                Acesso pela sua conta
+            </span>
+
+        </div>
+
+    </div>
+
+    <form method="POST" class="formulario-cadastro">
+
+        <div class="titulo-formulario-cadastro">
+
+            <div class="icone-aluno">
+                <i class="fa-regular fa-user"></i>
+            </div>
+
+            <div>
+                <h2>Cadastro do aluno</h2>
+                <p>Preencha seus dados para continuar.</p>
+            </div>
+
+        </div>
+
+        <div class="linha-formulario">
+
+            <div class="grupo-campo">
+
+                <label for="nome">Nome completo</label>
+
+                <div class="campo-cadastro">
+
+                    <i class="fa-regular fa-user"></i>
+
+                    <input
+                        id="nome"
+                        type="text"
+                        name="nome"
+                        placeholder="Digite seu nome completo"
+                        value="{{ request.form.get('nome', '') }}"
+                        autocomplete="name"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+            <div class="grupo-campo">
+
+                <label for="email">E-mail</label>
+
+                <div class="campo-cadastro">
+
+                    <i class="fa-regular fa-envelope"></i>
+
+                    <input
+                        id="email"
+                        type="email"
+                        name="email"
+                        placeholder="Digite seu e-mail"
+                        value="{{ request.form.get('email', '') }}"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="linha-formulario">
+
+            <div class="grupo-campo">
+
+                <label for="idade">Idade</label>
+
+                <div class="campo-cadastro">
+
+                    <i class="fa-regular fa-calendar"></i>
+
+                    <input
+                        id="idade"
+                        type="number"
+                        name="idade"
+                        min="5"
+                        max="100"
+                        placeholder="Digite sua idade"
+                        value="{{ request.form.get('idade', '') }}"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+            <div class="grupo-campo">
+
+                <label for="serie">Série escolar</label>
+
+                <div class="campo-cadastro campo-select">
+
+                    <i class="fa-solid fa-graduation-cap"></i>
+
+                    <select id="serie" name="serie" required>
+
+                        <option value="" disabled
+                            {% if not request.form.get('serie') %}selected{% endif %}
+                        >
+                            Selecione sua série
+                        </option>
+
+                        <optgroup label="Ensino Fundamental I">
+
+                            {% for serie in series %}
+
+                                {% if serie.slug in [
+                                    "1-fundamental",
+                                    "2-fundamental",
+                                    "3-fundamental",
+                                    "4-fundamental",
+                                    "5-fundamental"
+                                ] %}
+
+                                    <option
+                                        value="{{ serie.slug }}"
+                                        {% if request.form.get('serie') == serie.slug %}
+                                            selected
+                                        {% endif %}
+                                    >
+                                        {{ serie.nome }}
+                                    </option>
+
+                                {% endif %}
+
+                            {% endfor %}
+
+                        </optgroup>
+
+                        <optgroup label="Ensino Fundamental II">
+
+                            {% for serie in series %}
+
+                                {% if serie.slug in [
+                                    "6-fundamental",
+                                    "7-fundamental",
+                                    "8-fundamental",
+                                    "9-fundamental"
+                                ] %}
+
+                                    <option
+                                        value="{{ serie.slug }}"
+                                        {% if request.form.get('serie') == serie.slug %}
+                                            selected
+                                        {% endif %}
+                                    >
+                                        {{ serie.nome }}
+                                    </option>
+
+                                {% endif %}
+
+                            {% endfor %}
+
+                        </optgroup>
+
+                        <optgroup label="Ensino Médio">
+
+                            {% for serie in series %}
+
+                                {% if serie.slug in [
+                                    "1-medio",
+                                    "2-medio",
+                                    "3-medio"
+                                ] %}
+
+                                    <option
+                                        value="{{ serie.slug }}"
+                                        {% if request.form.get('serie') == serie.slug %}
+                                            selected
+                                        {% endif %}
+                                    >
+                                        {{ serie.nome }}
+                                    </option>
+
+                                {% endif %}
+
+                            {% endfor %}
+
+                        </optgroup>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="linha-formulario">
+
+            <div class="grupo-campo">
+
+                <label for="senha">Senha</label>
+
+                <div class="campo-cadastro">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        id="senha"
+                        type="password"
+                        name="senha"
+                        minlength="6"
+                        placeholder="Mínimo de 6 caracteres"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="mostrar-senha-cadastro"
+                        onclick="mostrarSenha('senha', this)"
+                        aria-label="Mostrar ou esconder senha"
+                    >
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="grupo-campo">
+
+                <label for="confirmar_senha">Confirmar senha</label>
+
+                <div class="campo-cadastro">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        id="confirmar_senha"
+                        type="password"
+                        name="confirmar_senha"
+                        minlength="6"
+                        placeholder="Digite novamente sua senha"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="mostrar-senha-cadastro"
+                        onclick="mostrarSenha('confirmar_senha', this)"
+                        aria-label="Mostrar ou esconder senha"
+                    >
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <button type="submit" class="confirmar-cadastro">
+
+            <i class="fa-solid fa-user-plus"></i>
+
+            Confirmar cadastro
+
+        </button>
+
+        <p class="link-login-cadastro">
+
+            Já possui uma conta?
+
+            <a href="{{ url_for('login') }}">
+                Entrar
+            </a>
+
+        </p>
+
+    </form>
+
+</section>
+
+{% endblock %}

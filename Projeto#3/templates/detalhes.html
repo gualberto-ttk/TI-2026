@@ -1,0 +1,268 @@
+{% extends "base.html" %}
+
+{% block title %}{{ serie.nome }} | Estude+{% endblock %}
+
+{% block content %}
+
+<section class="pagina-materiais">
+
+    <div class="topo-materiais">
+
+        <div class="saudacao-serie">
+
+            <span class="etiqueta-serie">
+
+                {% if "medio" in serie.slug %}
+                    Ensino Médio
+
+                {% elif serie.slug in [
+                    "1-fundamental",
+                    "2-fundamental",
+                    "3-fundamental",
+                    "4-fundamental",
+                    "5-fundamental"
+                ] %}
+                    Ensino Fundamental I
+
+                {% else %}
+                    Ensino Fundamental II
+                {% endif %}
+
+            </span>
+
+            <h1>{{ serie.nome }}</h1>
+
+            <p>
+                Olá, <strong>{{ aluno.nome }}</strong>!
+                Escolha uma disciplina e abra o conteúdo que deseja estudar.
+            </p>
+
+        </div>
+
+        <div class="acoes-serie">
+
+            <a
+                href="{{ url_for('editar_vaga') }}"
+                class="botao-editar-serie"
+            >
+                <i class="fa-solid fa-user-pen"></i>
+                Editar cadastro
+            </a>
+
+            <a
+                href="{{ url_for('listar_vagas') }}"
+                class="botao-voltar-serie"
+            >
+                <i class="fa-solid fa-arrow-left"></i>
+                Ver séries
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="resumo-serie">
+
+        <article>
+
+            <span class="icone-resumo azul">
+                <i class="fa-solid fa-book-open"></i>
+            </span>
+
+            <div>
+                <strong>{{ serie.disciplinas|length }}</strong>
+                <p>Disciplinas</p>
+            </div>
+
+        </article>
+
+        <article>
+
+            <span class="icone-resumo verde">
+                <i class="fa-solid fa-list-check"></i>
+            </span>
+
+            <div>
+
+                {% set total = namespace(valor=0) %}
+
+                {% for disciplina, conteudos in serie.disciplinas.items() %}
+                    {% set total.valor = total.valor + conteudos|length %}
+                {% endfor %}
+
+                <strong>{{ total.valor }}</strong>
+                <p>Conteúdos</p>
+
+            </div>
+
+        </article>
+
+        <article>
+
+            <span class="icone-resumo roxo">
+                <i class="fa-solid fa-clock"></i>
+            </span>
+
+            <div>
+                <strong>24h</strong>
+                <p>Acesso disponível</p>
+            </div>
+
+        </article>
+
+    </div>
+
+    <div class="cabecalho-disciplinas">
+
+        <div>
+            <span>SEUS MATERIAIS</span>
+            <h2>Disciplinas da sua série</h2>
+        </div>
+
+        <p>
+            Abra uma disciplina e clique no conteúdo que deseja estudar.
+        </p>
+
+    </div>
+
+    <div class="grade-disciplinas">
+
+        {% for disciplina, conteudos in serie.disciplinas.items() %}
+
+            <article class="card-disciplina">
+
+                <div class="topo-disciplina">
+
+                    <span class="icone-disciplina cor-{{ (loop.index0 % 6) + 1 }}">
+
+                        {% if disciplina == "Português" %}
+                            <i class="fa-solid fa-pen-nib"></i>
+
+                        {% elif disciplina == "Matemática" %}
+                            <i class="fa-solid fa-calculator"></i>
+
+                        {% elif disciplina == "Ciências" %}
+                            <i class="fa-solid fa-flask"></i>
+
+                        {% elif disciplina == "História" %}
+                            <i class="fa-solid fa-landmark"></i>
+
+                        {% elif disciplina == "Geografia" %}
+                            <i class="fa-solid fa-earth-americas"></i>
+
+                        {% elif disciplina == "Biologia" %}
+                            <i class="fa-solid fa-dna"></i>
+
+                        {% elif disciplina == "Física" %}
+                            <i class="fa-solid fa-atom"></i>
+
+                        {% elif disciplina == "Química" %}
+                            <i class="fa-solid fa-vial"></i>
+
+                        {% elif disciplina == "Inglês" %}
+                            <i class="fa-solid fa-language"></i>
+
+                        {% else %}
+                            <i class="fa-solid fa-book"></i>
+                        {% endif %}
+
+                    </span>
+
+                    <span class="quantidade-conteudos">
+                        {{ conteudos|length }}
+
+                        {% if conteudos|length == 1 %}
+                            conteúdo
+                        {% else %}
+                            conteúdos
+                        {% endif %}
+                    </span>
+
+                </div>
+
+                <h3>{{ disciplina }}</h3>
+
+                <p class="descricao-disciplina">
+                    Estude os principais assuntos de {{ disciplina }}
+                    preparados para a sua série.
+                </p>
+
+                <div class="lista-conteudos">
+
+                    {% for conteudo in conteudos %}
+
+                        <a
+                            href="{{ url_for(
+                                'ver_conteudo',
+                                slug=serie.slug,
+                                disciplina=disciplina,
+                                indice=loop.index0
+                            ) }}"
+                            class="item-conteudo"
+                        >
+
+                            <span class="numero-conteudo">
+                                {{ loop.index }}
+                            </span>
+
+                            <span>
+                                {{ conteudo }}
+                            </span>
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+                        </a>
+
+                    {% endfor %}
+
+                </div>
+
+                <button
+                    type="button"
+                    class="botao-estudar"
+                    onclick="alternarConteudos(this)"
+                >
+                    <i class="fa-solid fa-book-reader"></i>
+                    <span>Ver conteúdos</span>
+                </button>
+
+            </article>
+
+        {% else %}
+
+            <div class="sem-materiais">
+
+                <i class="fa-solid fa-folder-open"></i>
+
+                <h3>Nenhum material encontrado</h3>
+
+                <p>
+                    Esta série ainda não possui disciplinas cadastradas.
+                </p>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+    <section class="dica-estudo">
+
+        <span>
+            <i class="fa-solid fa-lightbulb"></i>
+        </span>
+
+        <div>
+            <h2>Dica para estudar melhor</h2>
+
+            <p>
+                Escolha uma disciplina por vez, faça anotações e revise
+                os conteúdos regularmente.
+            </p>
+        </div>
+
+    </section>
+
+</section>
+
+{% endblock %}

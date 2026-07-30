@@ -1,0 +1,219 @@
+{% extends "base.html" %}
+
+{% block title %}Entrar | Educação para Todos{% endblock %}
+
+{% block content %}
+
+<section class="pagina-login">
+
+    <div class="conteudo-login">
+
+        <div class="apresentacao-login">
+
+            <span class="selo-gratuito">
+                <i class="fa-regular fa-heart"></i>
+                Plataforma gratuita
+            </span>
+
+            <h1>
+                Educação de
+                <span>qualidade</span>
+                ao alcance de todos
+            </h1>
+
+            <p class="descricao-login">
+                Aqui você encontra conteúdos organizados por série escolar,
+                disciplinas completas e materiais que ajudam você a aprender
+                de verdade.
+            </p>
+
+            <div class="vantagens-login">
+
+                <article>
+                    <span class="icone-vantagem azul">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </span>
+
+                    <div>
+                        <strong>Conteúdos organizados por série</strong>
+                        <p>Do 1º ano do Fundamental ao 3º ano do Ensino Médio.</p>
+                    </div>
+                </article>
+
+                <article>
+                    <span class="icone-vantagem verde">
+                        <i class="fa-solid fa-book-open"></i>
+                    </span>
+
+                    <div>
+                        <strong>Disciplinas completas</strong>
+                        <p>Português, Matemática, Ciências e muito mais.</p>
+                    </div>
+                </article>
+
+                <article>
+                    <span class="icone-vantagem roxo">
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                    </span>
+
+                    <div>
+                        <strong>Estude no seu ritmo</strong>
+                        <p>Aprenda de forma simples, prática e eficiente.</p>
+                    </div>
+                </article>
+
+            </div>
+
+            <div class="ilustracao-estudo">
+
+                <div class="chapeu">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+
+                <div class="livro livro-1"></div>
+                <div class="livro livro-2"></div>
+                <div class="livro livro-3"></div>
+
+                <div class="lapiseira">
+                    <i class="fa-solid fa-pencil"></i>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="area-formulario-login">
+
+            <form method="POST" class="formulario-login">
+
+                <div class="icone-usuario">
+                    <i class="fa-regular fa-user"></i>
+                </div>
+
+                <div class="titulo-login">
+                    <h2>Acesse sua conta</h2>
+
+                    <p>
+                        Entre com seu e-mail e senha para continuar.
+                    </p>
+                </div>
+
+                <label for="email">E-mail</label>
+
+                <div class="campo-com-icone">
+                    <i class="fa-regular fa-envelope"></i>
+
+                    <input
+                        id="email"
+                        type="email"
+                        name="email"
+                        placeholder="Digite seu e-mail"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <label for="senha">Senha</label>
+
+                <div class="campo-com-icone">
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        id="senha"
+                        type="password"
+                        name="senha"
+                        placeholder="Digite sua senha"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="mostrar-senha"
+                        onclick="mostrarSenha('senha', this)"
+                        aria-label="Mostrar ou esconder senha"
+                    >
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+                </div>
+
+                <div class="opcoes-login">
+
+                    <label class="lembrar-login">
+                        <input type="checkbox">
+                        <span>Lembrar de mim</span>
+                    </label>
+
+                    <a href="#">Esqueceu sua senha?</a>
+
+                </div>
+
+                <button type="submit" class="botao-entrar">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                    Entrar
+                </button>
+
+                <div class="separador">
+                    <span></span>
+                    <p>ou</p>
+                    <span></span>
+                </div>
+
+                <p class="criar-conta">
+                    Ainda não possui uma conta?
+
+                    <a href="{{ url_for('nova_vaga') }}">
+                        <i class="fa-solid fa-user-plus"></i>
+                        Cadastre-se agora
+                    </a>
+                </p>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <div class="beneficios-rodape">
+
+        <article>
+            <i class="fa-solid fa-shield-halved azul"></i>
+
+            <div>
+                <strong>Seguro e confiável</strong>
+                <span>Seus dados protegidos</span>
+            </div>
+        </article>
+
+        <article>
+            <i class="fa-regular fa-circle-check verde"></i>
+
+            <div>
+                <strong>100% gratuito</strong>
+                <span>Sem taxas ou mensalidades</span>
+            </div>
+        </article>
+
+        <article>
+            <i class="fa-regular fa-clock amarelo"></i>
+
+            <div>
+                <strong>Acesso 24h</strong>
+                <span>Estude quando quiser</span>
+            </div>
+        </article>
+
+        <article>
+            <i class="fa-solid fa-mobile-screen roxo"></i>
+
+            <div>
+                <strong>Em qualquer lugar</strong>
+                <span>No celular, tablet ou computador</span>
+            </div>
+        </article>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Cadastro{% endblock %}
+
+{% block content %}
+
+<h1>Editar Cadastro</h1>
+
+<form method="POST">
+
+    <input
+        type="text"
+        name="nome"
+        value="{{ aluno.nome }}"
+        placeholder="Nome"
+        required
+    >
+
+    <input
+        type="email"
+        name="email"
+        value="{{ aluno.email }}"
+        placeholder="E-mail"
+        required
+    >
+
+    <input
+        type="number"
+        name="idade"
+        value="{{ aluno.idade }}"
+        placeholder="Idade"
+        required
+    >
+
+    <select name="serie" required>
+
+        {% for serie in series %}
+
+        <option
+            value="{{ serie.slug }}"
+            {% if serie.slug == aluno.serie %}selected{% endif %}
+        >
+            {{ serie.nome }}
+        </option>
+
+        {% endfor %}
+
+    </select>
+
+    <button type="submit">
+        Salvar Alterações
+    </button>
+
+</form>
+
+{% endblock %}

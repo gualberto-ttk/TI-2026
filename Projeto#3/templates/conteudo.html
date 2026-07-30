@@ -1,0 +1,355 @@
+{% extends "base.html" %}
+
+{% block title %}{{ titulo }} | Estude+{% endblock %}
+
+{% block content %}
+
+<section class="pagina-conteudo">
+
+    <nav class="caminho-conteudo">
+
+        <a href="{{ url_for('inicio') }}">
+            Início
+        </a>
+
+        <i class="fa-solid fa-chevron-right"></i>
+
+        <a href="{{ url_for('detalhes_vaga', slug=serie.slug) }}">
+            {{ serie.nome }}
+        </a>
+
+        <i class="fa-solid fa-chevron-right"></i>
+
+        <span>{{ disciplina }}</span>
+
+        <i class="fa-solid fa-chevron-right"></i>
+
+        <span>{{ titulo }}</span>
+
+    </nav>
+
+    <header class="cabecalho-aula">
+
+        <div class="informacoes-aula">
+
+            <span class="etiqueta-aula">
+                {{ disciplina }}
+            </span>
+
+            <h1>{{ titulo }}</h1>
+
+            <p>
+                {{ material.introducao }}
+            </p>
+
+            <div class="progresso-aula">
+
+                <progress
+                    class="barra-progresso-nativa"
+                    value="{{ indice + 1 }}"
+                    max="{{ total }}"
+                >
+                    Conteúdo {{ indice + 1 }} de {{ total }}
+                </progress>
+
+                <small>
+                    Conteúdo {{ indice + 1 }} de {{ total }}
+                </small>
+
+            </div>
+
+        </div>
+
+        <div class="icone-aula">
+            <i class="{{ material.icone }}"></i>
+        </div>
+
+    </header>
+
+    <div class="estrutura-aula">
+
+        <div class="material-aula">
+
+            <article class="bloco-aula">
+
+                <div class="titulo-bloco-aula">
+
+                    <span>
+                        <i class="fa-solid fa-bullseye"></i>
+                    </span>
+
+                    <div>
+                        <small>OBJETIVOS</small>
+                        <h2>O que você vai aprender</h2>
+                    </div>
+
+                </div>
+
+                <ul class="lista-objetivos">
+
+                    {% for passo in material.passos %}
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+                            {{ passo }}
+                        </li>
+
+                    {% endfor %}
+
+                </ul>
+
+            </article>
+
+            <article class="bloco-aula">
+
+                <div class="titulo-bloco-aula">
+
+                    <span>
+                        <i class="fa-solid fa-book-open"></i>
+                    </span>
+
+                    <div>
+                        <small>EXPLICAÇÃO</small>
+                        <h2>Entendendo {{ titulo }}</h2>
+                    </div>
+
+                </div>
+
+                <p class="texto-aula">
+                    {{ material.explicacao }}
+                </p>
+
+                <div class="destaque-aula">
+
+                    <i class="fa-solid fa-lightbulb"></i>
+
+                    <div>
+
+                        <strong>Preste atenção</strong>
+
+                        <p>
+                            Faça anotações das palavras e ideias mais
+                            importantes. Isso ajudará durante a revisão.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+            <article class="bloco-aula">
+
+                <div class="titulo-bloco-aula">
+
+                    <span>
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+
+                    <div>
+                        <small>EXEMPLO</small>
+                        <h2>Exemplo prático</h2>
+                    </div>
+
+                </div>
+
+                <div class="exemplo-aula">
+                    {{ material.exemplo }}
+                </div>
+
+            </article>
+
+            <article class="bloco-aula bloco-atividade">
+
+                <div class="titulo-bloco-aula">
+
+                    <span>
+                        <i class="fa-solid fa-pencil"></i>
+                    </span>
+
+                    <div>
+                        <small>ATIVIDADE</small>
+                        <h2>Agora é sua vez</h2>
+                    </div>
+
+                </div>
+
+                <p class="texto-aula">
+                    {{ material.atividade }}
+                </p>
+
+                <div class="area-resposta">
+
+                    <label for="resposta">
+                        Faça suas anotações:
+                    </label>
+
+                    <textarea
+                        id="resposta"
+                        rows="7"
+                        placeholder="Digite sua resposta ou suas anotações aqui..."
+                    ></textarea>
+
+                    <button
+                        type="button"
+                        onclick="salvarAnotacao('{{ serie.slug }}-{{ disciplina }}-{{ indice }}')"
+                    >
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        Salvar anotação
+                    </button>
+
+                    <span
+                        class="mensagem-anotacao"
+                        id="mensagemAnotacao"
+                    ></span>
+
+                </div>
+
+            </article>
+
+            <div class="navegacao-conteudos">
+
+                {% if anterior is not none %}
+
+                    <a
+                        href="{{ url_for(
+                            'ver_conteudo',
+                            slug=serie.slug,
+                            disciplina=disciplina,
+                            indice=anterior
+                        ) }}"
+                        class="conteudo-anterior"
+                    >
+
+                        <i class="fa-solid fa-arrow-left"></i>
+
+                        <span>
+                            <small>Conteúdo anterior</small>
+                            Voltar
+                        </span>
+
+                    </a>
+
+                {% else %}
+
+                    <span></span>
+
+                {% endif %}
+
+                {% if proximo is not none %}
+
+                    <a
+                        href="{{ url_for(
+                            'ver_conteudo',
+                            slug=serie.slug,
+                            disciplina=disciplina,
+                            indice=proximo
+                        ) }}"
+                        class="proximo-conteudo"
+                    >
+
+                        <span>
+                            <small>Próximo conteúdo</small>
+                            Continuar
+                        </span>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+                {% else %}
+
+                    <a
+                        href="{{ url_for(
+                            'detalhes_vaga',
+                            slug=serie.slug
+                        ) }}"
+                        class="proximo-conteudo"
+                    >
+
+                        <span>
+                            <small>Disciplina concluída</small>
+                            Voltar aos materiais
+                        </span>
+
+                        <i class="fa-solid fa-check"></i>
+
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        <aside class="lateral-aula">
+
+            <div class="card-lateral-aula">
+
+                <span class="icone-lateral">
+                    <i class="fa-solid fa-user-graduate"></i>
+                </span>
+
+                <h3>{{ aluno.nome }}</h3>
+
+                <p>{{ serie.nome }}</p>
+
+            </div>
+
+            <div class="card-lateral-aula">
+
+                <h3>Informações da aula</h3>
+
+                <div class="informacao-lateral">
+
+                    <i class="fa-solid fa-book"></i>
+
+                    <span>
+                        <small>Disciplina</small>
+                        {{ disciplina }}
+                    </span>
+
+                </div>
+
+                <div class="informacao-lateral">
+
+                    <i class="fa-solid fa-list"></i>
+
+                    <span>
+                        <small>Posição</small>
+                        {{ indice + 1 }} de {{ total }}
+                    </span>
+
+                </div>
+
+                <div class="informacao-lateral">
+
+                    <i class="fa-solid fa-clock"></i>
+
+                    <span>
+                        <small>Tempo estimado</small>
+                        10 minutos
+                    </span>
+
+                </div>
+
+            </div>
+
+            <a
+                href="{{ url_for(
+                    'detalhes_vaga',
+                    slug=serie.slug
+                ) }}"
+                class="voltar-materiais"
+            >
+                <i class="fa-solid fa-arrow-left"></i>
+                Voltar aos materiais
+            </a>
+
+        </aside>
+
+    </div>
+
+</section>
+
+{% endblock %}
