@@ -1,0 +1,650 @@
+{% extends "base.html" %}
+
+{% block title %}Início | Estude+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="decoracao decoracao-1"></div>
+    <div class="decoracao decoracao-2"></div>
+
+    <div class="hero-texto revelar">
+
+        <span class="selo">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            Organize seus estudos
+        </span>
+
+        <h1>
+            Um caderno inteligente para
+            <span>todas as disciplinas.</span>
+        </h1>
+
+        <p>
+            Escolha sua série, abra uma disciplina e registre títulos,
+            temas, conteúdos, dúvidas e lembretes em um espaço criado
+            para estudar do seu jeito.
+        </p>
+
+        <div class="hero-acoes">
+
+            <a
+                href="{{ url_for('listar_vagas') }}"
+                class="botao botao-principal"
+            >
+                <i class="fa-solid fa-book-open"></i>
+                Abrir cadernos
+            </a>
+
+            {% if session.get('email') %}
+
+                <a
+                    href="{{ url_for('minha_serie') }}"
+                    class="botao botao-secundario"
+                >
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    Minha série
+                </a>
+
+            {% else %}
+
+                <a
+                    href="{{ url_for('nova_vaga') }}"
+                    class="botao botao-secundario"
+                >
+                    <i class="fa-solid fa-user-plus"></i>
+                    Criar conta gratuita
+                </a>
+
+            {% endif %}
+
+        </div>
+
+        <div class="indicadores">
+
+            <article>
+
+                <strong data-contador="12">
+                    0
+                </strong>
+
+                <span>
+                    Anos escolares
+                </span>
+
+            </article>
+
+            <article>
+
+                <strong data-contador="14">
+                    0
+                </strong>
+
+                <span>
+                    Disciplinas
+                </span>
+
+            </article>
+
+            <article>
+
+                <strong>
+                    24h
+                </strong>
+
+                <span>
+                    Acesso disponível
+                </span>
+
+            </article>
+
+        </div>
+
+    </div>
+
+    <div class="hero-ilustracao revelar">
+
+        <div class="orbita orbita-menor"></div>
+        <div class="orbita orbita-maior"></div>
+
+        <div class="etiqueta-flutuante etiqueta-matematica">
+            <i class="fa-solid fa-calculator"></i>
+            Matemática
+        </div>
+
+        <div class="etiqueta-flutuante etiqueta-ciencias">
+            <i class="fa-solid fa-flask"></i>
+            Ciências
+        </div>
+
+        <div class="etiqueta-flutuante etiqueta-historia">
+            <i class="fa-solid fa-landmark"></i>
+            História
+        </div>
+
+        <div class="etiqueta-flutuante etiqueta-ingles">
+            <i class="fa-solid fa-language"></i>
+            Inglês
+        </div>
+
+        <div class="caderno-desenho">
+
+            <div class="espiral">
+
+                {% for item in range(9) %}
+                    <span></span>
+                {% endfor %}
+
+            </div>
+
+            <div class="pagina-desenho">
+
+                <div class="materia-desenho">
+
+                    <span>Português</span>
+
+                    <i class="fa-solid fa-pen"></i>
+
+                </div>
+
+                <h2>
+                    Figuras de linguagem
+                </h2>
+
+                <span class="linha linha-curta"></span>
+                <span class="linha"></span>
+                <span class="linha"></span>
+                <span class="linha linha-media"></span>
+
+                <div class="postit-desenho">
+                    <i class="fa-solid fa-thumbtack"></i>
+                    Revisar antes da prova
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="lapis">
+            <i class="fa-solid fa-pencil"></i>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="faixa-informacoes">
+
+    <div class="faixa-informacoes-conteudo">
+
+        <article class="revelar">
+
+            <span class="icone-informacao">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+            </span>
+
+            <div>
+
+                <h3>Salvamento automático</h3>
+
+                <p>
+                    Continue escrevendo de onde parou.
+                </p>
+
+            </div>
+
+        </article>
+
+        <article class="revelar">
+
+            <span class="icone-informacao">
+                <i class="fa-solid fa-mobile-screen-button"></i>
+            </span>
+
+            <div>
+
+                <h3>Funciona em qualquer tela</h3>
+
+                <p>
+                    Celular, tablet ou computador.
+                </p>
+
+            </div>
+
+        </article>
+
+        <article class="revelar">
+
+            <span class="icone-informacao">
+                <i class="fa-solid fa-universal-access"></i>
+            </span>
+
+            <div>
+
+                <h3>Experiência acessível</h3>
+
+                <p>
+                    Ajuste fonte, contraste e animações.
+                </p>
+
+            </div>
+
+        </article>
+
+        <article class="revelar">
+
+            <span class="icone-informacao">
+                <i class="fa-solid fa-lock"></i>
+            </span>
+
+            <div>
+
+                <h3>Conta protegida</h3>
+
+                <p>
+                    Suas anotações ficam no seu perfil.
+                </p>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+<section class="secao-recursos">
+
+    <header class="titulo-secao revelar">
+
+        <span>SEU ESPAÇO DE ESTUDO</span>
+
+        <h2>
+            Simples, organizado e útil
+        </h2>
+
+        <p>
+            Recursos criados para deixar suas anotações mais claras,
+            bonitas e fáceis de revisar.
+        </p>
+
+    </header>
+
+    <div class="grade-recursos">
+
+        <article class="card-recurso revelar">
+
+            <span class="icone-recurso">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </span>
+
+            <h3>
+                Do 1º ano ao Ensino Médio
+            </h3>
+
+            <p>
+                Todos os anos são organizados em Fundamental I,
+                Fundamental II e Ensino Médio.
+            </p>
+
+            <div class="etiquetas">
+
+                <span>Fundamental I</span>
+                <span>Fundamental II</span>
+                <span>Ensino Médio</span>
+
+            </div>
+
+        </article>
+
+        <article class="card-recurso revelar">
+
+            <span class="icone-recurso">
+                <i class="fa-solid fa-pen-to-square"></i>
+            </span>
+
+            <h3>
+                Editor por disciplina
+            </h3>
+
+            <p>
+                Preencha título, tema principal e conteúdo completo
+                dentro de cada caderno.
+            </p>
+
+            <div class="mini-editor">
+
+                <span class="mini-linha mini-titulo"></span>
+                <span class="mini-linha"></span>
+                <span class="mini-linha"></span>
+
+            </div>
+
+        </article>
+
+        <article class="card-recurso revelar">
+
+            <span class="icone-recurso">
+                <i class="fa-solid fa-note-sticky"></i>
+            </span>
+
+            <h3>
+                Blocos de notas
+            </h3>
+
+            <p>
+                Separe lembretes importantes, conteúdos para revisar,
+                ideias e dúvidas.
+            </p>
+
+            <div class="mini-postits">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </div>
+
+        </article>
+
+        <article class="card-recurso revelar">
+
+            <span class="icone-recurso">
+                <i class="fa-solid fa-floppy-disk"></i>
+            </span>
+
+            <h3>
+                Notas salvas
+            </h3>
+
+            <p>
+                Suas anotações ficam ligadas à sua conta para você
+                continuar depois.
+            </p>
+
+            <div class="status-salvo">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                Anotações salvas
+
+            </div>
+
+        </article>
+
+        <article class="card-recurso revelar">
+
+            <span class="icone-recurso">
+                <i class="fa-solid fa-list-check"></i>
+            </span>
+
+            <h3>
+                Organização por matéria
+            </h3>
+
+            <p>
+                Cada disciplina possui seu próprio espaço,
+                evitando que conteúdos diferentes se misturem.
+            </p>
+
+            <div class="etiquetas">
+
+                <span>Português</span>
+                <span>Matemática</span>
+                <span>Ciências</span>
+
+            </div>
+
+        </article>
+
+        <article class="card-recurso revelar">
+
+            <span class="icone-recurso">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </span>
+
+            <h3>
+                Feito para o seu jeito
+            </h3>
+
+            <p>
+                Use para aulas, resumos, revisões, exercícios,
+                pesquisas e trabalhos.
+            </p>
+
+            <div class="etiquetas">
+
+                <span>Resumo</span>
+                <span>Aula</span>
+                <span>Revisão</span>
+                <span>Pesquisa</span>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+<section class="secao-passos">
+
+    <div class="ilustracao-passos revelar">
+
+        <div class="pilha-cadernos">
+
+            <div class="caderno-pilha caderno-azul">
+                <i class="fa-solid fa-calculator"></i>
+                Matemática
+            </div>
+
+            <div class="caderno-pilha caderno-verde">
+                <i class="fa-solid fa-flask"></i>
+                Ciências
+            </div>
+
+            <div class="caderno-pilha caderno-laranja">
+                <i class="fa-solid fa-pen-nib"></i>
+                Português
+            </div>
+
+        </div>
+
+        <i class="fa-solid fa-star estrela estrela-1"></i>
+        <i class="fa-solid fa-star estrela estrela-2"></i>
+
+    </div>
+
+    <div class="conteudo-passos revelar">
+
+        <span class="subtitulo-secao">
+            COMECE EM POUCOS PASSOS
+        </span>
+
+        <h2>
+            Seu caderno pronto para usar
+        </h2>
+
+        <p>
+            Não é necessário montar páginas manualmente.
+            Escolha a série e a disciplina para começar.
+        </p>
+
+        <ol class="lista-passos">
+
+            <li>
+
+                <span class="numero-passo">1</span>
+
+                <div>
+
+                    <h3>
+                        Escolha sua série
+                    </h3>
+
+                    <p>
+                        Encontre seu ano no Fundamental I,
+                        Fundamental II ou Ensino Médio.
+                    </p>
+
+                </div>
+
+            </li>
+
+            <li>
+
+                <span class="numero-passo">2</span>
+
+                <div>
+
+                    <h3>
+                        Abra uma disciplina
+                    </h3>
+
+                    <p>
+                        Acesse o caderno da matéria desejada.
+                    </p>
+
+                </div>
+
+            </li>
+
+            <li>
+
+                <span class="numero-passo">3</span>
+
+                <div>
+
+                    <h3>
+                        Comece a escrever
+                    </h3>
+
+                    <p>
+                        Preencha título, tema, conteúdo e notas.
+                    </p>
+
+                </div>
+
+            </li>
+
+        </ol>
+
+        <a
+            href="{{ url_for('listar_vagas') }}"
+            class="botao botao-principal"
+        >
+            Ver todos os cadernos
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+    </div>
+
+</section>
+
+<section class="secao-disciplinas">
+
+    <header class="titulo-secao revelar">
+
+        <span>MUITAS POSSIBILIDADES</span>
+
+        <h2>
+            Um espaço para cada disciplina
+        </h2>
+
+        <p>
+            As matérias aumentam de acordo com o avanço escolar,
+            mantendo tudo organizado em um só lugar.
+        </p>
+
+    </header>
+
+    <div class="grade-destaques">
+
+        <article class="disciplina-destaque revelar">
+            <i class="fa-solid fa-pen-nib"></i>
+            <span>Português</span>
+        </article>
+
+        <article class="disciplina-destaque revelar">
+            <i class="fa-solid fa-calculator"></i>
+            <span>Matemática</span>
+        </article>
+
+        <article class="disciplina-destaque revelar">
+            <i class="fa-solid fa-flask"></i>
+            <span>Ciências</span>
+        </article>
+
+        <article class="disciplina-destaque revelar">
+            <i class="fa-solid fa-landmark"></i>
+            <span>História</span>
+        </article>
+
+        <article class="disciplina-destaque revelar">
+            <i class="fa-solid fa-earth-americas"></i>
+            <span>Geografia</span>
+        </article>
+
+        <article class="disciplina-destaque revelar">
+            <i class="fa-solid fa-language"></i>
+            <span>Inglês</span>
+        </article>
+
+        <article class="disciplina-destaque revelar">
+            <i class="fa-solid fa-atom"></i>
+            <span>Física</span>
+        </article>
+
+        <article class="disciplina-destaque revelar">
+            <i class="fa-solid fa-vial"></i>
+            <span>Química</span>
+        </article>
+
+    </div>
+
+</section>
+
+<section class="chamada-final revelar">
+
+    <div>
+
+        <span>
+            COMECE AGORA
+        </span>
+
+        <h2>
+            Transforme suas anotações em um caderno organizado.
+        </h2>
+
+        <p>
+            Tenha um espaço separado para cada matéria da sua série.
+        </p>
+
+    </div>
+
+    {% if session.get('email') %}
+
+        <a
+            href="{{ url_for('minha_serie') }}"
+            class="botao botao-claro"
+        >
+            <i class="fa-solid fa-book-open"></i>
+            Abrir minha série
+        </a>
+
+    {% else %}
+
+        <a
+            href="{{ url_for('nova_vaga') }}"
+            class="botao botao-claro"
+        >
+            <i class="fa-solid fa-user-plus"></i>
+            Criar conta gratuita
+        </a>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+
+{% block title %}{{ serie.nome }} | Estude+{% endblock %}
+
+{% block content %}
+
+<section class="pagina-disciplinas">
+
+    <div class="container-disciplinas">
+
+        <a
+            href="{{ url_for('listar_vagas') }}"
+            class="voltar-series"
+        >
+            <i class="fa-solid fa-arrow-left"></i>
+            Voltar às séries
+        </a>
+
+        <header class="cabecalho-disciplinas">
+
+            <div>
+
+                <span class="etiqueta-etapa">
+                    {{ serie.grupo }}
+                </span>
+
+                <h1>
+                    {{ serie.nome }}
+                </h1>
+
+                <p>
+                    Escolha uma disciplina para abrir seu caderno
+                    inteligente e continuar suas anotações.
+                </p>
+
+            </div>
+
+            <div class="resumo-serie">
+
+                <span class="resumo-serie-icone">
+                    <i class="fa-solid fa-book-open"></i>
+                </span>
+
+                <div>
+
+                    <strong>
+                        {{ serie.disciplinas|length }}
+                    </strong>
+
+                    <span>
+                        disciplinas disponíveis
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <div class="grade-disciplinas">
+
+            {% for disciplina in serie.disciplinas %}
+
+                <a
+                    href="{{ url_for('caderno', slug=serie.slug, disciplina=disciplina) }}"
+                    class="card-disciplina"
+                >
+
+                    <span class="icone-disciplina">
+
+                        {% if disciplina == "Português" %}
+
+                            <i class="fa-solid fa-pen-nib"></i>
+
+                        {% elif disciplina == "Literatura" %}
+
+                            <i class="fa-solid fa-book-open-reader"></i>
+
+                        {% elif disciplina == "Matemática" %}
+
+                            <i class="fa-solid fa-calculator"></i>
+
+                        {% elif disciplina == "Ciências" %}
+
+                            <i class="fa-solid fa-flask"></i>
+
+                        {% elif disciplina == "Biologia" %}
+
+                            <i class="fa-solid fa-dna"></i>
+
+                        {% elif disciplina == "Física" %}
+
+                            <i class="fa-solid fa-atom"></i>
+
+                        {% elif disciplina == "Química" %}
+
+                            <i class="fa-solid fa-vial"></i>
+
+                        {% elif disciplina == "História" %}
+
+                            <i class="fa-solid fa-landmark"></i>
+
+                        {% elif disciplina == "Geografia" %}
+
+                            <i class="fa-solid fa-earth-americas"></i>
+
+                        {% elif disciplina == "Inglês" %}
+
+                            <i class="fa-solid fa-language"></i>
+
+                        {% elif disciplina == "Filosofia" %}
+
+                            <i class="fa-solid fa-brain"></i>
+
+                        {% elif disciplina == "Sociologia" %}
+
+                            <i class="fa-solid fa-people-group"></i>
+
+                        {% elif disciplina == "Artes" %}
+
+                            <i class="fa-solid fa-palette"></i>
+
+                        {% else %}
+
+                            <i class="fa-solid fa-book"></i>
+
+                        {% endif %}
+
+                    </span>
+
+                    <div class="conteudo-card-disciplina">
+
+                        <span class="tipo-caderno">
+                            CADERNO DA DISCIPLINA
+                        </span>
+
+                        <h2>
+                            {{ disciplina }}
+                        </h2>
+
+                        <p>
+                            Abra seu caderno e continue escrevendo
+                            suas anotações.
+                        </p>
+
+                    </div>
+
+                    <span class="seta-disciplina">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </span>
+
+                </a>
+
+            {% else %}
+
+                <div class="sem-disciplinas">
+
+                    <i class="fa-solid fa-folder-open"></i>
+
+                    <h2>
+                        Nenhuma disciplina disponível
+                    </h2>
+
+                    <p>
+                        Verifique os dados dessa série no arquivo
+                        vagas.json.
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+        <section class="dica-disciplinas">
+
+            <span class="icone-dica">
+                <i class="fa-solid fa-lightbulb"></i>
+            </span>
+
+            <div>
+
+                <h2>
+                    Como funciona?
+                </h2>
+
+                <p>
+                    Ao abrir uma disciplina, você terá campos para
+                    título, tema principal, conteúdo completo e blocos
+                    laterais para lembretes, dúvidas e assuntos para revisar.
+                </p>
+
+            </div>
+
+            <i class="fa-solid fa-arrow-right seta-dica"></i>
+
+        </section>
+
+    </div>
+
+</section>
+
+{% endblock %}

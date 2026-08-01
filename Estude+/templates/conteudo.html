@@ -1,0 +1,373 @@
+{% extends "base.html" %}
+
+{% block title %}{{ disciplina }} | {{ serie.nome }} | Estude+{% endblock %}
+
+{% block content %}
+
+<section class="pagina-editor-caderno">
+
+    <div class="container-editor-caderno">
+
+        <header class="cabecalho-editor-caderno">
+
+            <div class="navegacao-editor">
+
+                <a
+                    href="{{ url_for('detalhes_vaga', slug=serie.slug) }}"
+                    class="voltar-editor"
+                >
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Voltar para {{ serie.nome }}
+                </a>
+
+                <div class="trilha-editor">
+
+                    <span>{{ serie.nome }}</span>
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                    <strong>{{ disciplina }}</strong>
+
+                </div>
+
+            </div>
+
+            <div class="titulo-editor">
+
+                <div class="icone-materia-editor">
+
+                    {% if disciplina == "Português" %}
+
+                        <i class="fa-solid fa-pen-nib"></i>
+
+                    {% elif disciplina == "Literatura" %}
+
+                        <i class="fa-solid fa-book-open-reader"></i>
+
+                    {% elif disciplina == "Matemática" %}
+
+                        <i class="fa-solid fa-calculator"></i>
+
+                    {% elif disciplina == "Ciências" %}
+
+                        <i class="fa-solid fa-flask"></i>
+
+                    {% elif disciplina == "Biologia" %}
+
+                        <i class="fa-solid fa-dna"></i>
+
+                    {% elif disciplina == "Física" %}
+
+                        <i class="fa-solid fa-atom"></i>
+
+                    {% elif disciplina == "Química" %}
+
+                        <i class="fa-solid fa-vial"></i>
+
+                    {% elif disciplina == "História" %}
+
+                        <i class="fa-solid fa-landmark"></i>
+
+                    {% elif disciplina == "Geografia" %}
+
+                        <i class="fa-solid fa-earth-americas"></i>
+
+                    {% elif disciplina == "Inglês" %}
+
+                        <i class="fa-solid fa-language"></i>
+
+                    {% elif disciplina == "Filosofia" %}
+
+                        <i class="fa-solid fa-brain"></i>
+
+                    {% elif disciplina == "Sociologia" %}
+
+                        <i class="fa-solid fa-people-group"></i>
+
+                    {% elif disciplina == "Artes" %}
+
+                        <i class="fa-solid fa-palette"></i>
+
+                    {% else %}
+
+                        <i class="fa-solid fa-book"></i>
+
+                    {% endif %}
+
+                </div>
+
+                <div>
+
+                    <span class="etiqueta-editor">
+                        CADERNO DA DISCIPLINA
+                    </span>
+
+                    <h1>{{ disciplina }}</h1>
+
+                    <p>
+                        Organize suas anotações, conteúdos, dúvidas e lembretes.
+                    </p>
+
+                </div>
+
+            </div>
+
+            {% if caderno.atualizado_em %}
+
+                <div class="ultima-atualizacao">
+
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                    <div>
+
+                        <span>Último salvamento</span>
+
+                        <strong>
+                            {{ caderno.atualizado_em }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+        </header>
+
+        <form
+            method="POST"
+            id="formCaderno"
+            class="formulario-editor-caderno"
+        >
+
+            <div class="area-principal-editor">
+
+                <section class="folha-editor">
+
+                    <div class="topo-folha-editor">
+
+                        <div>
+
+                            <span class="numero-folha">
+                                01
+                            </span>
+
+                            <div>
+
+                                <strong>Nova anotação</strong>
+
+                                <small>{{ disciplina }}</small>
+
+                            </div>
+
+                        </div>
+
+                        <span class="status-rascunho">
+
+                            <i class="fa-solid fa-cloud"></i>
+
+                            Rascunho automático
+
+                        </span>
+
+                    </div>
+
+                    <div class="campo-editor campo-titulo-editor">
+
+                        <label for="titulo">
+                            Título da anotação
+                        </label>
+
+                        <input
+                            type="text"
+                            id="titulo"
+                            name="titulo"
+                            value="{{ caderno.titulo }}"
+                            placeholder="Ex.: Revolução Industrial"
+                            maxlength="120"
+                        >
+
+                    </div>
+
+                    <div class="campo-editor">
+
+                        <label for="tema">
+                            Tema principal
+                        </label>
+
+                        <input
+                            type="text"
+                            id="tema"
+                            name="tema"
+                            value="{{ caderno.tema }}"
+                            placeholder="Escreva o assunto central da anotação"
+                            maxlength="160"
+                        >
+
+                    </div>
+
+                    <div class="campo-editor campo-conteudo-editor">
+
+                        <div class="cabecalho-campo-conteudo">
+
+                            <label for="conteudo">
+                                Conteúdo
+                            </label>
+
+                            <span id="contadorPalavras">
+                                0 palavras
+                            </span>
+
+                        </div>
+
+                        <textarea
+                            id="conteudo"
+                            name="conteudo"
+                            placeholder="Comece a escrever suas anotações aqui..."
+                        >{{ caderno.conteudo }}</textarea>
+
+                    </div>
+
+                    <div class="rodape-folha-editor">
+
+                        <span>
+
+                            <i class="fa-solid fa-circle-info"></i>
+
+                            O rascunho também é salvo neste navegador.
+
+                        </span>
+
+                    </div>
+
+                </section>
+
+                <aside class="lateral-editor">
+
+                    <div class="cabecalho-blocos-notas">
+
+                        <div>
+
+                            <span class="icone-blocos-notas">
+                                <i class="fa-solid fa-note-sticky"></i>
+                            </span>
+
+                            <div>
+
+                                <h2>Blocos de notas</h2>
+
+                                <p>
+                                    Anotações rápidas para complementar o conteúdo.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <article class="bloco-nota bloco-importante">
+
+                        <header>
+
+                            <span>
+                                <i class="fa-solid fa-star"></i>
+                                Importante
+                            </span>
+
+                            <i class="fa-solid fa-thumbtack"></i>
+
+                        </header>
+
+                        <textarea
+                            name="nota1"
+                            placeholder="O que não posso esquecer?"
+                        >{{ caderno.nota1 }}</textarea>
+
+                    </article>
+
+                    <article class="bloco-nota bloco-revisao">
+
+                        <header>
+
+                            <span>
+                                <i class="fa-solid fa-rotate"></i>
+                                Revisar depois
+                            </span>
+
+                            <i class="fa-solid fa-bookmark"></i>
+
+                        </header>
+
+                        <textarea
+                            name="nota2"
+                            placeholder="Assuntos para revisar..."
+                        >{{ caderno.nota2 }}</textarea>
+
+                    </article>
+
+                    <article class="bloco-nota bloco-ideias">
+
+                        <header>
+
+                            <span>
+                                <i class="fa-solid fa-lightbulb"></i>
+                                Ideias e dúvidas
+                            </span>
+
+                            <i class="fa-solid fa-circle-question"></i>
+
+                        </header>
+
+                        <textarea
+                            name="nota3"
+                            placeholder="Escreva dúvidas ou ideias..."
+                        >{{ caderno.nota3 }}</textarea>
+
+                    </article>
+
+                    <div class="dica-editor">
+
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                        <p>
+                            Use os blocos para separar lembretes sem misturá-los
+                            ao conteúdo principal.
+                        </p>
+
+                    </div>
+
+                </aside>
+
+            </div>
+
+            <div class="acoes-editor">
+
+                <a
+                    href="{{ url_for('detalhes_vaga', slug=serie.slug) }}"
+                    class="botao-cancelar-editor"
+                >
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Voltar
+                </a>
+
+                <button
+                    type="submit"
+                    class="botao-salvar-editor"
+                >
+                    <i class="fa-solid fa-floppy-disk"></i>
+
+                    Salvar caderno
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

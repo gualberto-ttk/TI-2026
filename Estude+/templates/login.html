@@ -1,0 +1,230 @@
+{% extends "base.html" %}
+
+{% block title %}Entrar | Estude+{% endblock %}
+
+{% block content %}
+
+<section class="pagina-autenticacao">
+
+    <div class="decoracao-login decoracao-login-1"></div>
+    <div class="decoracao-login decoracao-login-2"></div>
+
+    <div class="autenticacao-container">
+
+        <aside class="autenticacao-ilustracao">
+
+            <span class="autenticacao-selo">
+                <i class="fa-solid fa-book-open"></i>
+                SEU CADERNO INTELIGENTE
+            </span>
+
+            <h1>
+                Continue seus estudos de onde parou.
+            </h1>
+
+            <p>
+                Entre na sua conta para acessar seus cadernos,
+                anotações, disciplinas e blocos de lembretes.
+            </p>
+
+            <div class="caderno-login">
+
+                <div class="espiral-login">
+
+                    {% for item in range(7) %}
+                        <span></span>
+                    {% endfor %}
+
+                </div>
+
+                <div class="folha-login">
+
+                    <div class="topo-folha-login">
+
+                        <span>Matemática</span>
+
+                        <i class="fa-solid fa-pen"></i>
+
+                    </div>
+
+                    <h2>
+                        Equações do primeiro grau
+                    </h2>
+
+                    <span class="linha-login linha-login-curta"></span>
+                    <span class="linha-login"></span>
+                    <span class="linha-login"></span>
+                    <span class="linha-login linha-login-media"></span>
+
+                    <div class="postit-login">
+                        Revisar exercício 4
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="vantagens-login">
+
+                <span>
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    Anotações salvas
+                </span>
+
+                <span>
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                    Acesso em qualquer tela
+                </span>
+
+            </div>
+
+        </aside>
+
+        <div class="autenticacao-formulario">
+
+            <div class="formulario-login">
+
+                <span class="icone-login">
+                    <i class="fa-solid fa-lock"></i>
+                </span>
+
+                <div class="titulo-login">
+
+                    <span>ACESSAR MINHA CONTA</span>
+
+                    <h2>
+                        Bem-vindo de volta
+                    </h2>
+
+                    <p>
+                        Digite seus dados para continuar suas anotações.
+                    </p>
+
+                </div>
+
+                <form method="POST" class="form-login">
+
+                    <label for="email-login">
+
+                        <span>E-mail</span>
+
+                        <div class="campo-login">
+
+                            <i class="fa-regular fa-envelope"></i>
+
+                            <input
+                                type="email"
+                                id="email-login"
+                                name="email"
+                                placeholder="Digite seu e-mail"
+                                value="{{ request.form.get('email', '') }}"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+                    </label>
+
+                    <label for="senha-login">
+
+                        <div class="linha-label-login">
+                            <span>Senha</span>
+                        </div>
+
+                        <div class="campo-login">
+
+                            <i class="fa-solid fa-lock"></i>
+
+                            <input
+                                type="password"
+                                id="senha-login"
+                                name="senha"
+                                placeholder="Digite sua senha"
+                                autocomplete="current-password"
+                                minlength="6"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="mostrar-senha"
+                                onclick="alternarSenha('senha-login', this)"
+                                aria-label="Mostrar ou ocultar senha"
+                            >
+                                <i class="fa-regular fa-eye"></i>
+                            </button>
+
+                        </div>
+
+                    </label>
+
+                    <label class="lembrar-login">
+
+                        <input
+                            type="checkbox"
+                            name="lembrar"
+                        >
+
+                        <span>
+                            Manter minha conta conectada
+                        </span>
+
+                    </label>
+
+                    <button
+                        type="submit"
+                        class="botao-entrar-login"
+                    >
+                        <span>Entrar</span>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                </form>
+
+                <div class="separador-login">
+
+                    <span></span>
+
+                    <p>ou</p>
+
+                    <span></span>
+
+                </div>
+
+                <div class="criar-conta-login">
+
+                    <p>
+                        Ainda não possui uma conta?
+                    </p>
+
+                    <a href="{{ url_for('nova_vaga') }}">
+
+                        <i class="fa-solid fa-user-plus"></i>
+
+                        Criar conta gratuita
+
+                    </a>
+
+                </div>
+
+                <div class="seguranca-login">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    <span>
+                        Sua senha é armazenada de forma protegida.
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

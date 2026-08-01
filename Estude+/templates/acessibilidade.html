@@ -1,0 +1,494 @@
+{% extends "base.html" %}
+
+{% block title %}Acessibilidade | Estude+{% endblock %}
+
+{% block content %}
+
+<section class="pagina-acessibilidade">
+
+    <div class="acessibilidade-decoracao decoracao-acessibilidade-1"></div>
+    <div class="acessibilidade-decoracao decoracao-acessibilidade-2"></div>
+
+    <div class="container-acessibilidade">
+
+        <header class="cabecalho-acessibilidade">
+
+            <div class="texto-cabecalho-acessibilidade">
+
+                <span class="selo-acessibilidade">
+                    <i class="fa-solid fa-universal-access"></i>
+                    PERSONALIZE SUA EXPERIÊNCIA
+                </span>
+
+                <h1>
+                    Acessibilidade
+                </h1>
+
+                <p>
+                    Ajuste a leitura, o contraste e a navegação para deixar
+                    o Estude+ mais confortável para você.
+                </p>
+
+            </div>
+
+            <div class="ilustracao-acessibilidade">
+
+                <div class="circulo-acessibilidade">
+                    <i class="fa-solid fa-universal-access"></i>
+                </div>
+
+                <span class="icone-flutuante-acessibilidade icone-acessibilidade-1">
+                    <i class="fa-solid fa-font"></i>
+                </span>
+
+                <span class="icone-flutuante-acessibilidade icone-acessibilidade-2">
+                    <i class="fa-solid fa-eye"></i>
+                </span>
+
+                <span class="icone-flutuante-acessibilidade icone-acessibilidade-3">
+                    <i class="fa-solid fa-hand-pointer"></i>
+                </span>
+
+            </div>
+
+        </header>
+
+        <div class="grade-acessibilidade">
+
+            <article class="card-acessibilidade">
+
+                <div class="topo-card-acessibilidade">
+
+                    <span class="icone-card-acessibilidade">
+                        <i class="fa-solid fa-text-height"></i>
+                    </span>
+
+                    <div>
+
+                        <h2>
+                            Tamanho da fonte
+                        </h2>
+
+                        <p>
+                            Aumente ou diminua os textos da plataforma.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div
+                    class="opcoes-acessibilidade opcoes-tres"
+                    data-grupo-acessibilidade="fonte"
+                >
+
+                    <button
+                        type="button"
+                        class="opcao-acessibilidade"
+                        data-opcao="menor"
+                        onclick="diminuirFonte()"
+                    >
+
+                        <strong>A−</strong>
+
+                        <span>
+                            Diminuir
+                        </span>
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="opcao-acessibilidade ativa"
+                        data-opcao="normal"
+                        onclick="fonteNormal()"
+                    >
+
+                        <strong>100%</strong>
+
+                        <span>
+                            Normal
+                        </span>
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="opcao-acessibilidade"
+                        data-opcao="maior"
+                        onclick="aumentarFonte()"
+                    >
+
+                        <strong>A+</strong>
+
+                        <span>
+                            Aumentar
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </article>
+
+            <article class="card-acessibilidade">
+
+                <div class="topo-card-acessibilidade">
+
+                    <span class="icone-card-acessibilidade">
+                        <i class="fa-solid fa-eye"></i>
+                    </span>
+
+                    <div>
+
+                        <h2>
+                            Contraste
+                        </h2>
+
+                        <p>
+                            Escolha uma aparência que facilite a visualização.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div
+                    class="opcoes-acessibilidade opcoes-tres"
+                    data-grupo-acessibilidade="contraste"
+                >
+
+                    <button
+                        type="button"
+                        class="opcao-acessibilidade ativa"
+                        data-opcao="padrao"
+                        onclick="alterarContraste('padrao')"
+                    >
+
+                        <i class="fa-solid fa-circle-half-stroke"></i>
+
+                        <span>
+                            Padrão
+                        </span>
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="opcao-acessibilidade"
+                        data-opcao="alto"
+                        onclick="alterarContraste('alto')"
+                    >
+
+                        <i class="fa-solid fa-sun"></i>
+
+                        <span>
+                            Alto contraste
+                        </span>
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="opcao-acessibilidade"
+                        data-opcao="cinza"
+                        onclick="alterarContraste('cinza')"
+                    >
+
+                        <i class="fa-solid fa-circle"></i>
+
+                        <span>
+                            Tons de cinza
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </article>
+
+            <article class="card-acessibilidade">
+
+                <div class="topo-card-acessibilidade">
+
+                    <span class="icone-card-acessibilidade">
+                        <i class="fa-solid fa-font"></i>
+                    </span>
+
+                    <div>
+
+                        <h2>
+                            Fonte de leitura
+                        </h2>
+
+                        <p>
+                            Escolha uma fonte mais simples para leitura.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div
+                    class="opcoes-acessibilidade opcoes-duas"
+                    data-grupo-acessibilidade="fonte-leitura"
+                >
+
+                    <button
+                        type="button"
+                        class="opcao-acessibilidade ativa"
+                        data-opcao="padrao"
+                        onclick="alterarFonteLeitura('padrao')"
+                    >
+
+                        <strong class="exemplo-inter">
+                            Inter
+                        </strong>
+
+                        <span>
+                            Fonte padrão
+                        </span>
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="opcao-acessibilidade"
+                        data-opcao="acessivel"
+                        onclick="alterarFonteLeitura('acessivel')"
+                    >
+
+                        <strong class="exemplo-arial">
+                            Arial
+                        </strong>
+
+                        <span>
+                            Leitura simplificada
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </article>
+
+            <article class="card-acessibilidade">
+
+                <div class="topo-card-acessibilidade">
+
+                    <span class="icone-card-acessibilidade">
+                        <i class="fa-solid fa-person-running"></i>
+                    </span>
+
+                    <div>
+
+                        <h2>
+                            Movimentos e animações
+                        </h2>
+
+                        <p>
+                            Reduza movimentos que possam causar desconforto.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div
+                    class="opcoes-acessibilidade opcoes-duas"
+                    data-grupo-acessibilidade="animacoes"
+                >
+
+                    <button
+                        type="button"
+                        class="opcao-acessibilidade ativa"
+                        data-opcao="normais"
+                        onclick="alterarAnimacoes(false)"
+                    >
+
+                        <i class="fa-solid fa-play"></i>
+
+                        <span>
+                            Normais
+                        </span>
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="opcao-acessibilidade"
+                        data-opcao="reduzidas"
+                        onclick="alterarAnimacoes(true)"
+                    >
+
+                        <i class="fa-solid fa-pause"></i>
+
+                        <span>
+                            Reduzidas
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </article>
+
+            <article class="card-acessibilidade card-largura-total">
+
+                <div class="topo-card-acessibilidade">
+
+                    <span class="icone-card-acessibilidade">
+                        <i class="fa-solid fa-align-left"></i>
+                    </span>
+
+                    <div>
+
+                        <h2>
+                            Espaçamento da leitura
+                        </h2>
+
+                        <p>
+                            Ajuste o espaço entre letras, palavras e linhas
+                            para tornar os textos mais confortáveis.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div
+                    class="opcoes-espacamento-leitura"
+                    data-grupo-acessibilidade="espacamento"
+                >
+
+                    <button
+                        type="button"
+                        class="opcao-espacamento ativa"
+                        data-opcao="padrao"
+                        onclick="alterarEspacamentoLeitura('padrao')"
+                    >
+
+                        <span class="exemplo-espacamento exemplo-padrao">
+                            Estudar ajuda a aprender.
+                        </span>
+
+                        <strong>
+                            Padrão
+                        </strong>
+
+                        <small>
+                            Espaçamento normal
+                        </small>
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="opcao-espacamento"
+                        data-opcao="confortavel"
+                        onclick="alterarEspacamentoLeitura('confortavel')"
+                    >
+
+                        <span class="exemplo-espacamento exemplo-confortavel">
+                            Estudar ajuda a aprender.
+                        </span>
+
+                        <strong>
+                            Confortável
+                        </strong>
+
+                        <small>
+                            Mais espaço entre os textos
+                        </small>
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="opcao-espacamento"
+                        data-opcao="amplo"
+                        onclick="alterarEspacamentoLeitura('amplo')"
+                    >
+
+                        <span class="exemplo-espacamento exemplo-amplo">
+                            Estudar ajuda a aprender.
+                        </span>
+
+                        <strong>
+                            Amplo
+                        </strong>
+
+                        <small>
+                            Espaçamento máximo
+                        </small>
+
+                    </button>
+
+                </div>
+
+            </article>
+
+            <article class="card-acessibilidade card-largura-total card-restaurar">
+
+                <div class="restaurar-conteudo">
+
+                    <span class="icone-restaurar">
+                        <i class="fa-solid fa-rotate-left"></i>
+                    </span>
+
+                    <div>
+
+                        <h2>
+                            Restaurar configurações
+                        </h2>
+
+                        <p>
+                            Volte todas as opções de acessibilidade para o padrão.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="botao-restaurar-acessibilidade"
+                    onclick="restaurarAcessibilidade(); restaurarBotoesAcessibilidade();"
+                >
+
+                    <i class="fa-solid fa-rotate-left"></i>
+
+                    Restaurar padrão
+
+                </button>
+
+            </article>
+
+        </div>
+
+        <section class="mensagem-inclusao">
+
+            <span>
+                <i class="fa-solid fa-heart"></i>
+            </span>
+
+            <div>
+
+                <h2>
+                    Uma plataforma feita para todos
+                </h2>
+
+                <p>
+                    O Estude+ busca oferecer uma experiência simples,
+                    inclusiva e confortável para diferentes estudantes.
+                </p>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</section>
+
+{% endblock %}

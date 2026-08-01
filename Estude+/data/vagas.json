@@ -1,0 +1,321 @@
+{
+  "series": [
+    {
+      "slug": "1-fundamental",
+      "nome": "1º Ano do Ensino Fundamental",
+      "grupo": "Fundamental I",
+      "disciplinas": {
+        "Língua Portuguesa": [],
+        "Matemática": [
+          "Números",
+          "Adição",
+          "Subtração"
+        ],
+        "Ciências": [
+          "Corpo humano",
+          "Animais",
+          "Plantas"
+        ],
+        "História": [],
+        "Geografia": [],
+        "Arte": [],
+        "Educação Física": [],
+        "Ensino Religioso": []
+      }
+    },
+    {
+      "slug": "2-fundamental",
+      "nome": "2º Ano do Ensino Fundamental",
+      "grupo": "Fundamental I",
+      "disciplinas": {
+        "Língua Portuguesa": [],
+        "Matemática": [
+          "Adição",
+          "Subtração",
+          "Multiplicação"
+        ],
+        "Ciências": [
+          "Seres vivos",
+          "Água",
+          "Alimentação"
+        ],
+        "História": [],
+        "Geografia": [],
+        "Arte": [],
+        "Educação Física": [],
+        "Ensino Religioso": []
+      }
+    },
+    {
+      "slug": "3-fundamental",
+      "nome": "3º Ano do Ensino Fundamental",
+      "grupo": "Fundamental I",
+      "disciplinas": {
+        "Língua Portuguesa": [],
+        "Matemática": [
+          "Multiplicação",
+          "Divisão",
+          "Problemas"
+        ],
+        "Ciências": [],
+        "História": [
+          "Família",
+          "Comunidade",
+          "Passado e presente"
+        ],
+        "Geografia": [],
+        "Arte": [],
+        "Educação Física": [],
+        "Ensino Religioso": [],
+        "Inglês": []
+      }
+    },
+    {
+      "slug": "4-fundamental",
+      "nome": "4º Ano do Ensino Fundamental",
+      "grupo": "Fundamental I",
+      "disciplinas": {
+        "Língua Portuguesa": [],
+        "Matemática": [
+          "Frações",
+          "Medidas",
+          "Geometria"
+        ],
+        "Ciências": [],
+        "História": [],
+        "Geografia": [
+          "Município",
+          "Paisagens",
+          "Zona urbana e rural"
+        ],
+        "Arte": [],
+        "Educação Física": [],
+        "Ensino Religioso": [],
+        "Inglês": []
+      }
+    },
+    {
+      "slug": "5-fundamental",
+      "nome": "5º Ano do Ensino Fundamental",
+      "grupo": "Fundamental I",
+      "disciplinas": {
+        "Língua Portuguesa": [],
+        "Matemática": [
+          "Frações",
+          "Porcentagem",
+          "Área e perímetro"
+        ],
+        "Ciências": [
+          "Sistema solar",
+          "Energia",
+          "Meio ambiente"
+        ],
+        "História": [],
+        "Geografia": [],
+        "Arte": [],
+        "Educação Física": [],
+        "Ensino Religioso": [],
+        "Inglês": []
+      }
+    },
+    {
+      "slug": "6-fundamental",
+      "nome": "6º Ano do Ensino Fundamental",
+      "grupo": "Fundamental II",
+      "disciplinas": {
+        "Língua Portuguesa": [],
+        "Inglês": [],
+        "Matemática": [
+          "Números naturais",
+          "Frações",
+          "Geometria"
+        ],
+        "Ciências": [
+          "Células",
+          "Ecossistemas",
+          "Solo e água"
+        ],
+        "História": [],
+        "Geografia": [],
+        "Arte": [],
+        "Educação Física": [],
+        "Ensino Religioso": []
+      }
+    },
+    {
+      "slug": "7-fundamental",
+      "nome": "7º Ano do Ensino Fundamental",
+      "grupo": "Fundamental II",
+      "disciplinas": {
+        "Língua Portuguesa": [],
+        "Inglês": [],
+        "Matemática": [
+          "Números inteiros",
+          "Equações",
+          "Porcentagem"
+        ],
+        "Ciências": [
+          "Seres vivos",
+          "Ecossistemas",
+          "Saúde"
+        ],
+        "História": [],
+        "Geografia": [],
+        "Arte": [],
+        "Educação Física": [],
+        "Ensino Religioso": []
+      }
+    },
+    {
+      "slug": "8-fundamental",
+      "nome": "8º Ano do Ensino Fundamental",
+      "grupo": "Fundamental II",
+      "disciplinas": {
+        "Língua Portuguesa": [],
+        "Inglês": [],
+        "Matemática": [
+          "Álgebra",
+          "Equações",
+          "Geometria"
+        ],
+        "Ciências": [
+          "Corpo humano",
+          "Energia",
+          "Eletricidade"
+        ],
+        "História": [],
+        "Geografia": [],
+        "Arte": [],
+        "Educação Física": [],
+        "Ensino Religioso": []
+      }
+    },
+    {
+      "slug": "9-fundamental",
+      "nome": "9º Ano do Ensino Fundamental",
+      "grupo": "Fundamental II",
+      "disciplinas": {
+        "Língua Portuguesa": [],
+        "Inglês": [],
+        "Matemática": [
+          "Equação do segundo grau",
+          "Funções",
+          "Probabilidade"
+        ],
+        "Ciências": [
+          "Átomos",
+          "Movimento",
+          "Eletricidade"
+        ],
+        "História": [],
+        "Geografia": [],
+        "Arte": [],
+        "Educação Física": [],
+        "Ensino Religioso": []
+      }
+    },
+    {
+      "slug": "1-medio",
+      "nome": "1º Ano do Ensino Médio",
+      "grupo": "Ensino Médio",
+      "disciplinas": {
+        "Língua Portuguesa e Literatura": [],
+        "Inglês": [],
+        "Matemática": [
+          "Conjuntos",
+          "Funções",
+          "Progressões"
+        ],
+        "Física": [
+          "Movimento",
+          "Velocidade",
+          "Leis de Newton"
+        ],
+        "Química": [],
+        "Biologia": [
+          "Células",
+          "Ecologia",
+          "Divisão celular"
+        ],
+        "História": [],
+        "Geografia": [],
+        "Filosofia": [],
+        "Sociologia": [],
+        "Arte": [],
+        "Educação Física": []
+      }
+    },
+    {
+      "slug": "2-medio",
+      "nome": "2º Ano do Ensino Médio",
+      "grupo": "Ensino Médio",
+      "disciplinas": {
+        "Língua Portuguesa e Literatura": [],
+        "Inglês": [],
+        "Matemática": [
+          "Trigonometria",
+          "Matrizes",
+          "Geometria espacial"
+        ],
+        "Física": [
+          "Calor",
+          "Ondas",
+          "Óptica"
+        ],
+        "Química": [],
+        "Biologia": [
+          "Genética",
+          "Evolução",
+          "Fisiologia"
+        ],
+        "História": [],
+        "Geografia": [],
+        "Filosofia": [],
+        "Sociologia": [],
+        "Arte": [],
+        "Educação Física": []
+      }
+    },
+    {
+      "slug": "3-medio",
+      "nome": "3º Ano do Ensino Médio",
+      "grupo": "Ensino Médio",
+      "disciplinas": {
+        "Língua Portuguesa e Literatura": [],
+        "Inglês": [],
+        "Matemática": [
+          "Estatística",
+          "Probabilidade",
+          "Geometria analítica"
+        ],
+        "Física": [
+          "Eletricidade",
+          "Magnetismo",
+          "Física moderna"
+        ],
+        "Química": [],
+        "Biologia": [
+          "Ecologia",
+          "Genética",
+          "Biotecnologia"
+        ],
+        "História": [],
+        "Geografia": [],
+        "Filosofia": [],
+        "Sociologia": [],
+        "Arte": [],
+        "Educação Física": []
+      }
+    }
+  ],
+  "alunos": [
+    {
+      "nome": "Daniel Lucas Gualberto Inácio",
+      "email": "ddanielinacio02@gmail.com",
+      "idade": "17",
+      "serie": "3-medio",
+      "senha": "scrypt:32768:8:1$BhZ7rUp7Qoh8LqPh$8fd28d0989d481189e4ae911c800092db9b94b1c9db113cd8aecdb1512a3cfe4d24e7ec5bacda245cb14b32b9450b45b3466980d7bcae3fc46f16bbbaa7d1656",
+      "foto": "uploads/perfis/2c11f0f6b1ec43cfae37b903cd787ae1.png"
+    }
+  ]
+}

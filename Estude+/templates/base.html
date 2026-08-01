@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Estude+ — seu caderno inteligente organizado por série e disciplina."
+    >
+
+    <title>{% block title %}Estude+{% endblock %}</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/layout.css') }}"
+    >
+
+</head>
+
+<body>
+
+<header class="cabecalho-site">
+
+    <div class="cabecalho-site-container">
+
+        <a
+            href="{{ url_for('inicio') }}"
+            class="marca-site"
+            aria-label="Ir para a página inicial do Estude+"
+        >
+
+            <span class="marca-site-icone">
+                <i class="fa-solid fa-book-open"></i>
+            </span>
+
+            <span class="marca-site-texto">
+
+                <strong>
+                    Estude<span>+</span>
+                </strong>
+
+                <small>
+                    Seu caderno inteligente.
+                </small>
+
+            </span>
+
+        </a>
+
+        <nav
+            class="navegacao-site"
+            id="menu"
+            aria-label="Menu principal"
+        >
+
+            <div class="navegacao-site-links">
+
+                <a
+                    href="{{ url_for('inicio') }}"
+                    class="{% if request.endpoint == 'inicio' %}ativo{% endif %}"
+                >
+                    <i class="fa-solid fa-house"></i>
+                    <span>Início</span>
+                </a>
+
+                <a
+                    href="{{ url_for('listar_vagas') }}"
+                    class="{% if request.endpoint in ['listar_vagas', 'detalhes_vaga', 'caderno', 'minha_serie'] %}ativo{% endif %}"
+                >
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span>Cadernos</span>
+                </a>
+
+                <a
+                    href="{{ url_for('acessibilidade') }}"
+                    class="{% if request.endpoint == 'acessibilidade' %}ativo{% endif %}"
+                >
+                    <i class="fa-solid fa-universal-access"></i>
+                    <span>Acessibilidade</span>
+                </a>
+
+            </div>
+
+            <div class="navegacao-site-acoes">
+
+                <button
+                    type="button"
+                    class="botao-tema-site"
+                    onclick="modoEscuro()"
+                    aria-label="Alternar tema claro ou escuro"
+                    title="Alternar tema"
+                >
+                    <i
+                        class="fa-solid fa-moon"
+                        id="iconeTema"
+                    ></i>
+                </button>
+
+                {% if usuario_atual %}
+
+                    <details class="perfil-site">
+
+                        <summary>
+
+                            {% if usuario_atual.foto %}
+
+                                <img
+                                    src="{{ url_for('static', filename=usuario_atual.foto) }}"
+                                    alt="Foto de {{ usuario_atual.nome }}"
+                                >
+
+                            {% else %}
+
+                                <span class="perfil-site-avatar">
+                                    {{ usuario_atual.nome[0]|upper }}
+                                </span>
+
+                            {% endif %}
+
+                            <span class="perfil-site-nome">
+                                {{ usuario_atual.nome.split()[0] }}
+                            </span>
+
+                            <i class="fa-solid fa-chevron-down"></i>
+
+                        </summary>
+
+                        <div class="perfil-site-menu">
+
+                            <div class="perfil-site-identidade">
+
+                                {% if usuario_atual.foto %}
+
+                                    <img
+                                        src="{{ url_for('static', filename=usuario_atual.foto) }}"
+                                        alt="Foto de {{ usuario_atual.nome }}"
+                                    >
+
+                                {% else %}
+
+                                    <span class="perfil-site-avatar">
+                                        {{ usuario_atual.nome[0]|upper }}
+                                    </span>
+
+                                {% endif %}
+
+                                <div>
+
+                                    <strong>
+                                        {{ usuario_atual.nome }}
+                                    </strong>
+
+                                    <small>
+                                        {{ usuario_atual.email }}
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                            <a href="{{ url_for('perfil') }}">
+
+                                <i class="fa-regular fa-user"></i>
+
+                                Meu perfil
+
+                            </a>
+
+                            <a href="{{ url_for('minha_serie') }}">
+
+                                <i class="fa-solid fa-book-open"></i>
+
+                                Minha série
+
+                            </a>
+
+                            <a href="{{ url_for('acessibilidade') }}">
+
+                                <i class="fa-solid fa-sliders"></i>
+
+                                Preferências
+
+                            </a>
+
+                            <hr>
+
+                            <a
+                                href="{{ url_for('sair') }}"
+                                class="perfil-site-sair"
+                            >
+
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+
+                                Sair
+
+                            </a>
+
+                        </div>
+
+                    </details>
+
+                {% else %}
+
+                    <a
+                        href="{{ url_for('login') }}"
+                        class="entrar-site {% if request.endpoint == 'login' %}ativo{% endif %}"
+                    >
+
+                        <i class="fa-solid fa-arrow-right-to-bracket"></i>
+
+                        <span>Entrar</span>
+
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </nav>
+
+        <button
+            type="button"
+            class="botao-menu-site"
+            onclick="abrirMenu()"
+            aria-label="Abrir ou fechar o menu"
+            aria-expanded="false"
+            title="Abrir menu"
+        >
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+    </div>
+
+</header>
+
+<main class="conteudo-site">
+
+    {% with mensagens = get_flashed_messages(with_categories=true) %}
+
+        {% if mensagens %}
+
+            <div class="area-mensagens">
+
+                {% for categoria, mensagem in mensagens %}
+
+                    <div
+                        class="mensagem {{ categoria }}"
+                        role="alert"
+                    >
+                        {{ mensagem }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% endif %}
+
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+
+</main>
+
+<footer class="rodape-site">
+
+    <div class="rodape-site-conteudo">
+
+        <a
+            href="{{ url_for('inicio') }}"
+            class="rodape-marca"
+            aria-label="Voltar para a página inicial"
+        >
+
+            <span class="rodape-marca-icone">
+                <i class="fa-solid fa-book-open"></i>
+            </span>
+
+            <span class="rodape-marca-texto">
+
+                <strong>
+                    Estude<span>+</span>
+                </strong>
+
+                <small>
+                    Seu caderno inteligente.
+                </small>
+
+            </span>
+
+        </a>
+
+        <nav
+            class="rodape-links"
+            aria-label="Links institucionais"
+        >
+
+            <a
+                href="{{ url_for('sobre') }}"
+                class="{% if request.endpoint == 'sobre' %}ativo{% endif %}"
+            >
+                <i class="fa-solid fa-circle-info"></i>
+                Sobre nós
+            </a>
+
+            <a
+                href="{{ url_for('termos') }}"
+                class="{% if request.endpoint == 'termos' %}ativo{% endif %}"
+            >
+                <i class="fa-solid fa-file-contract"></i>
+                Termos
+            </a>
+
+            <a
+                href="{{ url_for('privacidade') }}"
+                class="{% if request.endpoint == 'privacidade' %}ativo{% endif %}"
+            >
+                <i class="fa-solid fa-shield-halved"></i>
+                Privacidade
+            </a>
+
+        </nav>
+
+        <div class="rodape-direitos">
+
+            <strong>
+                © 2026 Estude+
+            </strong>
+
+            <span>
+                Todos os direitos reservados.
+            </span>
+
+        </div>
+
+    </div>
+
+</footer>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const perfil = document.querySelector(".perfil-site");
+    const menu = document.getElementById("menu");
+    const botaoMenu = document.querySelector(".botao-menu-site");
+
+    document.addEventListener("click", function (evento) {
+        if (
+            perfil &&
+            perfil.open &&
+            !perfil.contains(evento.target)
+        ) {
+            perfil.removeAttribute("open");
+        }
+
+        if (
+            menu &&
+            menu.classList.contains("aberto") &&
+            botaoMenu &&
+            !menu.contains(evento.target) &&
+            !botaoMenu.contains(evento.target)
+        ) {
+            menu.classList.remove("aberto");
+            botaoMenu.setAttribute("aria-expanded", "false");
+        }
+    });
+});
+</script>
+
+</body>
+
+</html>

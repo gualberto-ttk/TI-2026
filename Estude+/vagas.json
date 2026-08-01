@@ -1,0 +1,272 @@
+{
+  "series": [
+    {
+      "slug": "1-fundamental",
+      "nome": "1º Ano do Ensino Fundamental",
+      "disciplinas": {
+        "Português": [
+          "Alfabeto",
+          "Vogais e consoantes",
+          "Formação de palavras"
+        ],
+        "Matemática": [
+          "Números",
+          "Adição",
+          "Subtração"
+        ],
+        "Ciências": [
+          "Corpo humano",
+          "Animais",
+          "Plantas"
+        ]
+      }
+    },
+    {
+      "slug": "2-fundamental",
+      "nome": "2º Ano do Ensino Fundamental",
+      "disciplinas": {
+        "Português": [
+          "Sílabas",
+          "Leitura",
+          "Produção de frases"
+        ],
+        "Matemática": [
+          "Adição",
+          "Subtração",
+          "Multiplicação"
+        ],
+        "Ciências": [
+          "Seres vivos",
+          "Água",
+          "Alimentação"
+        ]
+      }
+    },
+    {
+      "slug": "3-fundamental",
+      "nome": "3º Ano do Ensino Fundamental",
+      "disciplinas": {
+        "Português": [
+          "Interpretação de texto",
+          "Substantivos",
+          "Adjetivos"
+        ],
+        "Matemática": [
+          "Multiplicação",
+          "Divisão",
+          "Problemas"
+        ],
+        "História": [
+          "Família",
+          "Comunidade",
+          "Passado e presente"
+        ]
+      }
+    },
+    {
+      "slug": "4-fundamental",
+      "nome": "4º Ano do Ensino Fundamental",
+      "disciplinas": {
+        "Português": [
+          "Verbos",
+          "Pronomes",
+          "Ortografia"
+        ],
+        "Matemática": [
+          "Frações",
+          "Medidas",
+          "Geometria"
+        ],
+        "Geografia": [
+          "Município",
+          "Paisagens",
+          "Zona urbana e rural"
+        ]
+      }
+    },
+    {
+      "slug": "5-fundamental",
+      "nome": "5º Ano do Ensino Fundamental",
+      "disciplinas": {
+        "Português": [
+          "Gramática",
+          "Pontuação",
+          "Produção de texto"
+        ],
+        "Matemática": [
+          "Frações",
+          "Porcentagem",
+          "Área e perímetro"
+        ],
+        "Ciências": [
+          "Sistema solar",
+          "Energia",
+          "Meio ambiente"
+        ]
+      }
+    },
+    {
+      "slug": "6-fundamental",
+      "nome": "6º Ano do Ensino Fundamental",
+      "disciplinas": {
+        "Português": [
+          "Gêneros textuais",
+          "Verbos",
+          "Interpretação"
+        ],
+        "Matemática": [
+          "Números naturais",
+          "Frações",
+          "Geometria"
+        ],
+        "Ciências": [
+          "Células",
+          "Ecossistemas",
+          "Solo e água"
+        ]
+      }
+    },
+    {
+      "slug": "7-fundamental",
+      "nome": "7º Ano do Ensino Fundamental",
+      "disciplinas": {
+        "Português": [
+          "Advérbios",
+          "Sujeito e predicado",
+          "Textos"
+        ],
+        "Matemática": [
+          "Números inteiros",
+          "Equações",
+          "Porcentagem"
+        ],
+        "Ciências": [
+          "Seres vivos",
+          "Ecossistemas",
+          "Saúde"
+        ]
+      }
+    },
+    {
+      "slug": "8-fundamental",
+      "nome": "8º Ano do Ensino Fundamental",
+      "disciplinas": {
+        "Português": [
+          "Orações",
+          "Conjunções",
+          "Figuras de linguagem"
+        ],
+        "Matemática": [
+          "Álgebra",
+          "Equações",
+          "Geometria"
+        ],
+        "Ciências": [
+          "Corpo humano",
+          "Energia",
+          "Eletricidade"
+        ]
+      }
+    },
+    {
+      "slug": "9-fundamental",
+      "nome": "9º Ano do Ensino Fundamental",
+      "disciplinas": {
+        "Português": [
+          "Orações subordinadas",
+          "Concordância",
+          "Redação"
+        ],
+        "Matemática": [
+          "Equação do segundo grau",
+          "Funções",
+          "Probabilidade"
+        ],
+        "Ciências": [
+          "Átomos",
+          "Movimento",
+          "Eletricidade"
+        ]
+      }
+    },
+    {
+      "slug": "1-medio",
+      "nome": "1º Ano do Ensino Médio",
+      "disciplinas": {
+        "Português": [
+          "Literatura",
+          "Gêneros textuais",
+          "Redação"
+        ],
+        "Matemática": [
+          "Conjuntos",
+          "Funções",
+          "Progressões"
+        ],
+        "Biologia": [
+          "Células",
+          "Ecologia",
+          "Divisão celular"
+        ],
+        "Física": [
+          "Movimento",
+          "Velocidade",
+          "Leis de Newton"
+        ]
+      }
+    },
+    {
+      "slug": "2-medio",
+      "nome": "2º Ano do Ensino Médio",
+      "disciplinas": {
+        "Português": [
+          "Romantismo",
+          "Realismo",
+          "Redação"
+        ],
+        "Matemática": [
+          "Trigonometria",
+          "Matrizes",
+          "Geometria espacial"
+        ],
+        "Biologia": [
+          "Genética",
+          "Evolução",
+          "Fisiologia"
+        ],
+        "Física": [
+          "Calor",
+          "Ondas",
+          "Óptica"
+        ]
+      }
+    },
+    {
+      "slug": "3-medio",
+      "nome": "3º Ano do Ensino Médio",
+      "disciplinas": {
+        "Português": [
+          "Modernismo",
+          "Gramática",
+          "Redação do Enem"
+        ],
+        "Matemática": [
+          "Estatística",
+          "Probabilidade",
+          "Geometria analítica"
+        ],
+        "Biologia": [
+          "Ecologia",
+          "Genética",
+          "Biotecnologia"
+        ],
+        "Física": [
+          "Eletricidade",
+          "Magnetismo",
+          "Física moderna"
+        ]
+      }
+    }
+  ],
+  "alunos": []
+}
