@@ -1,0 +1,45 @@
+{
+  "gringohlegal@gmail.com": [],
+  "emaildeericasantos1996@gmail.com": [
+    {
+      "id": "91005dfe1b07467ba9cc73e5f571189c",
+      "titulo": "Revisão geral AV3 TRI II",
+      "data": "2026-08-14",
+      "horario": "08:00",
+      "disciplina": "",
+      "descricao": "Estudar para AV3 - Revisão Geral : Linguagens, Humanas e Redação",
+      "prioridade": "alta",
+      "concluido": false,
+      "criado_em": "03/08/2026 às 17:08",
+      "atualizado_em": ""
+    }
+  ],
+  "gaby@gmail.com": [
+    {
+      "id": "0db5b2b398ac49098742a5f9ffe12bf6",
+      "titulo": "Prova",
+      "data": "2026-08-03",
+      "horario": "05:00",
+      "disciplina": "Química",
+      "descricao": "",
+      "prioridade": "media",
+      "concluido": true,
+      "criado_em": "03/08/2026 às 18:34",
+      "atualizado_em": "03/08/2026 às 18:35"
+    }
+  ],
+  "heloisasevf@gmail.com": [
+    {
+      "id": "2c77570d5f62463a97a2f6b32e1db542",
+      "titulo": "sde",
+      "data": "2026-08-18",
+      "horario": "",
+      "disciplina": "",
+      "descricao": "",
+      "prioridade": "media",
+      "concluido": true,
+      "criado_em": "03/08/2026 às 18:52",
+      "atualizado_em": "03/08/2026 às 18:53"
+    }
+  ]
+}

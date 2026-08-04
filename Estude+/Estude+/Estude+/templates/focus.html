@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+
+{% block title %}Modo Focus | Estude+{% endblock %}
+
+{% block content %}
+<section class="recurso-pagina focus-pagina">
+    <div class="recurso-container">
+        <nav class="central-atalhos" aria-label="Recursos de estudo">
+            <a href="{{ url_for('central.focus') }}" class="ativo">
+                <i class="fa-solid fa-bullseye"></i>
+                Focus
+            </a>
+            <a href="{{ url_for('central.evolucao') }}">
+                <i class="fa-solid fa-chart-line"></i>
+                Evolução
+            </a>
+            <a href="{{ url_for('central.recompensas') }}">
+                <i class="fa-solid fa-gift"></i>
+                Recompensas
+            </a>
+            <a href="{{ url_for('central.chatbot') }}">
+                <i class="fa-solid fa-robot"></i>
+                Assistente
+            </a>
+        </nav>
+
+        <header class="recurso-hero recurso-hero-premium">
+            <div class="recurso-hero-conteudo">
+                <span class="recurso-selo">
+                    <i class="fa-solid fa-bullseye"></i>
+                    MODO DE CONCENTRAÇÃO
+                </span>
+
+                <h1>Estude com foco total</h1>
+
+                <p>
+                    Defina uma tarefa, escolha a duração e transforme
+                    minutos de concentração em progresso real.
+                </p>
+            </div>
+
+            <div class="recurso-status">
+                <span class="status-icone">
+                    <i class="fa-solid fa-medal"></i>
+                </span>
+                <div>
+                    <small>NÍVEL ATUAL</small>
+                    <strong>{{ nivel.nome }}</strong>
+                    <span>{{ xp }} XP • {{ moedas }} moedas</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="focus-layout">
+            <section class="recurso-card focus-card-principal">
+                <div class="focus-topo">
+                    <div>
+                        <span class="focus-etiqueta">
+                            <i class="fa-solid fa-circle"></i>
+                            SESSÃO ATUAL
+                        </span>
+                        <h2>Hora de se concentrar</h2>
+                        <p>Escolha uma matéria e comece quando estiver pronto.</p>
+                    </div>
+
+                    <span class="focus-icone">
+                        <i class="fa-solid fa-headphones"></i>
+                    </span>
+                </div>
+
+                <label class="focus-campo" for="focusDisciplina">
+                    <span>O que você vai estudar?</span>
+                    <div>
+                        <i class="fa-solid fa-book-open"></i>
+                        <input
+                            id="focusDisciplina"
+                            type="text"
+                            placeholder="Ex.: Matemática — equação do segundo grau"
+                            autocomplete="off"
+                            maxlength="100"
+                        >
+                    </div>
+                </label>
+
+                <div class="focus-tempos" aria-label="Escolha a duração da sessão">
+                    <button type="button" data-minutos="25" class="ativo">
+                        <strong>25</strong>
+                        <span>Pomodoro</span>
+                    </button>
+                    <button type="button" data-minutos="50">
+                        <strong>50</strong>
+                        <span>Foco longo</span>
+                    </button>
+                    <button type="button" data-minutos="90">
+                        <strong>90</strong>
+                        <span>Imersão</span>
+                    </button>
+                </div>
+
+                <div class="focus-relogio-area">
+                    <span class="focus-relogio-legenda" id="focusEstado">
+                        PRONTO PARA COMEÇAR
+                    </span>
+
+                    <div class="focus-relogio" id="focusRelogio">25:00</div>
+
+                    <div
+                        class="focus-progresso"
+                        role="progressbar"
+                        aria-label="Progresso da sessão"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-valuenow="0"
+                    >
+                        <span id="focusBarra"></span>
+                    </div>
+                </div>
+
+                <div class="focus-acoes focus-acoes-tres">
+                    <button
+                        type="button"
+                        id="focusIniciar"
+                        class="focus-botao-principal"
+                    >
+                        <i class="fa-solid fa-play"></i>
+                        Iniciar
+                    </button>
+
+                    <button type="button" id="focusPausar">
+                        <i class="fa-solid fa-pause"></i>
+                        Pausar
+                    </button>
+
+                    <button type="button" id="focusReiniciar">
+                        <i class="fa-solid fa-rotate-left"></i>
+                        Reiniciar
+                    </button>
+                </div>
+
+                <p class="focus-mensagem" id="focusMensagem" aria-live="polite"></p>
+            </section>
+
+            <aside class="focus-coluna-lateral">
+                <section class="recurso-card focus-guia">
+                    <span class="focus-guia-icone">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </span>
+
+                    <h2>Como aproveitar melhor</h2>
+
+                    <div class="focus-passos">
+                        <article>
+                            <span>1</span>
+                            <div>
+                                <strong>Escolha uma tarefa</strong>
+                                <small>Um objetivo simples e específico.</small>
+                            </div>
+                        </article>
+
+                        <article>
+                            <span>2</span>
+                            <div>
+                                <strong>Elimine distrações</strong>
+                                <small>Silencie notificações e use tela cheia.</small>
+                            </div>
+                        </article>
+
+                        <article>
+                            <span>3</span>
+                            <div>
+                                <strong>Conclua a sessão</strong>
+                                <small>Ganhe experiência e moedas.</small>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="recurso-card focus-premio">
+                    <span>
+                        <i class="fa-solid fa-trophy"></i>
+                    </span>
+                    <div>
+                        <small>RECOMPENSA</small>
+                        <strong>Seu esforço vale pontos</strong>
+                        <p>
+                            Cada sessão concluída é registrada na evolução
+                            e ajuda você a subir de nível.
+                        </p>
+                    </div>
+                </section>
+            </aside>
+        </div>
+    </div>
+</section>
+{% endblock %}

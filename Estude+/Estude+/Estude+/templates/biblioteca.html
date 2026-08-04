@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+
+{% block title %}Biblioteca de anotações | Estude+{% endblock %}
+
+{% block content %}
+<section class="pagina-biblioteca">
+    <div class="biblioteca-container">
+        <header class="cabecalho-biblioteca">
+            <div>
+                <span class="selo-biblioteca">
+                    <i class="fa-solid fa-book-bookmark"></i>
+                    SUAS ANOTAÇÕES
+                </span>
+
+                <h1>Biblioteca de estudos</h1>
+
+                <p>
+                    Encontre suas anotações salvas, organizadas
+                    por matéria e data.
+                </p>
+            </div>
+
+            <div class="ilustracao-biblioteca" aria-hidden="true">
+                <span class="livro-biblioteca livro-biblioteca-1">
+                    <i class="fa-solid fa-book"></i>
+                </span>
+
+                <span class="livro-biblioteca livro-biblioteca-2">
+                    <i class="fa-solid fa-book-open"></i>
+                </span>
+
+                <span class="livro-biblioteca livro-biblioteca-3">
+                    <i class="fa-solid fa-bookmark"></i>
+                </span>
+            </div>
+        </header>
+
+        {% if disciplina_atual %}
+            <div class="barra-biblioteca-disciplina">
+                <div>
+                    <span class="icone-materia-biblioteca">
+                        <i class="fa-solid fa-book-open"></i>
+                    </span>
+
+                    <div>
+                        <small>{{ serie_atual.nome }}</small>
+                        <h2>{{ disciplina_atual }}</h2>
+                    </div>
+                </div>
+
+                <a
+                    href="{{ url_for('caderno', slug=serie_atual.slug, disciplina=disciplina_atual) }}"
+                >
+                    <i class="fa-solid fa-plus"></i>
+                    Nova anotação
+                </a>
+            </div>
+        {% endif %}
+
+        {% if materias %}
+            <div class="lista-materias-biblioteca">
+                {% for materia in materias %}
+                    <section class="grupo-materia-biblioteca">
+                        <header class="topo-materia-biblioteca">
+                            <div>
+                                <span>
+                                    <i class="fa-solid fa-folder-open"></i>
+                                </span>
+
+                                <div>
+                                    <small>{{ materia.serie_nome }}</small>
+                                    <h2>{{ materia.disciplina }}</h2>
+                                </div>
+                            </div>
+
+                            <div class="acoes-materia-biblioteca">
+                                <span class="quantidade-anotacoes">
+                                    {{ materia.quantidade }}
+                                    {% if materia.quantidade == 1 %}
+                                        anotação
+                                    {% else %}
+                                        anotações
+                                    {% endif %}
+                                </span>
+
+                                <a
+                                    href="{{ url_for('caderno', slug=materia.slug, disciplina=materia.disciplina) }}"
+                                >
+                                    <i class="fa-solid fa-plus"></i>
+                                    Nova
+                                </a>
+                            </div>
+                        </header>
+
+                        <div class="grade-anotacoes-biblioteca">
+                            {% for anotacao in materia.anotacoes %}
+                                <article class="card-anotacao-biblioteca">
+                                    <div class="topo-card-anotacao">
+                                        <span class="data-card-anotacao">
+                                            <i class="fa-regular fa-calendar"></i>
+
+                                            {{
+                                                anotacao.criado_em
+                                                or anotacao.atualizado_em
+                                                or "Data não informada"
+                                            }}
+                                        </span>
+
+                                        <span class="icone-card-anotacao">
+                                            <i class="fa-solid fa-file-lines"></i>
+                                        </span>
+                                    </div>
+
+                                    <div class="conteudo-card-anotacao">
+                                        <small>
+                                            {{ anotacao.tema or materia.disciplina }}
+                                        </small>
+
+                                        <h3>
+                                            {{ anotacao.titulo or "Anotação sem título" }}
+                                        </h3>
+
+                                        <p>
+                                            {% if anotacao.conteudo %}
+                                                {{
+                                                    anotacao.conteudo
+                                                    | truncate(150, true, "...")
+                                                }}
+                                            {% else %}
+                                                Esta anotação possui somente
+                                                lembretes e blocos de notas.
+                                            {% endif %}
+                                        </p>
+                                    </div>
+
+                                    {% if anotacao.atualizado_em %}
+                                        <div class="informacoes-card-anotacao">
+                                            <span>
+                                                <i class="fa-solid fa-clock-rotate-left"></i>
+                                                Atualizada em {{ anotacao.atualizado_em }}
+                                            </span>
+                                        </div>
+                                    {% endif %}
+
+                                    <div class="acoes-card-anotacao">
+                                        <a
+                                            href="{{ url_for(
+                                                'caderno',
+                                                slug=materia.slug,
+                                                disciplina=materia.disciplina,
+                                                anotacao=anotacao.id,
+                                                modo='visualizar'
+                                            ) }}"
+                                            class="botao-abrir-anotacao"
+                                        >
+                                            <i class="fa-solid fa-eye"></i>
+                                            Visualizar
+                                        </a>
+
+                                        <form
+                                            method="POST"
+                                            action="{{ url_for(
+                                                'excluir_anotacao',
+                                                slug=materia.slug,
+                                                disciplina=materia.disciplina,
+                                                anotacao_id=anotacao.id
+                                            ) }}"
+                                            onsubmit="return confirm('Deseja realmente excluir esta anotação?');"
+                                        >
+                                            <button
+                                                type="submit"
+                                                class="botao-excluir-anotacao"
+                                                aria-label="Excluir anotação"
+                                                title="Excluir anotação"
+                                            >
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </article>
+                            {% endfor %}
+                        </div>
+                    </section>
+                {% endfor %}
+            </div>
+        {% else %}
+            <section class="biblioteca-vazia">
+                <span>
+                    <i class="fa-solid fa-book-open-reader"></i>
+                </span>
+
+                <h2>Sua biblioteca ainda está vazia</h2>
+
+                <p>
+                    Abra uma disciplina e salve sua primeira anotação.
+                    Ela aparecerá aqui automaticamente.
+                </p>
+
+                <a href="{{ url_for('listar_vagas') }}">
+                    <i class="fa-solid fa-layer-group"></i>
+                    Abrir meus cadernos
+                </a>
+            </section>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

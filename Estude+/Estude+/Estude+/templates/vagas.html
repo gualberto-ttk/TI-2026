@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+{% block title %}
+    Cadernos por série | Estude+
+{% endblock %}
+{% macro card_serie(serie, grupo) %}
+<article class="novo-card-serie">
+    <div class="novo-card-serie-topo">
+        <span class="novo-card-serie-icone">
+            <i class="fa-solid fa-book-open">
+            </i>
+        </span>
+        <span class="novo-card-serie-etapa">
+            {{ grupo }}
+        </span>
+    </div>
+    <div class="novo-card-serie-conteudo">
+        <h3>
+            {{ serie.nome }}
+        </h3>
+        <p>
+            {{ serie.disciplinas|length }}
+            {% if serie.disciplinas|length == 1 %}
+                disciplina disponível
+            {% else %}
+                disciplinas disponíveis
+            {% endif %}
+        </p>
+        <div class="novo-card-materias">
+            {% for disciplina in serie.disciplinas.keys() %}
+                {% if loop.index <= 3 %}
+                    <span>
+                        {{ disciplina }}
+                    </span>
+                {% endif %}
+            {% endfor %}
+            {% if serie.disciplinas|length > 3 %}
+                <span class="mais-materias">
+                    +{{ serie.disciplinas|length - 3 }}
+                </span>
+            {% endif %}
+        </div>
+    </div>
+    <a
+        href="{{ url_for('detalhes_vaga', slug=serie.slug) }}"
+        class="novo-card-serie-link"
+        >
+        <span>Ver disciplinas</span>
+        <i class="fa-solid fa-arrow-right">
+        </i>
+    </a>
+</article>
+{% endmacro %}
+{% block content %}
+    <section class="nova-pagina-series">
+        <div class="nova-pagina-series-container">
+            <header class="nova-pagina-series-cabecalho">
+                <div class="nova-pagina-series-texto">
+                    <span class="nova-pagina-series-selo">
+                        ESCOLHA SEU ANO
+                    </span>
+                    <h1>
+                        Cadernos por série
+                    </h1>
+                    <p>
+                        Selecione uma série para visualizar as disciplinas
+                        disponíveis e abrir seu caderno inteligente.
+                    </p>
+                </div>
+                <div class="nova-pagina-series-ilustracao">
+                    <div class="desenho-caderno-series">
+                        <span class="espiral-series espiral-series-1">
+                        </span>
+                        <span class="espiral-series espiral-series-2">
+                        </span>
+                        <span class="espiral-series espiral-series-3">
+                        </span>
+                        <span class="espiral-series espiral-series-4">
+                        </span>
+                        <span class="espiral-series espiral-series-5">
+                        </span>
+                        <div class="folha-series">
+                            <span>
+                            </span>
+                            <span>
+                            </span>
+                            <span>
+                            </span>
+                        </div>
+                    </div>
+                    <span class="lapis-series">
+                        <i class="fa-solid fa-pencil">
+                        </i>
+                    </span>
+                    <span class="circulo-series circulo-series-1">
+                    </span>
+                    <span class="circulo-series circulo-series-2">
+                    </span>
+                </div>
+            </header>
+            <section class="novo-grupo-series">
+                <header class="novo-grupo-series-cabecalho">
+                    <div class="novo-grupo-series-identificacao">
+                        <span class="novo-grupo-series-icone">
+                            <i class="fa-solid fa-shapes">
+                            </i>
+                        </span>
+                        <div>
+                            <h2>
+                                Fundamental I
+                            </h2>
+                            <p>
+                                Do 1º ao 5º ano do Ensino Fundamental
+                            </p>
+                        </div>
+                    </div>
+                    <span class="novo-grupo-series-quantidade">
+                        5 anos
+                    </span>
+                </header>
+                <div class="nova-grade-series fundamental-um">
+                    {% for serie in series %}
+                        {% if serie.slug in [
+                            "1-fundamental",
+                            "2-fundamental",
+                            "3-fundamental",
+                            "4-fundamental",
+                            "5-fundamental"
+                            ] %}
+                            {{ card_serie(serie, "Fundamental I") }}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+            <section class="novo-grupo-series">
+                <header class="novo-grupo-series-cabecalho">
+                    <div class="novo-grupo-series-identificacao">
+                        <span class="novo-grupo-series-icone">
+                            <i class="fa-solid fa-school">
+                            </i>
+                        </span>
+                        <div>
+                            <h2>
+                                Fundamental II
+                            </h2>
+                            <p>
+                                Do 6º ao 9º ano do Ensino Fundamental
+                            </p>
+                        </div>
+                    </div>
+                    <span class="novo-grupo-series-quantidade">
+                        4 anos
+                    </span>
+                </header>
+                <div class="nova-grade-series fundamental-dois">
+                    {% for serie in series %}
+                        {% if serie.slug in [
+                            "6-fundamental",
+                            "7-fundamental",
+                            "8-fundamental",
+                            "9-fundamental"
+                            ] %}
+                            {{ card_serie(serie, "Fundamental II") }}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+            <section class="novo-grupo-series ultimo-grupo-series">
+                <header class="novo-grupo-series-cabecalho">
+                    <div class="novo-grupo-series-identificacao">
+                        <span class="novo-grupo-series-icone">
+                            <i class="fa-solid fa-graduation-cap">
+                            </i>
+                        </span>
+                        <div>
+                            <h2>
+                                Ensino Médio
+                            </h2>
+                            <p>
+                                Do 1º ao 3º ano do Ensino Médio
+                            </p>
+                        </div>
+                    </div>
+                    <span class="novo-grupo-series-quantidade">
+                        3 anos
+                    </span>
+                </header>
+                <div class="nova-grade-series ensino-medio">
+                    {% for serie in series %}
+                        {% if serie.slug in [
+                            "1-medio",
+                            "2-medio",
+                            "3-medio"
+                            ] %}
+                            {{ card_serie(serie, "Ensino Médio") }}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </section>
+{% endblock %}

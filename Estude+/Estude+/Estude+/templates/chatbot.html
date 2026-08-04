@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+
+{% block title %}Assistente virtual | Estude+{% endblock %}
+
+{% block content %}
+<section class="recurso-pagina chatbot-pagina">
+    <div class="recurso-container">
+        <nav class="central-atalhos" aria-label="Recursos de estudo">
+            <a href="{{ url_for('central.focus') }}">
+                <i class="fa-solid fa-bullseye"></i>
+                Focus
+            </a>
+            <a href="{{ url_for('central.evolucao') }}">
+                <i class="fa-solid fa-chart-line"></i>
+                Evolução
+            </a>
+            <a href="{{ url_for('central.recompensas') }}">
+                <i class="fa-solid fa-gift"></i>
+                Recompensas
+            </a>
+            <a href="{{ url_for('central.chatbot') }}" class="ativo">
+                <i class="fa-solid fa-robot"></i>
+                Assistente
+            </a>
+        </nav>
+
+        <header class="recurso-hero recurso-hero-premium">
+            <div class="recurso-hero-conteudo">
+                <span class="recurso-selo">
+                    <i class="fa-solid fa-robot"></i>
+                    ASSISTENTE VIRTUAL
+                </span>
+
+                <h1>Converse com a IA do Estude+</h1>
+
+                <p>
+                    Tire dúvidas, peça explicações, resolva exercícios,
+                    revise textos e organize seus estudos.
+                </p>
+            </div>
+
+            <button type="button" class="chat-limpar" id="chatLimpar">
+                <i class="fa-solid fa-trash"></i>
+                Limpar conversa
+            </button>
+        </header>
+
+        <div class="chatbot-layout">
+            <aside class="chat-painel-lateral">
+                <div class="chat-identidade">
+                    <span>
+                        <i class="fa-solid fa-robot"></i>
+                    </span>
+                    <div>
+                        <small>ASSISTENTE DE ESTUDOS</small>
+                        <strong>EstudeBot</strong>
+                        <p>Online e pronto para ajudar</p>
+                    </div>
+                </div>
+
+                <div class="chat-capacidades">
+                    <h2>Posso ajudar com</h2>
+
+                    <span>
+                        <i class="fa-solid fa-square-root-variable"></i>
+                        Exercícios e cálculos
+                    </span>
+                    <span>
+                        <i class="fa-solid fa-book-open"></i>
+                        Explicações de matérias
+                    </span>
+                    <span>
+                        <i class="fa-solid fa-spell-check"></i>
+                        Revisão de textos
+                    </span>
+                    <span>
+                        <i class="fa-solid fa-list-check"></i>
+                        Planos de estudo
+                    </span>
+                    <span>
+                        <i class="fa-solid fa-code"></i>
+                        Programação
+                    </span>
+                </div>
+
+                <div class="chat-seguranca">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <p>Não envie senhas, documentos ou informações privadas.</p>
+                </div>
+            </aside>
+
+            <section class="chatbot-card">
+                <div
+                    id="chatMensagens"
+                    class="chat-mensagens"
+                    aria-live="polite"
+                    aria-label="Conversa com o assistente"
+                >
+                    <div class="chat-balao bot">
+                        <span class="chat-avatar">
+                            <i class="fa-solid fa-robot"></i>
+                        </span>
+
+                        <div class="chat-conteudo">
+                            <small>ESTUDEBOT</small>
+                            <div class="chat-texto">
+                                Olá! Sou o EstudeBot. Pode perguntar sobre qualquer
+                                matéria, exercício, texto, programação, carreira
+                                ou organização de estudos.
+                            </div>
+                        </div>
+                    </div>
+
+                    {% for item in historico %}
+                        <div class="chat-balao usuario">
+                            <div class="chat-conteudo">
+                                <small>VOCÊ</small>
+                                <div class="chat-texto">{{ item.pergunta }}</div>
+                            </div>
+                        </div>
+
+                        <div class="chat-balao bot">
+                            <span class="chat-avatar">
+                                <i class="fa-solid fa-robot"></i>
+                            </span>
+
+                            <div class="chat-conteudo">
+                                <small>ESTUDEBOT</small>
+                                <div class="chat-texto">{{ item.resposta }}</div>
+
+                                <button
+                                    type="button"
+                                    class="chat-copiar"
+                                    data-copiar-resposta
+                                    aria-label="Copiar resposta"
+                                >
+                                    <i class="fa-regular fa-copy"></i>
+                                    Copiar
+                                </button>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="chat-sugestoes">
+                    <button type="button">
+                        <i class="fa-solid fa-leaf"></i>
+                        Explique fotossíntese de forma simples
+                    </button>
+                    <button type="button">
+                        <i class="fa-solid fa-calculator"></i>
+                        Resolva uma equação do segundo grau
+                    </button>
+                    <button type="button">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        Monte um plano de estudos para uma prova
+                    </button>
+                    <button type="button">
+                        <i class="fa-solid fa-pen"></i>
+                        Corrija um texto para mim
+                    </button>
+                </div>
+
+                <form id="chatForm" class="chat-form">
+                    <textarea
+                        id="chatInput"
+                        placeholder="Digite sua pergunta..."
+                        autocomplete="off"
+                        maxlength="8000"
+                        rows="1"
+                        required
+                    ></textarea>
+
+                    <span class="chat-contador" id="chatContador">0/8000</span>
+
+                    <button
+                        id="chatEnviar"
+                        type="submit"
+                        aria-label="Enviar pergunta"
+                        title="Enviar"
+                    >
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
+
+                <small class="chat-aviso">
+                    <i class="fa-solid fa-circle-info"></i>
+                    A IA pode cometer erros. Confira informações importantes.
+                </small>
+            </section>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,557 @@
+{% extends "base.html" %}
+{% block title %}
+    Meu perfil | Estude+
+{% endblock %}
+{% block content %}
+    <section class="pagina-novo-perfil">
+        <div class="container-novo-perfil">
+            <header class="cabecalho-novo-perfil">
+                <div>
+                    <span class="selo-novo-perfil">
+                        <i class="fa-regular fa-user">
+                        </i>
+                        MINHA CONTA
+                    </span>
+                    <h1>Meu perfil</h1>
+                    <p>
+                        Atualize seus dados pessoais, sua série, sua foto
+                        e sua senha.
+                    </p>
+                </div>
+                <a
+                    href="{{ url_for('minha_serie') }}"
+                    class="atalho-caderno-perfil"
+                    >
+                    <i class="fa-solid fa-book-open">
+                    </i>
+                    <span>Abrir meu caderno</span>
+                    <i class="fa-solid fa-arrow-right">
+                    </i>
+                </a>
+            </header>
+            <form
+                method="POST"
+                enctype="multipart/form-data"
+                class="formulario-novo-perfil"
+                id="formularioPerfil"
+                >
+                <div class="grade-novo-perfil">
+                    <aside class="cartao-identidade-perfil">
+                        <div class="foto-grande-perfil">
+                            {% if aluno.foto %}
+                                <img
+                                src="{{ url_for('static', filename=aluno.foto) }}"
+                                alt="Foto de perfil de {{ aluno.nome }}"
+                                id="previewFotoPerfil"
+                                data-foto-original="{{ url_for('static', filename=aluno.foto) }}"
+                                >
+                            {% else %}
+                                <span
+                                    class="inicial-grande-perfil"
+                                    id="inicialPerfil"
+                                    >
+                                    {{ aluno.nome[0]|upper }}
+                                </span>
+                                <img
+                                src=""
+                                alt="Prévia da nova foto"
+                                id="previewFotoPerfil"
+                                class="preview-foto-escondida"
+                                data-foto-original=""
+                                >
+                            {% endif %}
+                        </div>
+                        <div class="identidade-usuario-perfil">
+                            <h2>{{ aluno.nome }}</h2>
+                            <p>{{ aluno.email }}</p>
+                            <span>
+                                <i class="fa-solid fa-graduation-cap">
+                                </i>
+                                {% for serie in series %}
+                                    {% if serie.slug == aluno.serie %}
+                                        {{ serie.nome }}
+                                    {% endif %}
+                                {% endfor %}
+                            </span>
+                        </div>
+                        <label
+                            for="fotoPerfil"
+                            class="botao-foto-perfil"
+                            >
+                            <i class="fa-solid fa-camera">
+                            </i>
+                            Escolher nova foto
+                        </label>
+                        <input
+                        type="file"
+                        id="fotoPerfil"
+                        name="foto"
+                        accept=".png,.jpg,.jpeg,.webp"
+                        class="input-foto-perfil"
+                        >
+                        <small class="aviso-foto-perfil">
+                            PNG, JPG ou WEBP. Tamanho máximo de 3 MB.
+                        </small>
+                        <div class="resumo-conta-perfil">
+                            <div>
+                                <i class="fa-solid fa-shield-halved">
+                                </i>
+                                <span>
+                                    <strong>Conta protegida</strong>
+                                    Senha armazenada com segurança
+                                </span>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-cloud-arrow-up">
+                                </i>
+                                <span>
+                                    <strong>Cadernos salvos</strong>
+                                    Suas anotações ficam ligadas à conta
+                                </span>
+                            </div>
+                        </div>
+                    </aside>
+                    <div class="conteudo-formulario-perfil">
+                        <section class="secao-formulario-perfil">
+                            <header class="titulo-secao-perfil">
+                                <span>
+                                    <i class="fa-regular fa-user">
+                                    </i>
+                                </span>
+                                <div>
+                                    <h2>Dados pessoais</h2>
+                                    <p>
+                                        Atualize as informações principais da sua conta.
+                                    </p>
+                                </div>
+                            </header>
+                            <div class="grade-campos-perfil">
+                                <label class="campo-perfil">
+                                    <span>Nome completo</span>
+                                    <div class="caixa-campo-perfil">
+                                        <i class="fa-regular fa-user">
+                                        </i>
+                                        <input
+                                        type="text"
+                                        name="nome"
+                                        value="{{ aluno.nome }}"
+                                        placeholder="Digite seu nome completo"
+                                        autocomplete="name"
+                                        required
+                                        >
+                                    </div>
+                                </label>
+                                <label class="campo-perfil">
+                                    <span>E-mail</span>
+                                    <div class="caixa-campo-perfil">
+                                        <i class="fa-regular fa-envelope">
+                                        </i>
+                                        <input
+                                        type="email"
+                                        name="email"
+                                        value="{{ aluno.email }}"
+                                        placeholder="Digite seu e-mail"
+                                        autocomplete="email"
+                                        required
+                                        >
+                                    </div>
+                                </label>
+                                <label class="campo-perfil">
+                                    <span>Idade</span>
+                                    <div class="caixa-campo-perfil">
+                                        <i class="fa-regular fa-calendar">
+                                        </i>
+                                        <input
+                                        type="number"
+                                        name="idade"
+                                        value="{{ aluno.idade }}"
+                                        placeholder="Informe sua idade"
+                                        min="5"
+                                        max="100"
+                                        required
+                                        >
+                                    </div>
+                                </label>
+                                <label class="campo-perfil">
+                                    <span>Série escolar</span>
+                                    <div class="caixa-campo-perfil caixa-select-perfil">
+                                        <i class="fa-solid fa-graduation-cap">
+                                        </i>
+                                        <select
+                                            name="serie"
+                                            required
+                                            >
+                                            <optgroup label="Fundamental I">
+                                                {% for serie in series %}
+                                                    {% if serie.slug in [
+                                                        "1-fundamental",
+                                                        "2-fundamental",
+                                                        "3-fundamental",
+                                                        "4-fundamental",
+                                                        "5-fundamental"
+                                                        ] %}
+                                                        <option
+                                                            value="{{ serie.slug }}"
+                                                            {% if serie.slug == aluno.serie %}
+                                                                selected
+                                                            {% endif %}
+                                                            >
+                                                            {{ serie.nome }}
+                                                        </option>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </optgroup>
+                                            <optgroup label="Fundamental II">
+                                                {% for serie in series %}
+                                                    {% if serie.slug in [
+                                                        "6-fundamental",
+                                                        "7-fundamental",
+                                                        "8-fundamental",
+                                                        "9-fundamental"
+                                                        ] %}
+                                                        <option
+                                                            value="{{ serie.slug }}"
+                                                            {% if serie.slug == aluno.serie %}
+                                                                selected
+                                                            {% endif %}
+                                                            >
+                                                            {{ serie.nome }}
+                                                        </option>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </optgroup>
+                                            <optgroup label="Ensino Médio">
+                                                {% for serie in series %}
+                                                    {% if serie.slug in [
+                                                        "1-medio",
+                                                        "2-medio",
+                                                        "3-medio"
+                                                        ] %}
+                                                        <option
+                                                            value="{{ serie.slug }}"
+                                                            {% if serie.slug == aluno.serie %}
+                                                                selected
+                                                            {% endif %}
+                                                            >
+                                                            {{ serie.nome }}
+                                                        </option>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                </label>
+                            </div>
+                        </section>
+                        <section class="secao-formulario-perfil">
+                            <header class="titulo-secao-perfil">
+                                <span>
+                                    <i class="fa-solid fa-lock">
+                                    </i>
+                                </span>
+                                <div>
+                                    <h2>Alterar senha</h2>
+                                    <p>
+                                        Deixe estes campos vazios para manter a senha atual.
+                                    </p>
+                                </div>
+                            </header>
+                            <div class="grade-senhas-perfil">
+                                <label class="campo-perfil">
+                                    <span>Senha atual</span>
+                                    <div class="caixa-campo-perfil">
+                                        <i class="fa-solid fa-lock">
+                                        </i>
+                                        <input
+                                        type="password"
+                                        id="senhaAtualPerfil"
+                                        name="senha_atual"
+                                        placeholder="Digite sua senha atual"
+                                        autocomplete="current-password"
+                                        >
+                                        <button
+                                            type="button"
+                                            class="mostrar-senha-perfil"
+                                            onclick="alternarSenha('senhaAtualPerfil', this)"
+                                            aria-label="Mostrar ou ocultar senha"
+                                            >
+                                            <i class="fa-regular fa-eye">
+                                            </i>
+                                        </button>
+                                    </div>
+                                </label>
+                                <label class="campo-perfil">
+                                    <span>Nova senha</span>
+                                    <div class="caixa-campo-perfil">
+                                        <i class="fa-solid fa-key">
+                                        </i>
+                                        <input
+                                        type="password"
+                                        id="novaSenhaPerfil"
+                                        name="nova_senha"
+                                        placeholder="Mínimo de 6 caracteres"
+                                        autocomplete="new-password"
+                                        minlength="6"
+                                        >
+                                        <button
+                                            type="button"
+                                            class="mostrar-senha-perfil"
+                                            onclick="alternarSenha('novaSenhaPerfil', this)"
+                                            aria-label="Mostrar ou ocultar senha"
+                                            >
+                                            <i class="fa-regular fa-eye">
+                                            </i>
+                                        </button>
+                                    </div>
+                                </label>
+                                <label class="campo-perfil">
+                                    <span>Confirmar nova senha</span>
+                                    <div class="caixa-campo-perfil">
+                                        <i class="fa-solid fa-key">
+                                        </i>
+                                        <input
+                                        type="password"
+                                        id="confirmarSenhaPerfil"
+                                        name="confirmar_senha"
+                                        placeholder="Digite novamente"
+                                        autocomplete="new-password"
+                                        minlength="6"
+                                        >
+                                        <button
+                                            type="button"
+                                            class="mostrar-senha-perfil"
+                                            onclick="alternarSenha('confirmarSenhaPerfil', this)"
+                                            aria-label="Mostrar ou ocultar senha"
+                                            >
+                                            <i class="fa-regular fa-eye">
+                                            </i>
+                                        </button>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="aviso-senha-perfil">
+                                <i class="fa-solid fa-circle-info">
+                                </i>
+                                <p>
+                                    Para alterar a senha, preencha a senha atual,
+                                    a nova senha e a confirmação.
+                                </p>
+                            </div>
+                        </section>
+                        <div
+                            class="aviso-alteracoes-perfil"
+                            id="avisoAlteracoesPerfil"
+                            hidden
+                            >
+                            <i class="fa-solid fa-circle-exclamation">
+                            </i>
+                            <span>
+                                Você possui alterações que ainda não foram salvas.
+                            </span>
+                        </div>
+                        <div class="acoes-novo-perfil">
+                            <a
+                                href="{{ url_for('inicio') }}"
+                                class="cancelar-novo-perfil"
+                                id="botaoCancelarPerfil"
+                                >
+                                <i class="fa-solid fa-arrow-left">
+                                </i>
+                                Cancelar
+                            </a>
+                            <button
+                                type="submit"
+                                class="salvar-novo-perfil"
+                                id="botaoSalvarPerfil"
+                                disabled
+                                >
+                                <i class="fa-solid fa-floppy-disk">
+                                </i>
+                                Salvar alterações
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <style>
+        .aviso-alteracoes-perfil {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 16px;
+        border: 1px solid #f0bd83;
+        border-radius: 13px;
+        color: #8b4805;
+        background: #fff3df;
+        font-size: 0.7rem;
+        font-weight: 700;
+        }
+        .aviso-alteracoes-perfil[hidden] {
+        display: none;
+        }
+        .aviso-alteracoes-perfil i {
+        color: var(--laranja);
+        font-size: 1rem;
+        }
+        .salvar-novo-perfil:disabled {
+        opacity: 0.45;
+        box-shadow: none;
+        cursor: not-allowed;
+        transform: none;
+        }
+        .salvar-novo-perfil:disabled:hover {
+        box-shadow: none;
+        transform: none;
+        }
+        .formulario-novo-perfil.perfil-com-alteracoes
+        .secao-formulario-perfil {
+        border-color: rgba(244, 122, 11, 0.38);
+        }
+        body.modo-escuro .aviso-alteracoes-perfil {
+        color: #ffc27f;
+        border-color: #815126;
+        background: #302116;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        const formulario = document.getElementById("formularioPerfil");
+        const botaoSalvar = document.getElementById("botaoSalvarPerfil");
+        const avisoAlteracoes = document.getElementById("avisoAlteracoesPerfil");
+        const campoFoto = document.getElementById("fotoPerfil");
+        const preview = document.getElementById("previewFotoPerfil");
+        const inicial = document.getElementById("inicialPerfil");
+        if (!formulario || !botaoSalvar) {
+        return;
+        }
+        let existemAlteracoes = false;
+        let envioAutorizado = false;
+        let formularioEnviado = false;
+        const camposMonitorados = Array.from(
+        formulario.querySelectorAll(
+        "input:not([type='file']), select, textarea"
+        )
+        );
+        const valoresIniciais = new Map();
+        camposMonitorados.forEach(function (campo) {
+        valoresIniciais.set(campo, campo.value);
+        });
+        function formularioFoiAlterado() {
+        const campoModificado = camposMonitorados.some(function (campo) {
+        return campo.value !== valoresIniciais.get(campo);
+        });
+        const fotoSelecionada =
+        campoFoto &&
+        campoFoto.files &&
+        campoFoto.files.length > 0;
+        return campoModificado || fotoSelecionada;
+        }
+        function atualizarEstadoFormulario() {
+        existemAlteracoes = formularioFoiAlterado();
+        botaoSalvar.disabled = !existemAlteracoes;
+        if (avisoAlteracoes) {
+        avisoAlteracoes.hidden = !existemAlteracoes;
+        }
+        formulario.classList.toggle(
+        "perfil-com-alteracoes",
+        existemAlteracoes
+        );
+        }
+        camposMonitorados.forEach(function (campo) {
+        campo.addEventListener("input", atualizarEstadoFormulario);
+        campo.addEventListener("change", atualizarEstadoFormulario);
+        });
+        if (campoFoto) {
+        campoFoto.addEventListener("change", function () {
+        const arquivo = this.files[0];
+        if (!arquivo) {
+        atualizarEstadoFormulario();
+        return;
+        }
+        const extensoesPermitidas = [
+        "image/png",
+        "image/jpeg",
+        "image/webp"
+        ];
+        if (!extensoesPermitidas.includes(arquivo.type)) {
+        this.value = "";
+        alert(
+        "Escolha uma imagem PNG, JPG, JPEG ou WEBP."
+        );
+        atualizarEstadoFormulario();
+        return;
+        }
+        const tamanhoMaximo = 3 * 1024 * 1024;
+        if (arquivo.size > tamanhoMaximo) {
+        this.value = "";
+        alert("A imagem deve ter no máximo 3 MB.");
+        atualizarEstadoFormulario();
+        return;
+        }
+        const leitor = new FileReader();
+        leitor.addEventListener("load", function () {
+        if (!preview) {
+        return;
+        }
+        preview.src = leitor.result;
+        preview.classList.remove(
+        "preview-foto-escondida"
+        );
+        if (inicial) {
+        inicial.style.display = "none";
+        }
+        });
+        leitor.readAsDataURL(arquivo);
+        atualizarEstadoFormulario();
+        });
+        }
+        botaoSalvar.addEventListener("click", function () {
+        if (!existemAlteracoes) {
+        return;
+        }
+        envioAutorizado = true;
+        });
+        formulario.addEventListener("keydown", function (evento) {
+        if (
+        evento.key === "Enter" &&
+        evento.target.tagName !== "TEXTAREA"
+        ) {
+        evento.preventDefault();
+        }
+        });
+        formulario.addEventListener("submit", function (evento) {
+        if (!envioAutorizado) {
+        evento.preventDefault();
+        if (existemAlteracoes) {
+        alert(
+        "Clique no botão “Salvar alterações” para confirmar."
+        );
+        }
+        return;
+        }
+        if (!formulario.checkValidity()) {
+        envioAutorizado = false;
+        evento.preventDefault();
+        formulario.reportValidity();
+        return;
+        }
+        formularioEnviado = true;
+        existemAlteracoes = false;
+        botaoSalvar.disabled = true;
+        if (avisoAlteracoes) {
+        avisoAlteracoes.hidden = true;
+        }
+        });
+        window.addEventListener("beforeunload", function (evento) {
+        if (!existemAlteracoes || formularioEnviado) {
+        return;
+        }
+        evento.preventDefault();
+        evento.returnValue = "";
+        });
+        atualizarEstadoFormulario();
+        });
+    </script>
+{% endblock %}

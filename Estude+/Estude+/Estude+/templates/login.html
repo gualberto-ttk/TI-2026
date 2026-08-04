@@ -1,0 +1,315 @@
+{% extends "base.html" %}
+
+{% block title %}Entrar | Estude+{% endblock %}
+
+{% block head %}
+<style>
+    .form-login {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .grupo-campo-login {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin: 0;
+    }
+
+    .grupo-campo-login > span {
+        display: block;
+        margin: 0;
+        color: var(--texto, #27211e);
+        font-size: 0.78rem;
+        font-weight: 700;
+        line-height: 1.3;
+    }
+
+    .campo-login {
+        width: 100%;
+        min-height: 54px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 0 15px;
+        box-sizing: border-box;
+        border: 1px solid var(--borda, #ead3c0);
+        border-radius: 14px;
+        background: #fffaf6;
+        transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .campo-login:focus-within {
+        border-color: var(--laranja, #f36b00);
+        background: #fff;
+        box-shadow: 0 0 0 4px rgba(243, 107, 0, .1);
+    }
+
+    .campo-login > i {
+        width: 18px;
+        flex: 0 0 18px;
+        color: #aa9688;
+        font-size: 0.88rem;
+        text-align: center;
+    }
+
+    .campo-login input {
+        width: 100%;
+        min-width: 0;
+        height: 52px;
+        padding: 0;
+        border: 0;
+        outline: 0;
+        color: var(--texto, #27211e);
+        background: transparent;
+        font: 500 0.86rem "Inter", sans-serif;
+    }
+
+    .campo-login input::placeholder {
+        color: #af9f94;
+        opacity: 1;
+    }
+
+    .mostrar-senha {
+        width: 38px;
+        height: 38px;
+        display: grid;
+        place-items: center;
+        flex: 0 0 38px;
+        padding: 0;
+        border: 0;
+        border-radius: 10px;
+        color: #8e7d72;
+        background: transparent;
+        cursor: pointer;
+        transition: color .2s ease, background .2s ease;
+    }
+
+    .mostrar-senha:hover {
+        color: var(--laranja, #f36b00);
+        background: rgba(243, 107, 0, .08);
+    }
+
+    .lembrar-login {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        width: max-content;
+        margin: 0;
+        color: var(--texto-suave, #78695f);
+        font-size: 0.67rem;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    .lembrar-login input {
+        width: 17px;
+        height: 17px;
+        margin: 0;
+        accent-color: var(--laranja, #f36b00);
+    }
+
+    .botao-entrar-login {
+        width: 100%;
+        min-height: 54px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 2px;
+        border: 0;
+        border-radius: 14px;
+        color: #fff;
+        background: linear-gradient(135deg, #ff7900, #e95f00);
+        font: 800 0.82rem "Inter", sans-serif;
+        cursor: pointer;
+        box-shadow: 0 14px 28px rgba(243, 107, 0, .2);
+        transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .botao-entrar-login:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 17px 32px rgba(243, 107, 0, .28);
+    }
+
+    body.modo-escuro .campo-login {
+        border-color: var(--borda, #49382e);
+        background: var(--branco, #211a16);
+    }
+
+    body.modo-escuro .campo-login input,
+    body.modo-escuro .grupo-campo-login > span {
+        color: var(--texto, #fff8f1);
+    }
+
+    @media (max-width: 600px) {
+        .form-login {
+            gap: 16px;
+        }
+
+        .campo-login,
+        .botao-entrar-login {
+            min-height: 52px;
+        }
+
+        .campo-login input {
+            height: 50px;
+            font-size: 0.82rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="pagina-autenticacao">
+    <div class="decoracao-login decoracao-login-1"></div>
+    <div class="decoracao-login decoracao-login-2"></div>
+
+    <div class="autenticacao-container">
+        <aside class="autenticacao-ilustracao">
+            <span class="autenticacao-selo">
+                <i class="fa-solid fa-book-open"></i>
+                SEU CADERNO INTELIGENTE
+            </span>
+
+            <h1>Continue seus estudos de onde parou.</h1>
+
+            <p>
+                Entre na sua conta para acessar seus cadernos,
+                anotações, disciplinas e blocos de lembretes.
+            </p>
+
+            <div class="caderno-login">
+                <div class="espiral-login">
+                    {% for item in range(7) %}
+                        <span></span>
+                    {% endfor %}
+                </div>
+
+                <div class="folha-login">
+                    <div class="topo-folha-login">
+                        <span>Matemática</span>
+                        <i class="fa-solid fa-pen"></i>
+                    </div>
+
+                    <h2>Equações do primeiro grau</h2>
+
+                    <span class="linha-login linha-login-curta"></span>
+                    <span class="linha-login"></span>
+                    <span class="linha-login"></span>
+                    <span class="linha-login linha-login-media"></span>
+
+                    <div class="postit-login">
+                        Revisar exercício 4
+                    </div>
+                </div>
+            </div>
+
+            <div class="vantagens-login">
+                <span>
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    Anotações salvas
+                </span>
+
+                <span>
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                    Acesso em qualquer tela
+                </span>
+            </div>
+        </aside>
+
+        <div class="autenticacao-formulario">
+            <div class="formulario-login">
+                <span class="icone-login">
+                    <i class="fa-solid fa-lock"></i>
+                </span>
+
+                <div class="titulo-login">
+                    <span>ACESSAR MINHA CONTA</span>
+                    <h2>Bem-vindo de volta</h2>
+                    <p>Digite seus dados para continuar suas anotações.</p>
+                </div>
+
+                <form method="POST" class="form-login">
+                    <label class="grupo-campo-login" for="email-login">
+                        <span>E-mail</span>
+
+                        <div class="campo-login">
+                            <i class="fa-regular fa-envelope"></i>
+
+                            <input
+                                type="email"
+                                id="email-login"
+                                name="email"
+                                placeholder="Digite seu e-mail"
+                                value="{{ request.form.get('email', '') }}"
+                                autocomplete="email"
+                                required
+                            >
+                        </div>
+                    </label>
+
+                    <label class="grupo-campo-login" for="senha-login">
+                        <span>Senha</span>
+
+                        <div class="campo-login">
+                            <i class="fa-solid fa-lock"></i>
+
+                            <input
+                                type="password"
+                                id="senha-login"
+                                name="senha"
+                                placeholder="Digite sua senha"
+                                autocomplete="current-password"
+                                minlength="6"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="mostrar-senha"
+                                onclick="alternarSenha('senha-login', this)"
+                                aria-label="Mostrar ou ocultar senha"
+                                title="Mostrar ou ocultar senha"
+                            >
+                                <i class="fa-regular fa-eye"></i>
+                            </button>
+                        </div>
+                    </label>
+
+                    <label class="lembrar-login">
+                        <input type="checkbox" name="lembrar">
+                        <span>Manter minha conta conectada</span>
+                    </label>
+
+                    <button type="submit" class="botao-entrar-login">
+                        <span>Entrar</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </form>
+
+                <div class="separador-login">
+                    <span></span>
+                    <p>ou</p>
+                    <span></span>
+                </div>
+
+                <div class="criar-conta-login">
+                    <p>Ainda não possui uma conta?</p>
+
+                    <a href="{{ url_for('nova_vaga') }}">
+                        <i class="fa-solid fa-user-plus"></i>
+                        Criar conta gratuita
+                    </a>
+                </div>
+
+                <div class="seguranca-login">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Sua senha é armazenada de forma protegida.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

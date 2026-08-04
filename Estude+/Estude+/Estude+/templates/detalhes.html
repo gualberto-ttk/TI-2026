@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ serie.nome }} | Estude+
+{% endblock %}
+{% block content %}
+    <section class="serie-pagina">
+        <div class="serie-container">
+            <a
+                href="{{ url_for('listar_vagas') }}"
+                class="serie-voltar"
+                >
+                <i class="fa-solid fa-arrow-left">
+                </i>
+                Voltar às séries
+            </a>
+            <header class="serie-cabecalho">
+                <div>
+                    <span>{{ serie.grupo }}</span>
+                    <h1>{{ serie.nome }}</h1>
+                    <p>
+                        Escolha uma disciplina para abrir seu caderno
+                        inteligente e continuar suas anotações.
+                    </p>
+                </div>
+                <div class="serie-contador">
+                    <i class="fa-solid fa-book-open">
+                    </i>
+                    <strong>
+                        {{ serie.disciplinas|length }}
+                    </strong>
+                    <span>disciplinas disponíveis</span>
+                </div>
+            </header>
+            <div class="serie-disciplinas-grid">
+                {% for disciplina in serie.disciplinas %}
+                    {% set disciplina_minuscula = disciplina|lower %}
+                    {% if "portugu" in disciplina_minuscula %}
+                        {% set icone = "fa-pen-nib" %}
+                    {% elif "matem" in disciplina_minuscula %}
+                        {% set icone = "fa-calculator" %}
+                    {% elif "ciên" in disciplina_minuscula or "cien" in disciplina_minuscula %}
+                        {% set icone = "fa-flask" %}
+                    {% elif "biologia" in disciplina_minuscula %}
+                        {% set icone = "fa-dna" %}
+                    {% elif "física" in disciplina_minuscula or "fisica" in disciplina_minuscula %}
+                        {% set icone = "fa-atom" %}
+                    {% elif "química" in disciplina_minuscula or "quimica" in disciplina_minuscula %}
+                        {% set icone = "fa-vial" %}
+                    {% elif "história" in disciplina_minuscula or "historia" in disciplina_minuscula %}
+                        {% set icone = "fa-landmark" %}
+                    {% elif "geografia" in disciplina_minuscula %}
+                        {% set icone = "fa-earth-americas" %}
+                    {% elif "inglês" in disciplina_minuscula or "ingles" in disciplina_minuscula %}
+                        {% set icone = "fa-language" %}
+                    {% elif "filosofia" in disciplina_minuscula %}
+                        {% set icone = "fa-brain" %}
+                    {% elif "sociologia" in disciplina_minuscula %}
+                        {% set icone = "fa-users" %}
+                    {% elif "arte" in disciplina_minuscula %}
+                        {% set icone = "fa-palette" %}
+                    {% else %}
+                        {% set icone = "fa-book" %}
+                    {% endif %}
+                    <a
+                        href="{{ url_for('caderno', slug=serie.slug, disciplina=disciplina) }}"
+                        class="serie-card-disciplina"
+                        >
+                        <span class="serie-card-icone">
+                            <i class="fa-solid {{ icone }}">
+                            </i>
+                        </span>
+                        <div>
+                            <small>CADERNO DA DISCIPLINA</small>
+                            <h2>{{ disciplina }}</h2>
+                            <p>
+                                Abra seu caderno e continue escrevendo
+                                suas anotações.
+                            </p>
+                        </div>
+                        <span class="serie-card-seta">
+                            <i class="fa-solid fa-arrow-right">
+                            </i>
+                        </span>
+                    </a>
+                {% endfor %}
+            </div>
+            <section class="serie-ajuda">
+                <i class="fa-solid fa-lightbulb">
+                </i>
+                <div>
+                    <h2>Como funciona?</h2>
+                    <p>
+                        Clique em uma disciplina para criar uma nova anotação
+                        ou editar conteúdos salvos anteriormente.
+                    </p>
+                </div>
+                <a href="{{ url_for('biblioteca') }}">
+                    Ver anotações
+                    <i class="fa-solid fa-arrow-right">
+                    </i>
+                </a>
+            </section>
+        </div>
+    </section>
+{% endblock %}

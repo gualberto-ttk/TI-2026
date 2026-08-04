@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <meta
+        name="description"
+        content="Estude+ — caderno inteligente com anotações, calendário, modo Focus, evolução, recompensas e assistente virtual."
+    >
+
+    <meta name="theme-color" content="#f46f00">
+
+    <title>{% block title %}Estude+{% endblock %}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}?v=1100"
+    >
+
+    <script>
+        (() => {
+            try {
+                const tema = localStorage.getItem("estude-tema");
+                const fonte = localStorage.getItem("estude-fonte");
+                const contraste = localStorage.getItem("estude-contraste");
+                const leitura = localStorage.getItem("estude-fonte-leitura");
+                const espacamento = localStorage.getItem("estude-espacamento");
+                const animacoes = localStorage.getItem("estude-animacoes");
+
+                const tamanhos = {
+                    menor: "14px",
+                    normal: "16px",
+                    maior: "18px"
+                };
+
+                if (tema === "escuro") {
+                    document.documentElement.classList.add("tema-escuro-inicial");
+                }
+
+                if (tamanhos[fonte]) {
+                    document.documentElement.style.fontSize = tamanhos[fonte];
+                }
+
+                if (contraste) {
+                    document.documentElement.dataset.contraste = contraste;
+                }
+
+                if (leitura) {
+                    document.documentElement.dataset.fonteLeitura = leitura;
+                }
+
+                if (espacamento) {
+                    document.documentElement.dataset.espacamento = espacamento;
+                }
+
+                if (animacoes === "reduzidas") {
+                    document.documentElement.classList.add("movimento-reduzido");
+                }
+            } catch (erro) {
+                console.warn("Preferências iniciais não puderam ser aplicadas.", erro);
+            }
+        })();
+    </script>
+
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+    <header class="cabecalho-site">
+        <div class="cabecalho-site-container">
+            <a
+                href="{{ url_for('inicio') }}"
+                class="marca-site"
+                aria-label="Ir para o início do Estude+"
+            >
+                <span class="marca-site-icone" aria-hidden="true">
+                    <i class="fa-solid fa-book-open"></i>
+                </span>
+
+                <span class="marca-site-texto">
+                    <strong>Estude<span>+</span></strong>
+                    <small>Seu caderno inteligente.</small>
+                </span>
+            </a>
+
+            <nav
+                class="navegacao-site"
+                id="menu"
+                aria-label="Menu principal"
+            >
+                <div class="navegacao-site-links">
+                    <a
+                        href="{{ url_for('inicio') }}"
+                        class="{% if request.endpoint == 'inicio' %}ativo{% endif %}"
+                        {% if request.endpoint == 'inicio' %}aria-current="page"{% endif %}
+                    >
+                        <i class="fa-solid fa-house"></i>
+                        <span>Início</span>
+                    </a>
+
+                    <a
+                        href="{{ url_for('listar_vagas') }}"
+                        class="{% if request.endpoint in [
+                            'listar_vagas',
+                            'detalhes_vaga',
+                            'caderno',
+                            'minha_serie',
+                            'biblioteca',
+                            'biblioteca_disciplina'
+                        ] %}ativo{% endif %}"
+                        {% if request.endpoint in [
+                            'listar_vagas',
+                            'detalhes_vaga',
+                            'caderno',
+                            'minha_serie',
+                            'biblioteca',
+                            'biblioteca_disciplina'
+                        ] %}aria-current="page"{% endif %}
+                    >
+                        <i class="fa-solid fa-layer-group"></i>
+                        <span>Cadernos</span>
+                    </a>
+
+                    <a
+                        href="{{ url_for('calendario') }}"
+                        class="{% if request.endpoint in [
+                            'calendario',
+                            'criar_evento',
+                            'editar_evento',
+                            'concluir_evento',
+                            'excluir_evento'
+                        ] %}ativo{% endif %}"
+                        {% if request.endpoint in [
+                            'calendario',
+                            'criar_evento',
+                            'editar_evento',
+                            'concluir_evento',
+                            'excluir_evento'
+                        ] %}aria-current="page"{% endif %}
+                    >
+                        <i class="fa-solid fa-calendar-days"></i>
+                        <span>Calendário</span>
+                    </a>
+
+                    <a
+                        href="{{ url_for('central.focus') }}"
+                        class="{% if request.endpoint in [
+                            'central.focus',
+                            'central.evolucao',
+                            'central.recompensas',
+                            'central.chatbot',
+                            'central.carreira'
+                        ] %}ativo{% endif %}"
+                        {% if request.endpoint in [
+                            'central.focus',
+                            'central.evolucao',
+                            'central.recompensas',
+                            'central.chatbot',
+                            'central.carreira'
+                        ] %}aria-current="page"{% endif %}
+                    >
+                        <i class="fa-solid fa-bullseye"></i>
+                        <span>Focus</span>
+                    </a>
+
+                    <a
+                        href="{{ url_for('acessibilidade') }}"
+                        class="{% if request.endpoint == 'acessibilidade' %}ativo{% endif %}"
+                        {% if request.endpoint == 'acessibilidade' %}aria-current="page"{% endif %}
+                    >
+                        <i class="fa-solid fa-universal-access"></i>
+                        <span>Acessibilidade</span>
+                    </a>
+                </div>
+
+                <div class="navegacao-site-acoes">
+                    <button
+                        type="button"
+                        class="botao-tema-site"
+                        id="botaoTema"
+                        aria-label="Alternar entre tema claro e escuro"
+                        aria-pressed="false"
+                        title="Alternar tema"
+                    >
+                        <i class="fa-solid fa-moon" id="iconeTema"></i>
+                    </button>
+
+                    {% if usuario_atual %}
+                        <details class="perfil-site">
+                            <summary aria-label="Abrir menu do perfil">
+                                {% if usuario_atual.foto %}
+                                    <img
+                                        src="{{ url_for('static', filename=usuario_atual.foto) }}"
+                                        alt="Foto de perfil de {{ usuario_atual.nome }}"
+                                    >
+                                {% else %}
+                                    <span class="perfil-site-avatar" aria-hidden="true">
+                                        {{ usuario_atual.nome[0]|upper }}
+                                    </span>
+                                {% endif %}
+
+                                <span class="perfil-site-nome">
+                                    {{ usuario_atual.nome.split()[0] }}
+                                </span>
+
+                                <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                            </summary>
+
+                            <div class="perfil-site-menu">
+                                <div class="perfil-site-identidade">
+                                    {% if usuario_atual.foto %}
+                                        <img
+                                            src="{{ url_for('static', filename=usuario_atual.foto) }}"
+                                            alt="Foto de perfil de {{ usuario_atual.nome }}"
+                                        >
+                                    {% else %}
+                                        <span class="perfil-site-avatar" aria-hidden="true">
+                                            {{ usuario_atual.nome[0]|upper }}
+                                        </span>
+                                    {% endif %}
+
+                                    <div>
+                                        <strong>{{ usuario_atual.nome }}</strong>
+                                        <small>{{ usuario_atual.email }}</small>
+                                    </div>
+                                </div>
+
+                                <a
+                                    href="{{ url_for('perfil') }}"
+                                    class="{% if request.endpoint == 'perfil' %}ativo{% endif %}"
+                                >
+                                    <i class="fa-regular fa-user"></i>
+                                    <span>Meu perfil</span>
+                                </a>
+
+                                <a
+                                    href="{{ url_for('minha_serie') }}"
+                                    class="{% if request.endpoint in [
+                                        'minha_serie',
+                                        'detalhes_vaga',
+                                        'caderno'
+                                    ] %}ativo{% endif %}"
+                                >
+                                    <i class="fa-solid fa-book-open"></i>
+                                    <span>Minha série</span>
+                                </a>
+
+                                <a
+                                    href="{{ url_for('biblioteca') }}"
+                                    class="{% if request.endpoint in [
+                                        'biblioteca',
+                                        'biblioteca_disciplina'
+                                    ] %}ativo{% endif %}"
+                                >
+                                    <i class="fa-solid fa-book-bookmark"></i>
+                                    <span>Anotações</span>
+                                </a>
+
+                                <a
+                                    href="{{ url_for('calendario') }}"
+                                    class="{% if request.endpoint in [
+                                        'calendario',
+                                        'criar_evento',
+                                        'editar_evento',
+                                        'concluir_evento',
+                                        'excluir_evento'
+                                    ] %}ativo{% endif %}"
+                                >
+                                    <i class="fa-regular fa-calendar-check"></i>
+                                    <span>Meu calendário</span>
+                                </a>
+
+                                <a
+                                    href="{{ url_for('central.focus') }}"
+                                    class="{% if request.endpoint == 'central.focus' %}ativo{% endif %}"
+                                >
+                                    <i class="fa-solid fa-bullseye"></i>
+                                    <span>Modo Focus</span>
+                                </a>
+
+                                <a
+                                    href="{{ url_for('central.evolucao') }}"
+                                    class="{% if request.endpoint == 'central.evolucao' %}ativo{% endif %}"
+                                >
+                                    <i class="fa-solid fa-chart-line"></i>
+                                    <span>Evolução</span>
+                                </a>
+
+                                <a
+                                    href="{{ url_for('central.recompensas') }}"
+                                    class="{% if request.endpoint == 'central.recompensas' %}ativo{% endif %}"
+                                >
+                                    <i class="fa-solid fa-gift"></i>
+                                    <span>Recompensas</span>
+                                </a>
+
+                                <a
+                                    href="{{ url_for('central.chatbot') }}"
+                                    class="{% if request.endpoint == 'central.chatbot' %}ativo{% endif %}"
+                                >
+                                    <i class="fa-solid fa-robot"></i>
+                                    <span>Assistente</span>
+                                </a>
+
+                                <a
+                                    href="{{ url_for('central.carreira') }}"
+                                    class="{% if request.endpoint == 'central.carreira' %}ativo{% endif %}"
+                                >
+                                    <i class="fa-solid fa-compass"></i>
+                                    <span>Carreira</span>
+                                </a>
+
+                                <a
+                                    href="{{ url_for('acessibilidade') }}"
+                                    class="{% if request.endpoint == 'acessibilidade' %}ativo{% endif %}"
+                                >
+                                    <i class="fa-solid fa-sliders"></i>
+                                    <span>Preferências</span>
+                                </a>
+
+                                <hr>
+
+                                <a
+                                    href="{{ url_for('sair') }}"
+                                    class="perfil-site-sair"
+                                >
+                                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                    <span>Sair</span>
+                                </a>
+                            </div>
+                        </details>
+                    {% else %}
+                        <a
+                            href="{{ url_for('login') }}"
+                            class="entrar-site {% if request.endpoint == 'login' %}ativo{% endif %}"
+                        >
+                            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                            <span>Entrar</span>
+                        </a>
+                    {% endif %}
+                </div>
+            </nav>
+
+            <button
+                type="button"
+                class="botao-menu-site"
+                id="botaoMenu"
+                aria-label="Abrir menu principal"
+                aria-controls="menu"
+                aria-expanded="false"
+                title="Abrir menu"
+            >
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main
+        class="conteudo-site"
+        id="conteudoPrincipal"
+    >
+        {% with mensagens = get_flashed_messages(with_categories=true) %}
+            {% if mensagens %}
+                <div class="area-mensagens" aria-live="polite">
+                    {% for categoria, mensagem in mensagens %}
+                        <div
+                            class="mensagem {{ categoria }}"
+                            role="{% if categoria == 'danger' %}alert{% else %}status{% endif %}"
+                        >
+                            <span>{{ mensagem }}</span>
+
+                            <button
+                                type="button"
+                                class="fechar-mensagem"
+                                aria-label="Fechar mensagem"
+                            >
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="rodape-site">
+        <div class="rodape-site-conteudo">
+            <a
+                href="{{ url_for('inicio') }}"
+                class="rodape-marca"
+                aria-label="Voltar para o início"
+            >
+                <span class="rodape-marca-icone" aria-hidden="true">
+                    <i class="fa-solid fa-book-open"></i>
+                </span>
+
+                <span class="rodape-marca-texto">
+                    <strong>Estude<span>+</span></strong>
+                    <small>Seu caderno inteligente.</small>
+                </span>
+            </a>
+
+            <nav
+                class="rodape-links"
+                aria-label="Links institucionais"
+            >
+                <a
+                    href="{{ url_for('sobre') }}"
+                    class="{% if request.endpoint == 'sobre' %}ativo{% endif %}"
+                >
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Sobre nós</span>
+                </a>
+
+                <a
+                    href="{{ url_for('termos') }}"
+                    class="{% if request.endpoint == 'termos' %}ativo{% endif %}"
+                >
+                    <i class="fa-solid fa-file-contract"></i>
+                    <span>Termos</span>
+                </a>
+
+                <a
+                    href="{{ url_for('privacidade') }}"
+                    class="{% if request.endpoint == 'privacidade' %}ativo{% endif %}"
+                >
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Privacidade</span>
+                </a>
+            </nav>
+
+            <div class="rodape-direitos">
+                <strong>© 2026 Estude+</strong>
+                <span>Todos os direitos reservados.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script
+        src="{{ url_for('static', filename='js/script.js') }}?v=1100"
+        defer
+    ></script>
+
+    {% if request.endpoint in [
+        'calendario',
+        'criar_evento',
+        'editar_evento',
+        'concluir_evento',
+        'excluir_evento'
+    ] %}
+        <script
+            src="{{ url_for('static', filename='js/calendario.js') }}?v=1100"
+            defer
+        ></script>
+    {% endif %}
+
+    {% if request.endpoint in [
+        'central.focus',
+        'central.evolucao',
+        'central.recompensas',
+        'central.chatbot',
+        'central.carreira'
+    ] %}
+        <script
+            src="{{ url_for('static', filename='js/recursos.js') }}?v=1100"
+            defer
+        ></script>
+    {% endif %}
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".fechar-mensagem").forEach((botao) => {
+                botao.addEventListener("click", () => {
+                    const mensagem = botao.closest(".mensagem");
+                    if (mensagem) mensagem.remove();
+                });
+            });
+        });
+    </script>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

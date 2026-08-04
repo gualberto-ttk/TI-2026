@@ -1,0 +1,324 @@
+{% extends "base.html" %}
+{% block title %}
+    Calendário inteligente | Estude+
+{% endblock %}
+{% block content %}
+    <section class="calendario-pagina" data-hoje="{{ hoje }}">
+        <div class="calendario-container">
+            <header class="calendario-hero">
+                <div>
+                    <span class="calendario-selo">
+                        <i class="fa-solid fa-wand-magic-sparkles">
+                        </i>
+                        PLANEJAMENTO INTELIGENTE
+                    </span>
+                    <h1>Organize seus estudos</h1>
+                    <p>
+                        Planeje matérias, horários, revisões e trabalhos.
+                        Tudo fica salvo na sua conta do Estude+.
+                    </p>
+                </div>
+                <button
+                    type="button"
+                    class="calendario-novo-evento"
+                    id="abrirNovoEvento"
+                    >
+                    <i class="fa-solid fa-plus">
+                    </i>
+                    Nova atividade
+                </button>
+            </header>
+            <section class="calendario-resumo">
+                <article>
+                    <span>
+                        <i class="fa-solid fa-list-check">
+                        </i>
+                    </span>
+                    <div>
+                        <strong id="totalAtividades">0</strong>
+                        <small>Atividades</small>
+                    </div>
+                </article>
+                <article>
+                    <span>
+                        <i class="fa-solid fa-hourglass-half">
+                        </i>
+                    </span>
+                    <div>
+                        <strong id="totalPendentes">0</strong>
+                        <small>Pendentes</small>
+                    </div>
+                </article>
+                <article>
+                    <span>
+                        <i class="fa-solid fa-circle-check">
+                        </i>
+                    </span>
+                    <div>
+                        <strong id="totalConcluidas">0</strong>
+                        <small>Concluídas</small>
+                    </div>
+                </article>
+                <article>
+                    <span>
+                        <i class="fa-solid fa-calendar-day">
+                        </i>
+                    </span>
+                    <div>
+                        <strong id="totalHoje">0</strong>
+                        <small>Para hoje</small>
+                    </div>
+                </article>
+            </section>
+            <div class="calendario-layout">
+                <section class="calendario-card-principal">
+                    <header class="calendario-controles">
+                        <button
+                            type="button"
+                            id="mesAnterior"
+                            aria-label="Mês anterior"
+                            >
+                            <i class="fa-solid fa-chevron-left">
+                            </i>
+                        </button>
+                        <div>
+                            <small>CALENDÁRIO DE ESTUDOS</small>
+                            <h2 id="tituloMes">
+                            </h2>
+                        </div>
+                        <button
+                            type="button"
+                            id="proximoMes"
+                            aria-label="Próximo mês"
+                            >
+                            <i class="fa-solid fa-chevron-right">
+                            </i>
+                        </button>
+                    </header>
+                    <div class="calendario-semana">
+                        <span>DOM</span>
+                        <span>SEG</span>
+                        <span>TER</span>
+                        <span>QUA</span>
+                        <span>QUI</span>
+                        <span>SEX</span>
+                        <span>SÁB</span>
+                    </div>
+                    <div
+                        class="calendario-grade"
+                        id="gradeCalendario"
+                        data-ano="{{ ano_atual }}"
+                        data-mes="{{ mes_atual }}"
+                        >
+                    </div>
+                </section>
+                <aside class="calendario-lateral">
+                    <header>
+                        <div>
+                            <span>PRÓXIMAS ATIVIDADES</span>
+                            <h2>Sua agenda</h2>
+                        </div>
+                        <button
+                            type="button"
+                            id="irParaHoje"
+                            >
+                            Hoje
+                        </button>
+                    </header>
+                    <div class="calendario-filtros">
+                        <button type="button" class="ativo" data-filtro="todas">Todas</button>
+                        <button type="button" data-filtro="pendentes">Pendentes</button>
+                        <button type="button" data-filtro="concluidas">Concluídas</button>
+                    </div>
+                    <div class="calendario-lista" id="listaEventos">
+                        {% for evento in eventos %}
+                            <article
+                                class="calendario-evento
+                                {% if evento.concluido %}
+                                    concluido
+                                {% endif %}
+                                "
+                                data-id="{{ evento.id }}"
+                                data-data="{{ evento.data }}"
+                                data-concluido="{{ 'true' if evento.concluido else 'false' }}"
+                                data-prioridade="{{ evento.prioridade or 'media' }}"
+                                >
+                                <div class="evento-data">
+                                    <strong>{{ evento.data[8:10] }}</strong>
+                                    <span data-data-formatar="{{ evento.data }}">
+                                    </span>
+                                </div>
+                                <div class="evento-conteudo">
+                                    <div class="evento-etiquetas">
+                                        {% if evento.disciplina %}
+                                            <span class="evento-disciplina">
+                                                {{ evento.disciplina }}
+                                            </span>
+                                        {% endif %}
+                                        <span class="evento-prioridade {{ evento.prioridade or 'media' }}">
+                                            {{ (evento.prioridade or 'media')|capitalize }}
+                                        </span>
+                                    </div>
+                                    <h3>{{ evento.titulo }}</h3>
+                                    <p>
+                                        {% if evento.horario %}
+                                            <i class="fa-regular fa-clock">
+                                            </i>
+                                            {{ evento.horario }}
+                                        {% else %}
+                                            <i class="fa-regular fa-calendar">
+                                            </i>
+                                            Horário livre
+                                        {% endif %}
+                                    </p>
+                                    {% if evento.descricao %}
+                                        <small>{{ evento.descricao }}</small>
+                                    {% endif %}
+                                </div>
+                                <div class="evento-acoes">
+                                    <form
+                                        method="POST"
+                                        action="{{ url_for('concluir_evento', evento_id=evento.id) }}"
+                                        >
+                                        <button
+                                            type="submit"
+                                            title="
+                                            {% if evento.concluido %}
+                                                Marcar como pendente
+                                            {% else %}
+                                                Concluir atividade
+                                            {% endif %}
+                                            "
+                                            >
+                                            <i class="fa-solid
+                                                {% if evento.concluido %}
+                                                    fa-rotate-left
+                                                {% else %}
+                                                    fa-check
+                                                {% endif %}
+                                                ">
+                                            </i>
+                                        </button>
+                                    </form>
+                                    <button
+                                        type="button"
+                                        class="editar-evento"
+                                        data-id="{{ evento.id }}"
+                                        data-titulo="{{ evento.titulo|e }}"
+                                        data-data="{{ evento.data }}"
+                                        data-horario="{{ evento.horario }}"
+                                        data-disciplina="{{ evento.disciplina|e }}"
+                                        data-descricao="{{ evento.descricao|e }}"
+                                        data-prioridade="{{ evento.prioridade or 'media' }}"
+                                        title="Editar atividade"
+                                        >
+                                        <i class="fa-solid fa-pen">
+                                        </i>
+                                    </button>
+                                    <form
+                                        method="POST"
+                                        action="{{ url_for('excluir_evento', evento_id=evento.id) }}"
+                                        onsubmit="return confirm('Deseja excluir esta atividade?');"
+                                        >
+                                        <button type="submit" title="Excluir atividade">
+                                            <i class="fa-solid fa-trash">
+                                            </i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </article>
+                        {% else %}
+                            <div class="calendario-vazio" id="calendarioVazio">
+                                <span>
+                                    <i class="fa-regular fa-calendar-plus">
+                                    </i>
+                                </span>
+                                <h3>Nenhuma atividade criada</h3>
+                                <p>Use o botão “Nova atividade” para começar seu planejamento.</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+    <div class="modal-calendario" id="modalCalendario" aria-hidden="true">
+        <div class="modal-calendario-fundo" data-fechar-modal>
+        </div>
+        <section class="modal-calendario-card" role="dialog" aria-modal="true" aria-labelledby="tituloModalCalendario">
+            <header>
+                <div>
+                    <span id="etiquetaModalCalendario">NOVA ATIVIDADE</span>
+                    <h2 id="tituloModalCalendario">Planejar estudo</h2>
+                </div>
+                <button type="button" data-fechar-modal aria-label="Fechar">
+                    <i class="fa-solid fa-xmark">
+                    </i>
+                </button>
+            </header>
+            <form method="POST" action="{{ url_for('criar_evento') }}" id="formEvento">
+                <div class="campo-calendario campo-calendario-largo">
+                    <label for="eventoTitulo">Título da atividade</label>
+                    <input
+                    type="text"
+                    id="eventoTitulo"
+                    name="titulo"
+                    maxlength="120"
+                    placeholder="Ex.: Revisar equações do 2º grau"
+                    required
+                    >
+                </div>
+                <div class="campos-calendario-duplos">
+                    <div class="campo-calendario">
+                        <label for="eventoData">Data</label>
+                        <input type="date" id="eventoData" name="data" required>
+                    </div>
+                    <div class="campo-calendario">
+                        <label for="eventoHorario">Horário</label>
+                        <input type="time" id="eventoHorario" name="horario">
+                    </div>
+                </div>
+                <div class="campos-calendario-duplos">
+                    <div class="campo-calendario">
+                        <label for="eventoDisciplina">Disciplina</label>
+                        <select id="eventoDisciplina" name="disciplina">
+                            <option value="">Estudo geral</option>
+                            {% for disciplina in disciplinas %}
+                                <option value="{{ disciplina }}">{{ disciplina }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="campo-calendario">
+                        <label for="eventoPrioridade">Prioridade</label>
+                        <select id="eventoPrioridade" name="prioridade">
+                            <option value="baixa">Baixa</option>
+                            <option value="media" selected>Média</option>
+                            <option value="alta">Alta</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="campo-calendario campo-calendario-largo">
+                    <label for="eventoDescricao">Descrição</label>
+                    <textarea
+                        id="eventoDescricao"
+                        name="descricao"
+                        rows="4"
+                        maxlength="500"
+                        placeholder="Detalhes, páginas para revisar, materiais necessários..."
+                        >
+                    </textarea>
+                </div>
+                <footer>
+                    <button type="button" class="botao-cancelar-evento" data-fechar-modal>
+                        Cancelar
+                    </button>
+                    <button type="submit" class="botao-salvar-evento">
+                        <i class="fa-solid fa-floppy-disk">
+                        </i>
+                        <span>Salvar atividade</span>
+                    </button>
+                </footer>
+            </form>
+        </section>
+    </div>
+{% endblock %}

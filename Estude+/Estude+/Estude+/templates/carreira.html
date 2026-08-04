@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block title %}Simulador de carreira | Estude+{% endblock %}
+
+{% block content %}
+<section class="recurso-pagina carreira-pagina">
+    <div class="recurso-container">
+        <header class="recurso-hero">
+            <div>
+                <span class="recurso-selo"><i class="fa-solid fa-compass"></i> SIMULADOR DE CARREIRA</span>
+                <h1>Descubra áreas que combinam com você</h1>
+                <p>Responda com sinceridade. O resultado é uma orientação, não uma decisão definitiva.</p>
+            </div>
+        </header>
+
+        <div class="carreira-grid">
+            <form id="carreiraForm" class="recurso-card carreira-form">
+                <label>
+                    <span>Quais matérias você mais gosta?</span>
+                    <textarea name="materias" required minlength="2" placeholder="Ex.: Matemática, Biologia, História..."></textarea>
+                </label>
+
+                <label>
+                    <span>O que você gosta de fazer?</span>
+                    <textarea name="atividades" required minlength="2" placeholder="Ex.: criar, cuidar, programar, ensinar..."></textarea>
+                </label>
+
+                <label>
+                    <span>Quais habilidades você considera fortes?</span>
+                    <textarea name="habilidades" required minlength="2" placeholder="Ex.: comunicação, criatividade, lógica..."></textarea>
+                </label>
+
+                <label>
+                    <span>Como imagina seu ambiente de trabalho?</span>
+                    <textarea name="ambiente" required minlength="2" placeholder="Ex.: escritório, hospital, escola, trabalho remoto..."></textarea>
+                </label>
+
+                <button type="submit" id="carreiraEnviar">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>Ver resultado</span>
+                </button>
+
+                <p id="carreiraMensagem" class="carreira-mensagem" aria-live="polite"></p>
+            </form>
+
+            <article id="carreiraResultado" class="recurso-card carreira-resultado" aria-live="polite">
+                {% if resultado %}
+                    <span class="carreira-resultado-icone"><i class="fa-solid fa-compass"></i></span>
+                    <small>ÁREA RECOMENDADA</small>
+                    <h2>{{ resultado.area }}</h2>
+                    <p>Carreiras relacionadas:</p>
+                    <ul>
+                        {% for item in resultado.carreiras %}
+                            <li><i class="fa-solid fa-check"></i> {{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <span class="carreira-resultado-icone"><i class="fa-solid fa-route"></i></span>
+                    <h2>Seu resultado aparecerá aqui</h2>
+                    <p>Preencha o questionário para receber sugestões.</p>
+                {% endif %}
+            </article>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+"use strict";
+
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("carreiraForm");
+    const resultado = document.getElementById("carreiraResultado");
+    const botao = document.getElementById("carreiraEnviar");
+    const mensagem = document.getElementById("carreiraMensagem");
+
+    if (!form || !resultado || !botao) return;
+
+    const escapar = valor => String(valor ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+    form.addEventListener("submit", async evento => {
+        evento.preventDefault();
+        if (!form.reportValidity()) return;
+
+        const dados = Object.fromEntries(new FormData(form).entries());
+        const htmlOriginal = botao.innerHTML;
+
+        botao.disabled = true;
+        botao.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>Analisando...</span>';
+        mensagem.textContent = "";
+
+        try {
+            const resposta = await fetch("{{ url_for('central.calcular_carreira') }}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(dados)
+            });
+
+            const retorno = await resposta.json();
+
+            if (!resposta.ok || !retorno.sucesso) {
+                throw new Error(retorno.mensagem || "Não foi possível calcular o resultado.");
+            }
+
+            const area = escapar(retorno.resultado?.area || "Área não identificada");
+            const carreiras = Array.isArray(retorno.resultado?.carreiras)
+                ? retorno.resultado.carreiras
+                : [];
+
+            resultado.innerHTML = `
+                <span class="carreira-resultado-icone"><i class="fa-solid fa-compass"></i></span>
+                <small>ÁREA RECOMENDADA</small>
+                <h2>${area}</h2>
+                <p>Carreiras relacionadas:</p>
+                <ul>
+                    ${carreiras.map(item => `<li><i class="fa-solid fa-check"></i>${escapar(item)}</li>`).join("")}
+                </ul>
+                ${retorno.bonus ? '<div class="carreira-bonus"><i class="fa-solid fa-gift"></i> Você ganhou 30 XP e 10 moedas.</div>' : ""}
+            `;
+
+            resultado.classList.add("carreira-resultado-pronto");
+            mensagem.textContent = "Resultado calculado com sucesso.";
+            resultado.scrollIntoView({ behavior: "smooth", block: "center" });
+        } catch (erro) {
+            console.error("Erro no simulador:", erro);
+            mensagem.textContent = erro.message || "Ocorreu um erro inesperado.";
+            resultado.innerHTML = `
+                <span class="carreira-resultado-icone carreira-erro-icone">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </span>
+                <h2>Não foi possível mostrar o resultado</h2>
+                <p>${escapar(erro.message || "Tente novamente.")}</p>
+            `;
+        } finally {
+            botao.disabled = false;
+            botao.innerHTML = htmlOriginal;
+        }
+    });
+});
+</script>
+{% endblock %}

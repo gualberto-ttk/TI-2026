@@ -1,0 +1,655 @@
+{% extends "base.html" %}
+{% block title %}
+    Início | Estude+
+{% endblock %}
+{% block content %}
+    <section class="inicio-hero">
+        <div class="inicio-container inicio-hero-grid">
+            <div class="inicio-hero-conteudo">
+                <span class="inicio-selo">
+                    <i class="fa-solid fa-wand-magic-sparkles">
+                    </i>
+                    Organize seus estudos
+                </span>
+                <h1>
+                    Um caderno inteligente para
+                    <strong>todas as disciplinas.</strong>
+                </h1>
+                <p>
+                    Escolha sua série, abra uma disciplina e registre títulos,
+                    temas, conteúdos, dúvidas e lembretes em um ambiente
+                    organizado, acessível e fácil de usar.
+                </p>
+                <div class="inicio-hero-botoes">
+                    {% if session.get("email") %}
+                        <a
+                            href="{{ url_for('minha_serie') }}"
+                            class="inicio-botao inicio-botao-laranja"
+                            >
+                            <i class="fa-solid fa-book-open">
+                            </i>
+                            Abrir meu caderno
+                        </a>
+                        <a
+                            href="{{ url_for('biblioteca') }}"
+                            class="inicio-botao inicio-botao-branco"
+                            >
+                            <i class="fa-solid fa-book-bookmark">
+                            </i>
+                            Minhas anotações
+                        </a>
+                    {% else %}
+                        <a
+                            href="{{ url_for('listar_vagas') }}"
+                            class="inicio-botao inicio-botao-laranja"
+                            >
+                            <i class="fa-solid fa-book-open">
+                            </i>
+                            Abrir cadernos
+                        </a>
+                        <a
+                            href="{{ url_for('nova_vaga') }}"
+                            class="inicio-botao inicio-botao-branco"
+                            >
+                            <i class="fa-solid fa-user-plus">
+                            </i>
+                            Criar conta gratuita
+                        </a>
+                    {% endif %}
+                </div>
+                <div class="inicio-estatisticas">
+                    <article>
+                        <strong>12</strong>
+                        <span>Anos escolares</span>
+                    </article>
+                    <article>
+                        <strong>14</strong>
+                        <span>Disciplinas</span>
+                    </article>
+                    <article>
+                        <strong>24h</strong>
+                        <span>Acesso disponível</span>
+                    </article>
+                </div>
+            </div>
+            <div class="inicio-hero-ilustracao">
+                <div class="inicio-circulo inicio-circulo-1">
+                </div>
+                <div class="inicio-circulo inicio-circulo-2">
+                </div>
+                <span class="inicio-materia inicio-materia-1">
+                    <i class="fa-solid fa-calculator">
+                    </i>
+                    Matemática
+                </span>
+                <span class="inicio-materia inicio-materia-2">
+                    <i class="fa-solid fa-flask">
+                    </i>
+                    Ciências
+                </span>
+                <span class="inicio-materia inicio-materia-3">
+                    <i class="fa-solid fa-landmark">
+                    </i>
+                    História
+                </span>
+                <span class="inicio-materia inicio-materia-4">
+                    <i class="fa-solid fa-language">
+                    </i>
+                    Inglês
+                </span>
+                <div class="inicio-caderno">
+                    <div
+                        class="inicio-caderno-espiral"
+                        aria-hidden="true"
+                        >
+                        {% for item in range(10) %}
+                            <span>
+                            </span>
+                        {% endfor %}
+                    </div>
+                    <div class="inicio-caderno-pagina">
+                        <div class="inicio-caderno-topo">
+                            <small>
+                                Português
+                            </small>
+                            <i class="fa-solid fa-pen">
+                            </i>
+                        </div>
+                        <h2>
+                            Figuras de linguagem
+                        </h2>
+                        <div
+                            class="inicio-caderno-linhas"
+                            aria-hidden="true"
+                            >
+                            <span>
+                            </span>
+                            <span>
+                            </span>
+                            <span>
+                            </span>
+                            <span>
+                            </span>
+                        </div>
+                        <div class="inicio-caderno-lembrete">
+                            <i class="fa-solid fa-thumbtack">
+                            </i>
+                            Revisar antes da prova
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="inicio-beneficios">
+        <div class="inicio-container inicio-beneficios-grid">
+            <article>
+                <i class="fa-solid fa-cloud-arrow-up">
+                </i>
+                <div>
+                    <strong>
+                        Salvamento automático
+                    </strong>
+                    <span>
+                        Continue de onde parou.
+                    </span>
+                </div>
+            </article>
+            <article>
+                <i class="fa-solid fa-mobile-screen-button">
+                </i>
+                <div>
+                    <strong>
+                        Qualquer dispositivo
+                    </strong>
+                    <span>
+                        Celular, tablet e computador.
+                    </span>
+                </div>
+            </article>
+            <article>
+                <i class="fa-solid fa-universal-access">
+                </i>
+                <div>
+                    <strong>
+                        Experiência acessível
+                    </strong>
+                    <span>
+                        Fonte, contraste e animações.
+                    </span>
+                </div>
+            </article>
+            <article>
+                <i class="fa-solid fa-shield-halved">
+                </i>
+                <div>
+                    <strong>
+                        Conta protegida
+                    </strong>
+                    <span>
+                        Anotações ligadas ao perfil.
+                    </span>
+                </div>
+            </article>
+        </div>
+    </section>
+    <section class="inicio-recursos">
+        <div class="inicio-container">
+            <header class="inicio-titulo-secao">
+                <span>
+                    SEU ESPAÇO DE ESTUDO
+                </span>
+                <h2>
+                    Simples, organizado e útil
+                </h2>
+                <p>
+                    Recursos criados para deixar suas anotações mais claras,
+                    bonitas e fáceis de revisar.
+                </p>
+            </header>
+            <div class="inicio-recursos-grid">
+                <article class="inicio-card-recurso">
+                    <i class="fa-solid fa-graduation-cap">
+                    </i>
+                    <h3>
+                        Do 1º ano ao Ensino Médio
+                    </h3>
+                    <p>
+                        Séries divididas entre Fundamental I,
+                        Fundamental II e Ensino Médio.
+                    </p>
+                    <div class="inicio-tags">
+                        <span>Fundamental I</span>
+                        <span>Fundamental II</span>
+                        <span>Ensino Médio</span>
+                    </div>
+                </article>
+                <article class="inicio-card-recurso">
+                    <i class="fa-solid fa-pen-to-square">
+                    </i>
+                    <h3>
+                        Editor por disciplina
+                    </h3>
+                    <p>
+                        Organize título, tema principal, conteúdo completo
+                        e informações de cada matéria.
+                    </p>
+                    <div
+                        class="inicio-mini-linhas"
+                        aria-hidden="true"
+                        >
+                        <span>
+                        </span>
+                        <span>
+                        </span>
+                        <span>
+                        </span>
+                    </div>
+                </article>
+                <article class="inicio-card-recurso">
+                    <i class="fa-solid fa-note-sticky">
+                    </i>
+                    <h3>
+                        Blocos de notas
+                    </h3>
+                    <p>
+                        Separe lembretes importantes, assuntos para revisar,
+                        ideias e dúvidas.
+                    </p>
+                    <div
+                        class="inicio-mini-blocos"
+                        aria-hidden="true"
+                        >
+                        <span class="amarelo">
+                        </span>
+                        <span class="verde">
+                        </span>
+                        <span class="azul">
+                        </span>
+                    </div>
+                </article>
+                <article class="inicio-card-recurso">
+                    <i class="fa-solid fa-floppy-disk">
+                    </i>
+                    <h3>
+                        Notas salvas
+                    </h3>
+                    <p>
+                        Suas anotações ficam ligadas à conta para você
+                        continuar estudando depois.
+                    </p>
+                    <div class="inicio-status">
+                        <i class="fa-solid fa-circle-check">
+                        </i>
+                        Anotações salvas
+                    </div>
+                </article>
+                <article class="inicio-card-recurso">
+                    <i class="fa-solid fa-list-check">
+                    </i>
+                    <h3>
+                        Organização por matéria
+                    </h3>
+                    <p>
+                        Cada disciplina possui seu próprio caderno,
+                        evitando que conteúdos diferentes se misturem.
+                    </p>
+                    <div class="inicio-tags">
+                        <span>Português</span>
+                        <span>Matemática</span>
+                        <span>Ciências</span>
+                    </div>
+                </article>
+                <article class="inicio-card-recurso">
+                    <i class="fa-solid fa-wand-magic-sparkles">
+                    </i>
+                    <h3>
+                        Feito para o seu jeito
+                    </h3>
+                    <p>
+                        Use para aulas, resumos, revisões, exercícios,
+                        pesquisas e trabalhos.
+                    </p>
+                    <div class="inicio-tags">
+                        <span>Resumo</span>
+                        <span>Aula</span>
+                        <span>Revisão</span>
+                        <span>Pesquisa</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+    <section class="inicio-passos">
+        <div class="inicio-container inicio-passos-grid">
+            <div class="inicio-passos-ilustracao">
+                <div class="inicio-pilha">
+                    <span class="inicio-livro azul">
+                        <i class="fa-solid fa-calculator">
+                        </i>
+                        Matemática
+                    </span>
+                    <span class="inicio-livro verde">
+                        <i class="fa-solid fa-flask">
+                        </i>
+                        Ciências
+                    </span>
+                    <span class="inicio-livro laranja">
+                        <i class="fa-solid fa-pen-nib">
+                        </i>
+                        Português
+                    </span>
+                </div>
+            </div>
+            <div class="inicio-passos-conteudo">
+                <span class="inicio-secao-selo">
+                    COMECE EM POUCOS PASSOS
+                </span>
+                <h2>
+                    Seu caderno pronto para usar
+                </h2>
+                <p>
+                    Não é necessário criar páginas manualmente.
+                    Escolha sua série e a disciplina para começar.
+                </p>
+                <div class="inicio-lista-passos">
+                    <article>
+                        <span>1</span>
+                        <div>
+                            <h3>
+                                Escolha sua série
+                            </h3>
+                            <p>
+                                Encontre seu ano no Fundamental I,
+                                Fundamental II ou Ensino Médio.
+                            </p>
+                        </div>
+                    </article>
+                    <article>
+                        <span>2</span>
+                        <div>
+                            <h3>
+                                Abra uma disciplina
+                            </h3>
+                            <p>
+                                Acesse o caderno específico da matéria desejada.
+                            </p>
+                        </div>
+                    </article>
+                    <article>
+                        <span>3</span>
+                        <div>
+                            <h3>
+                                Comece a escrever
+                            </h3>
+                            <p>
+                                Crie e salve quantas anotações precisar.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+                <a
+                    href="{{ url_for('listar_vagas') }}"
+                    class="inicio-link"
+                    >
+                    Ver todos os cadernos
+                    <i class="fa-solid fa-arrow-right">
+                    </i>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="inicio-disciplinas">
+        <div class="inicio-container">
+            <header class="inicio-titulo-secao">
+                <span>
+                    MUITAS POSSIBILIDADES
+                </span>
+                <h2>
+                    Um espaço para cada disciplina
+                </h2>
+                <p>
+                    As matérias aumentam de acordo com o avanço escolar,
+                    mantendo tudo organizado em um só lugar.
+                </p>
+            </header>
+            <div class="inicio-disciplinas-grid">
+                <article>
+                    <i class="fa-solid fa-pen-nib">
+                    </i>
+                    <span>Português</span>
+                </article>
+                <article>
+                    <i class="fa-solid fa-calculator">
+                    </i>
+                    <span>Matemática</span>
+                </article>
+                <article>
+                    <i class="fa-solid fa-flask">
+                    </i>
+                    <span>Ciências</span>
+                </article>
+                <article>
+                    <i class="fa-solid fa-landmark">
+                    </i>
+                    <span>História</span>
+                </article>
+                <article>
+                    <i class="fa-solid fa-earth-americas">
+                    </i>
+                    <span>Geografia</span>
+                </article>
+                <article>
+                    <i class="fa-solid fa-language">
+                    </i>
+                    <span>Inglês</span>
+                </article>
+                <article>
+                    <i class="fa-solid fa-atom">
+                    </i>
+                    <span>Física</span>
+                </article>
+                <article>
+                    <i class="fa-solid fa-vial">
+                    </i>
+                    <span>Química</span>
+                </article>
+            </div>
+            <section class="inicio-chamada">
+                <div>
+                    <span>
+                        SEU ESPAÇO DE ESTUDO
+                    </span>
+                    <h2>
+                        Comece a organizar suas anotações
+                    </h2>
+                    <p>
+                        Tenha um caderno separado para cada disciplina.
+                    </p>
+                </div>
+                {% if session.get("email") %}
+                    <a href="{{ url_for('minha_serie') }}">
+                        <i class="fa-solid fa-book-open">
+                        </i>
+                        Abrir minha série
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('nova_vaga') }}">
+                        <i class="fa-solid fa-user-plus">
+                        </i>
+                        Criar conta
+                    </a>
+                {% endif %}
+            </section>
+        </div>
+    </section>
+
+    <style>
+    .home-novo-caderno,
+    .home-novo-materia,
+    .home-novo-circulo,
+    .home-novo-lembrete {
+        will-change: transform;
+    }
+</style>
+
+<script>
+window.addEventListener("load", function () {
+    document.documentElement.classList.remove("movimento-reduzido");
+    document.body.classList.remove("movimento-reduzido");
+
+    const caderno = document.querySelector(".inicio-caderno");
+    const materias = document.querySelectorAll(".inicio-materia");
+    const circulos = document.querySelectorAll(".inicio-circulo");
+    const espirais = document.querySelectorAll(
+        ".inicio-caderno-espiral span"
+    );
+    const lembrete = document.querySelector(
+        ".inicio-caderno-lembrete"
+    );
+
+    if (!caderno) {
+        console.error("Caderno não encontrado.");
+        return;
+    }
+
+    const mobile = window.innerWidth <= 850;
+
+    caderno.getAnimations().forEach(animacao => animacao.cancel());
+
+    caderno.animate(
+        mobile
+            ? [
+                {
+                    transform:
+                        "translate(-50%, -50%) rotate(-1deg)"
+                },
+                {
+                    transform:
+                        "translate(-50%, calc(-50% - 18px)) rotate(1deg)"
+                },
+                {
+                    transform:
+                        "translate(-50%, -50%) rotate(-1deg)"
+                }
+            ]
+            : [
+                {
+                    transform:
+                        "translateY(-50%) rotate(3deg)"
+                },
+                {
+                    transform:
+                        "translateY(calc(-50% - 18px)) rotate(4deg)"
+                },
+                {
+                    transform:
+                        "translateY(-50%) rotate(3deg)"
+                }
+            ],
+        {
+            duration: 3800,
+            iterations: Infinity,
+            easing: "ease-in-out"
+        }
+    );
+
+    materias.forEach(function (materia, indice) {
+        materia.getAnimations().forEach(animacao => {
+            animacao.cancel();
+        });
+
+        materia.animate(
+            [
+                {
+                    transform: "translateY(0)"
+                },
+                {
+                    transform: "translateY(-14px)"
+                },
+                {
+                    transform: "translateY(0)"
+                }
+            ],
+            {
+                duration: 2600 + indice * 250,
+                delay: indice * 350,
+                iterations: Infinity,
+                easing: "ease-in-out"
+            }
+        );
+    });
+
+    circulos.forEach(function (circulo, indice) {
+        circulo.animate(
+            [
+                {
+                    transform: "scale(1)",
+                    opacity: 0.6
+                },
+                {
+                    transform: "scale(1.12)",
+                    opacity: 1
+                },
+                {
+                    transform: "scale(1)",
+                    opacity: 0.6
+                }
+            ],
+            {
+                duration: 5000,
+                delay: indice * 900,
+                iterations: Infinity,
+                easing: "ease-in-out"
+            }
+        );
+    });
+
+    espirais.forEach(function (espiral, indice) {
+        espiral.animate(
+            [
+                {
+                    transform: "translateX(0)"
+                },
+                {
+                    transform: "translateX(-5px)"
+                },
+                {
+                    transform: "translateX(0)"
+                }
+            ],
+            {
+                duration: 1900,
+                delay: indice * 100,
+                iterations: Infinity,
+                easing: "ease-in-out"
+            }
+        );
+    });
+
+    if (lembrete) {
+        lembrete.animate(
+            [
+                {
+                    transform: "translateY(0) rotate(0deg)"
+                },
+                {
+                    transform: "translateY(-7px) rotate(-1deg)"
+                },
+                {
+                    transform: "translateY(0) rotate(0deg)"
+                }
+            ],
+            {
+                duration: 3000,
+                iterations: Infinity,
+                easing: "ease-in-out"
+            }
+        );
+    }
+
+    console.log("Animações da página inicial ativadas.");
+});
+</script>
+
+{% endblock %}

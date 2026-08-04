@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Recompensas | Estude+{% endblock %}
+
+{% block content %}
+<section class="recurso-pagina recompensas-pagina">
+    <div class="recurso-container">
+        <header class="recurso-hero recompensas-hero">
+            <div class="recompensas-hero-texto">
+                <span class="recurso-selo">
+                    <i class="fa-solid fa-gift"></i>
+                    RECOMPENSAS
+                </span>
+
+                <h1>Transforme esforço em conquistas</h1>
+
+                <p>
+                    Ganhe XP e moedas ao concluir sessões de estudo.
+                </p>
+            </div>
+
+            <aside class="recompensas-saldo" aria-label="Saldo do usuário">
+                <span class="recompensas-saldo-icone" aria-hidden="true">
+                    <i class="fa-solid fa-coins"></i>
+                </span>
+
+                <small>SEU SALDO</small>
+
+                <strong>
+                    {{ moedas }}
+                    {% if moedas == 1 %}
+                        moeda
+                    {% else %}
+                        moedas
+                    {% endif %}
+                </strong>
+
+                <p>{{ nivel.nome }} • {{ xp }} XP</p>
+            </aside>
+        </header>
+
+        <div class="loja-grid">
+            {% for item in recompensas %}
+                <article class="loja-card {% if item.adquirida %}adquirida{% endif %}">
+                    <span class="loja-card-icone">
+                        <i class="fa-solid {{ item.icone }}"></i>
+                    </span>
+
+                    <h2>{{ item.nome }}</h2>
+                    <p>{{ item.descricao }}</p>
+
+                    <strong>{{ item.preco }} moedas</strong>
+
+                    {% if item.adquirida %}
+                        <button type="button" disabled>
+                            <i class="fa-solid fa-check"></i>
+                            Adquirida
+                        </button>
+                    {% else %}
+                        <form
+                            method="POST"
+                            action="{{ url_for(
+                                'central.comprar_recompensa',
+                                recompensa_id=item.id
+                            ) }}"
+                        >
+                            <button type="submit">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                Desbloquear
+                            </button>
+                        </form>
+                    {% endif %}
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

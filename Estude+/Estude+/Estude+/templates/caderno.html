@@ -1,0 +1,349 @@
+{% extends "base.html" %}
+{% block title %}
+    {% if visualizando %}
+        Visualizar anotação
+    {% elif editando %}
+        Editar anotação
+    {% else %}
+        Nova anotação
+    {% endif %}
+    | {{ disciplina }} | Estude+
+{% endblock %}
+{% block content %}
+    <section
+        class="pagina-caderno
+        {% if visualizando %}
+            modo-visualizacao-caderno
+        {% endif %}
+        "
+        >
+        <div class="container-caderno">
+            <header class="cabecalho-caderno">
+                <div class="cabecalho-caderno-conteudo">
+                    <a
+                        href="{{ url_for(
+                        'biblioteca_disciplina',
+                        slug=serie.slug,
+                        disciplina=disciplina
+                        ) }}"
+                        class="voltar-caderno"
+                        >
+                        <i class="fa-solid fa-arrow-left">
+                        </i>
+                        {% if visualizando %}
+                            Voltar para a biblioteca
+                        {% else %}
+                            Voltar para {{ serie.nome }}
+                        {% endif %}
+                    </a>
+                    <div class="identidade-caderno">
+                        <span class="icone-disciplina-caderno">
+                            {% if visualizando %}
+                                <i class="fa-solid fa-eye">
+                                </i>
+                            {% else %}
+                                <i class="fa-solid fa-pen-nib">
+                                </i>
+                            {% endif %}
+                        </span>
+                        <div>
+                            <span class="etiqueta-caderno">
+                                {% if visualizando %}
+                                    VISUALIZAÇÃO DA ANOTAÇÃO
+                                {% else %}
+                                    CADERNO DA DISCIPLINA
+                                {% endif %}
+                            </span>
+                            <h1>
+                                {{ disciplina }}
+                            </h1>
+                            <p>
+                                {% if visualizando %}
+                                    Leia sua anotação. Para fazer alterações,
+                                    use o botão de edição no final da página.
+                                {% else %}
+                                    Organize suas anotações, conteúdos,
+                                    dúvidas e lembretes.
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="acoes-topo-caderno">
+                    <a
+                        href="{{ url_for(
+                        'biblioteca_disciplina',
+                        slug=serie.slug,
+                        disciplina=disciplina
+                        ) }}"
+                        class="botao-biblioteca-caderno"
+                        >
+                        <i class="fa-solid fa-book-bookmark">
+                        </i>
+                        <span>Biblioteca</span>
+                        <strong>
+                            {{ total_anotacoes }}
+                        </strong>
+                    </a>
+                </div>
+            </header>
+            <form
+                method="POST"
+                class="formulario-caderno"
+                id="formCaderno"
+                >
+                <input
+                type="hidden"
+                name="anotacao_id"
+                value="{{ caderno.get('id', '') }}"
+                >
+                <div class="estrutura-caderno">
+                    <section class="folha-caderno">
+                        <div
+                            class="espiral-caderno"
+                            aria-hidden="true"
+                            >
+                            {% for item in range(13) %}
+                                <span>
+                                </span>
+                            {% endfor %}
+                        </div>
+                        <div class="conteudo-folha-caderno">
+                            <header class="topo-folha-caderno">
+                                <span class="numero-anotacao">
+                                    {% if visualizando %}
+                                        <i class="fa-solid fa-eye">
+                                        </i>
+                                    {% else %}
+                                        01
+                                    {% endif %}
+                                </span>
+                                <div class="titulo-anotacao-caderno">
+                                    <strong>
+                                        {% if visualizando %}
+                                            Visualizando anotação
+                                        {% elif editando %}
+                                            Editar anotação
+                                        {% else %}
+                                            Nova anotação
+                                        {% endif %}
+                                    </strong>
+                                    <small>
+                                        {{ disciplina }}
+                                    </small>
+                                </div>
+                                {% if visualizando %}
+                                    <span class="status-visualizacao">
+                                        <i class="fa-solid fa-lock">
+                                        </i>
+                                        Somente leitura
+                                    </span>
+                                {% else %}
+                                    <span class="status-rascunho">
+                                        <i class="fa-solid fa-cloud-arrow-up">
+                                        </i>
+                                        Rascunho automático
+                                    </span>
+                                {% endif %}
+                            </header>
+                            <div class="campo-caderno">
+                                <label for="titulo">
+                                    Título da anotação
+                                </label>
+                                <input
+                                type="text"
+                                id="titulo"
+                                name="titulo"
+                                value="{{ caderno.get('titulo', '') }}"
+                                placeholder="Ex.: Revolução Industrial"
+                                autocomplete="off"
+                                {% if visualizando %}
+                                    readonly
+                                {% endif %}
+                                >
+                            </div>
+                            <div class="campo-caderno">
+                                <label for="tema">
+                                    Tema principal
+                                </label>
+                                <input
+                                type="text"
+                                id="tema"
+                                name="tema"
+                                value="{{ caderno.get('tema', '') }}"
+                                placeholder="Escreva o assunto central da anotação"
+                                autocomplete="off"
+                                {% if visualizando %}
+                                    readonly
+                                {% endif %}
+                                >
+                            </div>
+                            <div class="campo-caderno campo-conteudo-caderno">
+                                <div class="linha-label-caderno">
+                                    <label for="conteudo">
+                                        Conteúdo
+                                    </label>
+                                    <span id="contadorPalavras">
+                                        0 palavras
+                                    </span>
+                                </div>
+                                <textarea
+                                    id="conteudo"
+                                    name="conteudo"
+                                    placeholder="Comece a escrever suas anotações aqui..."
+                                    {% if visualizando %}
+                                        readonly
+                                    {% endif %}
+                                    >{{ caderno.get('conteudo', '') }}</textarea>
+                                </div>
+                                {% if visualizando %}
+                                    <p class="aviso-visualizacao-caderno">
+                                        <i class="fa-solid fa-circle-info">
+                                        </i>
+                                        Esta anotação está no modo de visualização.
+                                        Nenhum conteúdo pode ser alterado.
+                                    </p>
+                                {% else %}
+                                    <p class="aviso-rascunho-caderno">
+                                        <i class="fa-solid fa-circle-info">
+                                        </i>
+                                        O rascunho também é salvo neste navegador.
+                                    </p>
+                                {% endif %}
+                            </div>
+                        </section>
+                        <aside class="lateral-caderno">
+                            <header class="cabecalho-blocos-caderno">
+                                <span>
+                                    <i class="fa-solid fa-note-sticky">
+                                    </i>
+                                </span>
+                                <div>
+                                    <h2>
+                                        Blocos de notas
+                                    </h2>
+                                    <p>
+                                        Informações rápidas para complementar
+                                        o conteúdo principal.
+                                    </p>
+                                </div>
+                            </header>
+                            <article class="bloco-caderno bloco-importante">
+                                <header>
+                                    <strong>
+                                        <i class="fa-solid fa-star">
+                                        </i>
+                                        Importante
+                                    </strong>
+                                    <i class="fa-solid fa-thumbtack">
+                                    </i>
+                                </header>
+                                <textarea
+                                    name="nota1"
+                                    placeholder="O que não posso esquecer?"
+                                    {% if visualizando %}
+                                        readonly
+                                    {% endif %}
+                                    >{{ caderno.get('nota1', '') }}</textarea>
+                                </article>
+                                <article class="bloco-caderno bloco-revisar">
+                                    <header>
+                                        <strong>
+                                            <i class="fa-solid fa-rotate">
+                                            </i>
+                                            Revisar depois
+                                        </strong>
+                                        <i class="fa-solid fa-bookmark">
+                                        </i>
+                                    </header>
+                                    <textarea
+                                        name="nota2"
+                                        placeholder="Assuntos para revisar..."
+                                        {% if visualizando %}
+                                            readonly
+                                        {% endif %}
+                                        >{{ caderno.get('nota2', '') }}</textarea>
+                                    </article>
+                                    <article class="bloco-caderno bloco-ideias">
+                                        <header>
+                                            <strong>
+                                                <i class="fa-solid fa-lightbulb">
+                                                </i>
+                                                Ideias e dúvidas
+                                            </strong>
+                                            <i class="fa-solid fa-circle-question">
+                                            </i>
+                                        </header>
+                                        <textarea
+                                            name="nota3"
+                                            placeholder="Escreva dúvidas ou ideias..."
+                                            {% if visualizando %}
+                                                readonly
+                                            {% endif %}
+                                            >{{ caderno.get('nota3', '') }}</textarea>
+                                        </article>
+                                        <div class="dica-blocos-caderno">
+                                            <i class="fa-solid fa-wand-magic-sparkles">
+                                            </i>
+                                            <p>
+                                                {% if visualizando %}
+                                                    Use o botão Editar anotação no final
+                                                    da página para liberar os campos.
+                                                {% else %}
+                                                    Separe os lembretes nos blocos para não
+                                                    misturá-los ao conteúdo principal.
+                                                {% endif %}
+                                            </p>
+                                        </div>
+                                    </aside>
+                                </div>
+                                <footer class="acoes-caderno">
+                                    <a
+                                        href="{{ url_for(
+                                        'biblioteca_disciplina',
+                                        slug=serie.slug,
+                                        disciplina=disciplina
+                                        ) }}"
+                                        class="botao-voltar-caderno"
+                                        >
+                                        <i class="fa-solid fa-arrow-left">
+                                        </i>
+                                        {% if visualizando %}
+                                            Voltar para biblioteca
+                                        {% else %}
+                                            Voltar
+                                        {% endif %}
+                                    </a>
+                                    {% if visualizando and caderno.get('id') %}
+                                        <a
+                                            href="{{ url_for(
+                                            'caderno',
+                                            slug=serie.slug,
+                                            disciplina=disciplina,
+                                            anotacao=caderno.get('id')
+                                            ) }}"
+                                            class="botao-editar-dentro-caderno"
+                                            >
+                                            <i class="fa-solid fa-pen">
+                                            </i>
+                                            Editar anotação
+                                        </a>
+                                    {% else %}
+                                        <button
+                                            type="submit"
+                                            class="botao-salvar-caderno"
+                                            >
+                                            <i class="fa-solid fa-floppy-disk">
+                                            </i>
+                                            {% if editando %}
+                                                Salvar alterações
+                                            {% else %}
+                                                Salvar caderno
+                                            {% endif %}
+                                        </button>
+                                    {% endif %}
+                                </footer>
+                            </form>
+                        </div>
+                    </section>
+                {% endblock %}

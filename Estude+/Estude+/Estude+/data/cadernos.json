@@ -1,0 +1,74 @@
+{
+  "lcauanogueiradesouza2@gmail.com": {
+    "2-medio::Química": {
+      "titulo": "",
+      "tema": "",
+      "conteudo": "",
+      "nota1": "",
+      "nota2": "",
+      "nota3": "",
+      "atualizado_em": "01/08/2026 às 17:52"
+    },
+    "1-fundamental::Língua Portuguesa": [],
+    "2-fundamental::Matemática": [],
+    "7-fundamental::História": [],
+    "1-fundamental::História": []
+  },
+  "ddanielinacio02@gmail.com": {
+    "3-medio::Língua Portuguesa e Literatura": [],
+    "3-medio::Inglês": [],
+    "3-medio::Matemática": [],
+    "3-medio::Sociologia": [],
+    "3-medio::Filosofia": [],
+    "3-medio::Física": []
+  },
+  "emaildeericasantos1996@gmail.com": {
+    "2-medio::Matemática": [
+      {
+        "id": "aadd61d70a334e09a1202eee5887a4b1",
+        "titulo": "Sistema Linear",
+        "tema": "Sistema Linear - tipos de resoluções",
+        "conteudo": "Existem 3 tipos de forma de resolução do sistema Linear \r\n- Adição \r\n- Substituição *\r\n- Comparação",
+        "nota1": "Sistemas lineares que tem elementos iguais são chamados de gêmeos",
+        "nota2": "Os tipos",
+        "nota3": "",
+        "criado_em": "02/08/2026 às 19:02",
+        "atualizado_em": "02/08/2026 às 19:02"
+      }
+    ],
+    "3-medio::Matemática": []
+  },
+  "gringohlegal@gmail.com": {
+    "5-fundamental::Língua Portuguesa": []
+  },
+  "gaby@gmail.com": {
+    "2-medio::Matemática": [
+      {
+        "id": "2b83f0ebedf540a1b8855012d8ba4c8f",
+        "titulo": "Soma",
+        "tema": "Soma",
+        "conteudo": "Teste teste",
+        "nota1": "Prova dia 10",
+        "nota2": "Soma entre número",
+        "nota3": "Falar com a professora",
+        "criado_em": "03/08/2026 às 18:33",
+        "atualizado_em": "03/08/2026 às 18:33"
+      }
+    ]
+  },
+  "heloisasevf@gmail.com": {
+    "2-medio::Arte": [
+      {
+        "id": "8727b7ecbdba46bd8c229d9484465330",
+        "titulo": "aaaaa",
+        "tema": "bbbb",
+        "conteudo": "cccc",
+        "nota1": "",
+        "nota2": "",
+        "nota3": "",
+        "criado_em": "03/08/2026 às 18:52",
+        "atualizado_em": "03/08/2026 às 18:52"
+      }
+    ]
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "series": [
+    {
+      "slug": "1-fundamental",
+      "nome": "1º Ano do Ensino Fundamental",
+      "grupo": "Fundamental I",
+      "disciplinas": {
+        "Língua Portuguesa": [],
+        "Matemática": [],
+        "Ciências": [],
+        "História": [],
+        "Geografia": [],
+        "Arte": []
+      }
+    },
+    {
+      "slug": "2-fundamental",
+      "nome": "2º Ano do Ensino Fundamental",
+      "grupo": "Fundamental I",
+      "disciplinas": {
+        "Língua Portuguesa": [],
+        "Matemática": [],
+        "Ciências": [],
+        "História": [],
+        "Geografia": [],
+        "Arte": []
+      }
+    },
+    {
+      "slug": "3-fundamental",
+      "nome": "3º Ano do Ensino Fundamental",
+      "grupo": "Fundamental I",
+      "disciplinas": {
+        "Língua Portuguesa": [],
+        "Matemática": [],
+        "Ciências": [],
+        "História": [],
+        "Geografia": [],
+        "Arte": []
+      }
+    },
+    {
+      "slug": "4-fundamental",
+      "nome": "4º Ano do Ensino Fundamental",
+      "grupo": "Fundamental I",
+      "disciplinas": {
+        "Língua Portuguesa": [],
+        "Matemática": [],
+        "Ciências": [],
+        "História": [],
+        "Geografia": [],
+        "Arte": [],
+        "Inglês": []
+      }
+    },
+    {
+      "slug": "5-fundamental",
+      "nome": "5º Ano do Ensino Fundamental",
+      "grupo": "Fundamental I",
+      "disciplinas": {
+        "Língua Portuguesa": [],
+        "Matemática": [],
+        "Ciências": [],
+        "História": [],
+        "Geografia": [],
+        "Arte": [],
+        "Inglês": []
+      }
+    },
+    {
+      "slug": "6-fundamental",
+      "nome": "6º Ano do Ensino Fundamental",
+      "grupo": "Fundamental II",
+      "disciplinas": {
+        "Língua Portuguesa": [],
+        "Matemática": [],
+        "Ciências": [],
+        "História": [],
+        "Geografia": [],
+        "Inglês": [],
+        "Arte": []
+      }
+    },
+    {
+      "slug": "7-fundamental",
+      "nome": "7º Ano do Ensino Fundamental",
+      "grupo": "Fundamental II",
+      "disciplinas": {
+        "Língua Portuguesa": [],
+        "Matemática": [],
+        "Ciências": [],
+        "História": [],
+        "Geografia": [],
+        "Inglês": [],
+        "Arte": []
+      }
+    },
+    {
+      "slug": "8-fundamental",
+      "nome": "8º Ano do Ensino Fundamental",
+      "grupo": "Fundamental II",
+      "disciplinas": {
+        "Língua Portuguesa": [],
+        "Matemática": [],
+        "Ciências": [],
+        "História": [],
+        "Geografia": [],
+        "Inglês": [],
+        "Arte": []
+      }
+    },
+    {
+      "slug": "9-fundamental",
+      "nome": "9º Ano do Ensino Fundamental",
+      "grupo": "Fundamental II",
+      "disciplinas": {
+        "Língua Portuguesa": [],
+        "Matemática": [],
+        "Ciências": [],
+        "História": [],
+        "Geografia": [],
+        "Inglês": [],
+        "Arte": []
+      }
+    },
+    {
+      "slug": "1-medio",
+      "nome": "1º Ano do Ensino Médio",
+      "grupo": "Ensino Médio",
+      "disciplinas": {
+        "Língua Portuguesa e Literatura": [],
+        "Matemática": [],
+        "Biologia": [],
+        "Física": [],
+        "Química": [],
+        "História": [],
+        "Geografia": [],
+        "Inglês": [],
+        "Filosofia": [],
+        "Sociologia": [],
+        "Arte": []
+      }
+    },
+    {
+      "slug": "2-medio",
+      "nome": "2º Ano do Ensino Médio",
+      "grupo": "Ensino Médio",
+      "disciplinas": {
+        "Língua Portuguesa e Literatura": [],
+        "Matemática": [],
+        "Biologia": [],
+        "Física": [],
+        "Química": [],
+        "História": [],
+        "Geografia": [],
+        "Inglês": [],
+        "Filosofia": [],
+        "Sociologia": [],
+        "Arte": []
+      }
+    },
+    {
+      "slug": "3-medio",
+      "nome": "3º Ano do Ensino Médio",
+      "grupo": "Ensino Médio",
+      "disciplinas": {
+        "Língua Portuguesa e Literatura": [],
+        "Matemática": [],
+        "Biologia": [],
+        "Física": [],
+        "Química": [],
+        "História": [],
+        "Geografia": [],
+        "Inglês": [],
+        "Filosofia": [],
+        "Sociologia": [],
+        "Arte": []
+      }
+    }
+  ],
+  "alunos": []
+}

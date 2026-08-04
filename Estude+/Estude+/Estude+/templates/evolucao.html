@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+
+{% block title %}Minha evolução | Estude+{% endblock %}
+
+{% block content %}
+<section class="recurso-pagina evolucao-pagina">
+    <div class="recurso-container">
+        <nav class="central-atalhos" aria-label="Recursos de estudo">
+            <a href="{{ url_for('central.focus') }}">
+                <i class="fa-solid fa-bullseye"></i>
+                Focus
+            </a>
+            <a href="{{ url_for('central.evolucao') }}" class="ativo">
+                <i class="fa-solid fa-chart-line"></i>
+                Evolução
+            </a>
+            <a href="{{ url_for('central.recompensas') }}">
+                <i class="fa-solid fa-gift"></i>
+                Recompensas
+            </a>
+            <a href="{{ url_for('central.chatbot') }}">
+                <i class="fa-solid fa-robot"></i>
+                Assistente
+            </a>
+        </nav>
+
+        <header class="recurso-hero recurso-hero-premium">
+            <div class="recurso-hero-conteudo">
+                <span class="recurso-selo">
+                    <i class="fa-solid fa-chart-line"></i>
+                    SUA EVOLUÇÃO
+                </span>
+
+                <h1>Acompanhe seu progresso</h1>
+
+                <p>
+                    Veja quanto você estudou, acompanhe sua sequência
+                    e descubra quais disciplinas receberam mais atenção.
+                </p>
+            </div>
+
+            <div class="recurso-status">
+                <span class="status-icone">
+                    <i class="fa-solid fa-medal"></i>
+                </span>
+                <div>
+                    <small>NÍVEL ATUAL</small>
+                    <strong>{{ nivel.nome }}</strong>
+                    <span>{{ xp }} XP • {{ moedas }} moedas</span>
+                </div>
+            </div>
+        </header>
+
+        <section class="metricas-grid">
+            <article>
+                <span><i class="fa-solid fa-clock"></i></span>
+                <div>
+                    <small>TEMPO TOTAL</small>
+                    <strong>{{ evolucao.horas }}</strong>
+                    <p>horas estudadas</p>
+                </div>
+            </article>
+
+            <article>
+                <span><i class="fa-solid fa-bullseye"></i></span>
+                <div>
+                    <small>FOCO CONCLUÍDO</small>
+                    <strong>{{ evolucao.sessoes }}</strong>
+                    <p>sessões finalizadas</p>
+                </div>
+            </article>
+
+            <article>
+                <span><i class="fa-solid fa-book"></i></span>
+                <div>
+                    <small>MAIS ESTUDADA</small>
+                    <strong>{{ evolucao.favorita }}</strong>
+                    <p>disciplina principal</p>
+                </div>
+            </article>
+
+            <article>
+                <span><i class="fa-solid fa-star"></i></span>
+                <div>
+                    <small>EXPERIÊNCIA</small>
+                    <strong>{{ xp }}</strong>
+                    <p>XP conquistados</p>
+                </div>
+            </article>
+        </section>
+
+        <div class="evolucao-grid">
+            <article class="recurso-card evolucao-card">
+                <header class="card-recurso-topo">
+                    <div>
+                        <span>DESEMPENHO</span>
+                        <h2>Tempo por disciplina</h2>
+                    </div>
+
+                    <i class="fa-solid fa-chart-simple"></i>
+                </header>
+
+                {% if evolucao.por_disciplina %}
+                    <div class="evolucao-barras">
+                        {% for nome, minutos in evolucao.por_disciplina.items() %}
+                            <div class="linha-progresso">
+                                <div>
+                                    <strong>{{ nome }}</strong>
+                                    <span>{{ minutos }} min</span>
+                                </div>
+
+                                <div>
+                                    <span
+                                        style="width: {{ [minutos, 100]|min }}%"
+                                        title="{{ minutos }} minutos"
+                                    ></span>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="estado-vazio-recurso">
+                        <span><i class="fa-solid fa-chart-column"></i></span>
+                        <h3>Seu gráfico começa aqui</h3>
+                        <p>
+                            Conclua uma sessão no Modo Focus para registrar
+                            seu primeiro progresso.
+                        </p>
+                        <a href="{{ url_for('central.focus') }}">
+                            <i class="fa-solid fa-play"></i>
+                            Iniciar sessão Focus
+                        </a>
+                    </div>
+                {% endif %}
+            </article>
+
+            <article class="recurso-card evolucao-card">
+                <header class="card-recurso-topo">
+                    <div>
+                        <span>HISTÓRICO</span>
+                        <h2>Últimas sessões</h2>
+                    </div>
+
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                </header>
+
+                {% if evolucao.ultimas %}
+                    <div class="sessoes-lista">
+                        {% for item in evolucao.ultimas %}
+                            <div class="sessao-item">
+                                <span>
+                                    <i class="fa-solid fa-check"></i>
+                                </span>
+
+                                <div>
+                                    <strong>{{ item.disciplina }}</strong>
+                                    <small>{{ item.data }} às {{ item.horario }}</small>
+                                </div>
+
+                                <b>{{ item.minutos }} min</b>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="estado-vazio-recurso">
+                        <span><i class="fa-solid fa-clock"></i></span>
+                        <h3>Nenhuma sessão registrada</h3>
+                        <p>
+                            Quando você concluir uma sessão, ela aparecerá
+                            aqui automaticamente.
+                        </p>
+                        <a href="{{ url_for('central.focus') }}">
+                            <i class="fa-solid fa-bullseye"></i>
+                            Começar agora
+                        </a>
+                    </div>
+                {% endif %}
+            </article>
+        </div>
+
+        <section class="evolucao-chamada">
+            <div>
+                <span><i class="fa-solid fa-fire"></i></span>
+                <div>
+                    <small>CONTINUE AVANÇANDO</small>
+                    <h2>Uma sessão hoje já faz diferença.</h2>
+                    <p>Use o Focus, acumule XP e acompanhe sua evolução.</p>
+                </div>
+            </div>
+
+            <a href="{{ url_for('central.focus') }}">
+                Nova sessão
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </section>
+    </div>
+</section>
+{% endblock %}
