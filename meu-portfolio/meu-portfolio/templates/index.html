@@ -1,0 +1,158 @@
+ <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel Lucas | Meu Portfólio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <header class="header">
+        <nav class="container nav-container">
+            <a href="#inicio" class="logo">daniel.dev</a>
+
+            <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+
+            <ul class="nav-list">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#habilidades">Habilidades</a></li>
+                <li><a href="#projetos">Projetos</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+
+            <button id="theme-toggle" aria-label="Mudar tema">🌙</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero container">
+            <div class="hero-content">
+                <span id="saudacao-dinamica">Olá!</span>
+
+                <h1>Eu sou Daniel Lucas</h1>
+
+                <p>Sou estudante de TI no SENAC MedTec e estou aprendendo desenvolvimento web. Quero conseguir uma oportunidade de estágio na área de front-end.</p>
+
+                <a href="#projetos" class="btn">Ver projetos</a>
+            </div>
+
+            <div class="hero-image">
+                <img src="{{ url_for('static', filename='img/avatar.JPEG') }}" alt="Foto de Daniel Lucas">
+            </div>
+        </section>
+
+        <section id="sobre" class="container">
+            <h2>Sobre mim</h2>
+
+            <p>Sou estudante de Desenvolvimento de Sistemas no SENAC e gosto bastante de tecnologia. Tenho interesse em criar sites e aprender como eles funcionam, usando HTML, CSS, JavaScript e outras ferramentas.</p>
+
+            <p>Estou praticando o que aprendo no curso e quero melhorar minhas habilidades para trabalhar na área de tecnologia e ganhar experiência com projetos reais.</p>
+        </section>
+
+        <section id="habilidades" class="container">
+            <h2>Habilidades</h2>
+
+            <div class="habilidades-grid">
+                <div class="habilidade-card">
+                    <h3>HTML5 e CSS3</h3>
+                    <span>Avançado</span>
+                </div>
+
+                <div class="habilidade-card">
+                    <h3>JavaScript</h3>
+                    <span>Praticando</span>
+                </div>
+
+                <div class="habilidade-card">
+                    <h3>Python e Flask</h3>
+                    <span>Avançado</span>
+                </div>
+
+                <div class="habilidade-card">
+                    <h3>SQLite</h3>
+                    <span>Praticando</span>
+                </div>
+
+                <div class="habilidade-card">
+                    <h3>Git e GitHub</h3>
+                    <span>Iniciante</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="projetos" class="container">
+            <h2>Projetos</h2>
+
+            <div class="projetos-grid">
+                <article class="projeto-card">
+                    <div>
+                        <h3>Quiz Interativo</h3>
+                        <p>Um quiz feito com HTML, CSS, JavaScript e Python, hospedado no PythonAnywhere.</p>
+                    </div>
+                </article>
+
+                <article class="projeto-card">
+                    <div>
+                        <h3>Sistema com Banco de Dados</h3>
+                        <p>Projeto para aprender a organizar e salvar informações usando o SQLite.</p>
+                    </div>
+                </article>
+
+                <article class="projeto-card">
+                    <div>
+                        <h3>
+                            <a href="https://estudemais.pythonanywhere.com/" target="_blank" rel="noopener noreferrer">EstudeMais 🔗</a>
+                        </h3>
+
+                        <p>Uma plataforma de estudos que desenvolvi com Python para ajudar na organização da rotina de estudos.</p>
+                    </div>
+
+                    <a href="https://estudemais.pythonanywhere.com/" target="_blank" rel="noopener noreferrer" class="btn" style="margin-top: 1rem; text-align: center; padding: 0.5rem 1rem; font-size: 0.9rem;">Acessar projeto</a>
+                </article>
+            </div>
+        </section>
+
+        <section id="contato" class="container">
+            <h2>Contato</h2>
+
+            <form id="contact-form">
+                <div>
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+
+                <div>
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div>
+                    <label for="mensagem">Mensagem:</label>
+                    <textarea id="mensagem" name="mensagem" rows="4" minlength="20" required></textarea>
+                </div>
+
+                <div class="consentimento-container">
+                    <input type="checkbox" id="consentimento" name="consentimento" required>
+                    <label for="consentimento">Concordo em fornecer meus dados para contato profissional.</label>
+                </div>
+
+                <button type="submit" class="btn">Enviar mensagem</button>
+            </form>
+
+            <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-muted);">
+                E-mail: ddanielinacio06@gmail.com | WhatsApp: (84) 9 8762-8468
+            </p>
+        </section>
+    </main>
+
+    <footer class="container">
+        <p>&copy; <span id="current-year"></span> Daniel Lucas. Todos os direitos reservados.</p>
+        <a href="#inicio">Voltar ao topo</a>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+
+</body>
+</html>
